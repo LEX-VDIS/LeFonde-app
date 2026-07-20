@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./app.css";
+import "./FrameApp.css";
 
 export default function Frame() {
   const [OpenLP, setOpenLP] = useState(false);
-  const toggleIsOpenLP = () => {setOpenLP((on) => !on)};
+  const toggleIsOpenLP = () => { setOpenLP((on) => !on) };
   const [OpenRP, setOpenRP] = useState(false);
-  const toggleIsOpenRP = () => {setOpenRP((on) => !on)};
+  const toggleIsOpenRP = () => { setOpenRP((on) => !on) };
 
   document.addEventListener("click", (e) => {
     if (
@@ -42,30 +42,26 @@ export default function Frame() {
         </nav>
       )}
 
-      <div>
+      <div className="app-header">
 
         <button
-          id="menu"
-          className={OpenLP ? "active panelButton" : "panelButton"}
-          onClick={toggleIsOpenLP}
-        >
-          <span className="icon material-symbols-rounded">
-            {OpenLP ? "menu_open" : "menu"}
-          </span>
+            id="menu"
+            className={OpenLP ? "active panelButton" : "panelButton"}
+            onClick={toggleIsOpenLP}
+          >
+            <span className="icon material-symbols-rounded">
+              {OpenLP ? "menu_open" : "menu"}
+            </span>
         </button>
 
-        <div key="header" id="header">
-          <nav key="navbar" className="navbar">
-            <div key="breadcumb" className="breadcumb"></div>
-          </nav>
-        </div>
+
 
         <button
-          id="user"
-          className={OpenRP ? " active panelButton" : "panelButton"}
-          onClick={toggleIsOpenRP}
-        >
-          <span className="icon material-symbols-rounded">settings</span>
+            id="user"
+            className={OpenRP ? " active panelButton" : "panelButton"}
+            onClick={toggleIsOpenRP}
+          >
+            <span className="icon material-symbols-rounded">settings</span>
         </button>
 
       </div>
@@ -73,13 +69,19 @@ export default function Frame() {
       {OpenRP && (
         <nav className={"right-panel " + (OpenRP ? "open" : "")}>
           <div>
-            <div style={{ height: "52px" }}></div>
-            <hr className="sp-hr" />
-            <div className="body"></div>
+            <div className="panel-header">
+              <div className="right">
+              </div>
+              <div>
+                <hr className="sp-hr" />
+              </div>
+            </div>
+            <div className="panel-body">
+            </div>
           </div>
         </nav>
       )}
-      
+
     </div>
   );
 }

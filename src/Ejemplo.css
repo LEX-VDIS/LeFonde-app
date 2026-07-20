@@ -1,0 +1,6 @@
+.tarjeta{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 100px;
+}
