@@ -1,15 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { useState } from 'react'
 import './App.css'
+import Login from './Login.jsx'
 import Frame from './FrameApp.jsx'
 import Body from './BodyApp.jsx'
 
+function App() {
+  const [log, setLog] = useState(false)
+  return (
+    !log ? <Login logueado={setLog} /> : <Frame />
+  )
+}
 
-const LeFonde = <Frame />
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {LeFonde}
-    <div className="app-container"><Body/></div>
-  </StrictMode>,
-)
+export default App
