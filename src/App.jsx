@@ -5,6 +5,7 @@ import Body from "./BodyApp.jsx";
 
 function App() {
   const [log, setLog] = useState(false); // estado para comprobar el logueo
+
   const [OpenLP, setOpenLP] = useState(false);
   const toggleIsOpenLP = () => {
     setOpenLP((on) => !on);
@@ -79,7 +80,8 @@ function App() {
         )}
       </div>
 
-      {!log ? <Login logueado={setLog} /> : <Body />}
+      {!log ? <Login setLog={setLog} /> : <Body />}
+
     </>
   );
 }
