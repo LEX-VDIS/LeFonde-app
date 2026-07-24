@@ -14,7 +14,30 @@ export default function Login({ setLog }) {
       setLog(false);
     } else {
       setError(false);
-      setLog(true);
+
+      const data = { user: name, pass: pass };
+
+      const fetchOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+
+      fetch("http://192.168.1.50:55555/login", fetchOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.token) {
+            localStorage.setItem("tokenme", result.token);
+            setLog(true);
+          } else {
+            
+            alert(result.mensaje);
+            setLog(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 

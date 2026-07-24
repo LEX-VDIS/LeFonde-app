@@ -2,9 +2,16 @@ import { useState } from "react";
 import "./App.css";
 import Login from "./Login.jsx";
 import Body from "./BodyApp.jsx";
+import { parseJwt } from "./funciones.js";
+
+let logueado = false;
+try {
+  parseJwt(localStorage.getItem("tokenme")).exp * 1000 > Date.now() &&
+    (logueado = true);
+} catch (error) {}
 
 function App() {
-  const [log, setLog] = useState(false); // estado para comprobar el logueo
+  const [log, setLog] = useState(logueado); // estado para comprobar el logueo
 
   const [OpenLP, setOpenLP] = useState(false);
   const toggleIsOpenLP = () => {
@@ -81,7 +88,6 @@ function App() {
       </div>
 
       {!log ? <Login setLog={setLog} /> : <Body />}
-
     </>
   );
 }
