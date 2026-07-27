@@ -23,8 +23,8 @@ export default function Login({ setLog }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       };
-      //const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/login`;
-      const fetchURL = `http://10.10.10.99:55555/login`;
+      const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/login`;
+      //const fetchURL = `http://10.10.10.99:55555/login`;
 
       fetch(fetchURL, fetchOptions)
         .then((response) => response.json())
@@ -47,14 +47,14 @@ export default function Login({ setLog }) {
   return (
     <section>
       <form className="login" onSubmit={evitarError}>
-        <h1>LeLogin</h1>
-        <label>Le Usuario</label>
+        <h1>Iniciar Sesión</h1>
+        <label>Usuario</label>
         <input
           type="text"
           value={name}
           onChange={(teclazo) => setName(teclazo.target.value)}
         />
-        <label>Le Contraseña</label>
+        <label>Contraseña</label>
         <input
           type="password"
           value={pass}

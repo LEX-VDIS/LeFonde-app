@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import Login from "./Login.jsx";
-import Body from "./BodyApp.jsx";
+import Home from "./Home.jsx";
+import Ordenes from "./Ordenes.jsx";
 import { parseJwt, logout } from "./sesion.js";
 
 let usuario = {};
 let logueado = false;
+
+const navegacion = [
+  [["Operación", "operacion"], [["Órdenes", "ordenes", "hand_meal"]]],
+  [["Administración", "administracion"], [["Reportes", "reportes", "query_stats"]]],
+];
 
 try {
   parseJwt(localStorage.getItem("tokenme")).exp * 1000 > Date.now() &&
@@ -42,81 +55,181 @@ function App() {
 
   return (
     <>
-      <div className="app-frame">
-        {OpenLP && (
-          <nav style={{}} className={"left-panel " + (OpenLP ? "open" : "")}>
-            <div>
-              <div className="panel-header">
-                <div className="left">
-                  <span className="title" style={{ fontSize: "1.2em" }}>
-                    LeFondé
-                  </span>
+      <BrowserRouter>
+        <div className="app-frame">
+          {OpenLP && (
+            <nav style={{}} className={"left-panel " + (OpenLP ? "open" : "")}>
+              <div>
+                <div className="panel-header">
+                  <div className="left">
+                    <span className="title" style={{ fontSize: "1.2em" }}>
+                      LeFondé
+                    </span>
+                  </div>
+                  <div>
+                    <hr className="sp-hr" />
+                  </div>
                 </div>
-                <div>
-                  <hr className="sp-hr" />
+                <div className="panel-body">
+                  {navegacion.map((elemento, indice) => {
+                    return (
+                      <Fragment key={"grupo_" + indice}>
+                        <NavLink
+                          key={elemento[1]}
+                          to={{
+                            pathname: "/" + elemento[0][1],
+                            search: "?",
+                          }}
+                          className={({ isActive }) =>
+                            isActive ? "active" : ""
+                          }
+                        >
+                          
+                          <span key={"h2_" + indice}>{elemento[0][0]}</span>
+
+                          <div key={"div_" + elemento[0][1]}>
+                            {elemento[1].map((elementoa, indicea) => {
+                              return (
+                                <NavLink
+                                  key={elementoa[1]}
+                                  to={{
+                                    pathname:
+                                      "/" + elemento[0][1] + "/" + elementoa[1],
+                                    search: "?",
+                                  }}
+                                  className={({ isActive }) =>
+                                    isActive ? "active" : ""
+                                  }
+                                >
+                                  <span className="icon material-symbols-rounded">{elementoa[2]}</span>
+                                  <span key={"h3_" + elementoa[1]} >
+                                    {elementoa[0]}
+                                  </span>
+                                </NavLink>
+                              );
+                            })}
+                          </div>
+                        </NavLink>
+                      </Fragment>
+                    );
+                  })}
                 </div>
               </div>
-              <div className="panel-body"></div>
-            </div>
-          </nav>
-        )}
-        <div className="app-header">
-          {log && (
-            <button
-              id="menu"
-              className={OpenLP ? "active panelButton" : "panelButton"}
-              onClick={toggleIsOpenLP}
-            >
-              <span className="icon material-symbols-rounded">
-                {OpenLP ? "menu_open" : "menu"}
-              </span>
-            </button>
+            </nav>
           )}
-          {!log && <span className="titulo">LeFondé</span>}
-          {log && (
-            <button
-              id="user"
-              className={OpenRP ? " active panelButton" : "panelButton"}
-              onClick={toggleIsOpenRP}
-            >
-              <span className="icon material-symbols-rounded">settings</span>
-            </button>
+          <div className="app-header">
+            {log && (
+              <button
+                id="menu"
+                className={OpenLP ? "active panelButton" : "panelButton"}
+                onClick={toggleIsOpenLP}
+              >
+                <span className="icon material-symbols-rounded">
+                  {OpenLP ? "menu_open" : "menu"}
+                </span>
+              </button>
+            )}
+            {!log && <span className="titulo">LeFondé</span>}
+            {log && (
+              <button
+                id="user"
+                className={OpenRP ? " active panelButton" : "panelButton"}
+                onClick={toggleIsOpenRP}
+              >
+                <span className="icon material-symbols-rounded">settings</span>
+              </button>
+            )}
+          </div>
+          {OpenRP && (
+            <nav className={"right-panel " + (OpenRP ? "open" : "")}>
+              <div>
+                <div className="panel-header">
+                  <div className="right">
+                    {" "}
+                    <span className="title" >
+                      {nombre}
+                    </span>
+                  </div>
+                  <div>
+                    <hr className="sp-hr" />
+                  </div>
+                </div>
+                <div className="panel-body">
+                  <div className="group">
+                    <button
+                      onClick={() => {
+                        setLog(false);
+                        localStorage.removeItem("tokenme");
+                        setOpenLP(false);
+                        setOpenRP(false);
+                      }}
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </nav>
           )}
         </div>
-        {OpenRP && (
-          <nav className={"right-panel " + (OpenRP ? "open" : "")}>
-            <div>
-              <div className="panel-header">
-                <div className="right">
-                  {" "}
-                  <span className="title" style={{ fontSize: "1.2em" }}>
-                    {nombre}
-                  </span>
-                </div>
-                <div>
-                  <hr className="sp-hr" />
-                </div>
-              </div>
-              <div className="panel-body">
-                <div className="group">
-                  <button
-                    onClick={() => {
-                      setLog(false);
-                      localStorage.removeItem("tokenme");
-                      setOpenLP(false);
-                      setOpenRP(false);
-                    }}
-                  >
-                    Cerrar Sesión
-                  </button>
-                </div>
-              </div>
-            </div>
-          </nav>
-        )}
-      </div>
 
-      {!log ? <Login setLog={setLog} /> : <Body />}
+        {!log ? (
+          <Login setLog={setLog} />
+        ) : (
+          <Routes>
+            <Route
+              key="root"
+              path="/"
+              element={
+                <>
+                  <div className="app-container">
+                    <Home />
+                  </div>
+                </>
+              }
+            />
+            <Route
+              key="page"
+              path="/operacion/ordenes"
+              element={
+                <>
+                  <div className="app-container"><Ordenes/></div>
+                </>
+              }
+            />
+
+            <Route
+              key="page"
+              path="/:page"
+              element={
+                <>
+                  <div className="app-container"></div>
+                </>
+              }
+            />
+            <Route
+              key="subpage"
+              path="/:page/:subpage"
+              element={
+                <>
+                  <div className="app-container"></div>
+                </>
+              }
+            />
+            <Route
+              key="else"
+              path="*"
+              element={
+                <>
+                  <div className="app-container">
+                    <Ordenes />
+                  </div>
+                </>
+              }
+            />
+          </Routes>
+        )}
+      </BrowserRouter>
     </>
   );
 }

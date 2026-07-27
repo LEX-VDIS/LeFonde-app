@@ -1,0 +1,7 @@
+.app-body {
+  display: flex;
+  gap: 6px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
