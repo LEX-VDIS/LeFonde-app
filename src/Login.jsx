@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import { parseJwt } from "./sesion.js";
 
 export default function Login({ setLog }) {
   const [name, setName] = useState("");
@@ -22,15 +23,17 @@ export default function Login({ setLog }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       };
+      //const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/login`;
+      const fetchURL = `http://10.10.10.99:55555/login`;
 
-      fetch("http://192.168.1.50:55555/login", fetchOptions)
+      fetch(fetchURL, fetchOptions)
         .then((response) => response.json())
         .then((result) => {
           if (result.token) {
             localStorage.setItem("tokenme", result.token);
+            console.log(parseJwt(result.token));
             setLog(true);
           } else {
-            
             alert(result.mensaje);
             setLog(false);
           }

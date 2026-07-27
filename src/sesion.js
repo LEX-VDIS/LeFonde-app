@@ -14,3 +14,9 @@ export function parseJwt(token) {
 
   return JSON.parse(jsonPayload);
 }
+
+export function logout() {
+  localStorage.removeItem("tokenme");
+  //document.location.reload();
+  setLog(false);
+}

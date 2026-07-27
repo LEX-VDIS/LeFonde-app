@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./BodyApp.css";
 import Ejemplo from "./Ejemplo";
 
-const cantidad = 5;
+const cantidad = 25;
 
 export default function Body() {
   return (
