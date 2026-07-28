@@ -1,7 +1,81 @@
+.app-container {
+  align-items: center;
+}
 .login {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  width: 320px;
+}
+
+.lab_txt {
+  padding: 8px;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  width: -webkit-fill-available;
+}
+
+.lab_txt > label {
+  font-size: 1.25rem;
+}
+.lab_txt > input {
+  text-align: center;
+  font-family: "Sofia Sans";
+  font-size: 18px;
+  width: -webkit-fill-available;
+  height: 24px;
+  border-radius: 6px;
+  color: #000;
+  background-color: #eee;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 2px;
+}
+@media (hover: hover) {
+.lab_txt > input:hover {
+  background-color: #fff;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+}
+.lab_txt > input:focus {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.lab_txt > button {
+  font-family: "Sofia Sans";
+  font-size: 18px;
+  justify-content: center;
+  font-weight: bold;
+  width: -webkit-fill-available;
+  height: 36px;
+  border-radius: 6px;
+  color: #c8c8c8;
+  background-color: #333;
+  border-color: #555;
+  border-style: solid;
+  border-width: 2px;
+}
+@media (hover: hover) {
+  .lab_txt > button:hover {
+    border-radius: 6px;
+    background-color: #555;
+    border-color: #555;
+  }
+}
+.lab_txt > button:active {
+  color: #222;
+  background-color: #555;
+  border-radius: 6px;
+  border-color: #ddd;
 }

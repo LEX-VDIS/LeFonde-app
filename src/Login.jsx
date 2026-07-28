@@ -45,23 +45,28 @@ export default function Login({ setLog }) {
   };
 
   return (
-    <section>
+    <section className="app-container">
       <form className="login" onSubmit={evitarError}>
         <h1>Iniciar Sesión</h1>
-        <label>Usuario</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(teclazo) => setName(teclazo.target.value)}
-        />
-        <label>Contraseña</label>
-        <input
-          type="password"
-          value={pass}
-          onChange={(teclazo) => setPass(teclazo.target.value)}
-        />
-        <button>Iniciar Sesión</button>
-        {error && <h2>Ingresa el usuario y la contraseña</h2>}
+        <section className="lab_txt">
+          <label for="user">Usuario</label>
+          <input
+            id="user"
+            type="text"
+            value={name}
+            onChange={(teclazo) => setName(teclazo.target.value)}
+          />
+          <label for="pass">Contraseña</label>
+          <input
+            id="pass"
+            type="password"
+            value={pass}
+            onChange={(teclazo) => setPass(teclazo.target.value)}
+          />
+          <button>Iniciar Sesión</button>
+        </section>
+
+        {error && <h3>Ingresa el usuario y la contraseña</h3>}
       </form>
     </section>
   );

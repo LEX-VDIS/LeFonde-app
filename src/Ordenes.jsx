@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Ordenes.css";
 import Ejemplo from "./Ejemplo";
 
-const cantidad = 152;
+const cantidad = 12;
 
 export default function Ordenes() {
   return (

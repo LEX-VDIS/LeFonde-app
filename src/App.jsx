@@ -17,7 +17,10 @@ let logueado = false;
 
 const navegacion = [
   [["Operación", "operacion"], [["Órdenes", "ordenes", "hand_meal"]]],
-  [["Administración", "administracion"], [["Reportes", "reportes", "query_stats"]]],
+  [
+    ["Administración", "administracion"],
+    [["Reportes", "reportes", "query_stats"]],
+  ],
 ];
 
 try {
@@ -62,9 +65,12 @@ function App() {
               <div>
                 <div className="panel-header">
                   <div className="left">
-                    <span className="title" style={{ fontSize: "1.2em" }}>
-                      LeFondé
-                    </span>
+                    <NavLink
+                      to={{ pathname: "/", search: "?" }}
+                      className={({ isActive }) => (isActive ? "home active" : "home")}
+                    >
+                      <span style={{ fontSize: "1.5em" }}>LeFondé</span>
+                    </NavLink>
                   </div>
                   <div>
                     <hr className="sp-hr" />
@@ -84,7 +90,6 @@ function App() {
                             isActive ? "active" : ""
                           }
                         >
-                          
                           <span key={"h2_" + indice}>{elemento[0][0]}</span>
 
                           <div key={"div_" + elemento[0][1]}>
@@ -101,8 +106,10 @@ function App() {
                                     isActive ? "active" : ""
                                   }
                                 >
-                                  <span className="icon material-symbols-rounded">{elementoa[2]}</span>
-                                  <span key={"h3_" + elementoa[1]} >
+                                  <span className="icon material-symbols-rounded">
+                                    {elementoa[2]}
+                                  </span>
+                                  <span key={"h3_" + elementoa[1]}>
                                     {elementoa[0]}
                                   </span>
                                 </NavLink>
@@ -128,6 +135,7 @@ function App() {
                   {OpenLP ? "menu_open" : "menu"}
                 </span>
               </button>
+              
             )}
             {!log && <span className="titulo">LeFondé</span>}
             {log && (
@@ -146,9 +154,7 @@ function App() {
                 <div className="panel-header">
                   <div className="right">
                     {" "}
-                    <span className="title" >
-                      {nombre}
-                    </span>
+                    <span className="title">{nombre}</span>
                   </div>
                   <div>
                     <hr className="sp-hr" />
@@ -193,7 +199,9 @@ function App() {
               path="/operacion/ordenes"
               element={
                 <>
-                  <div className="app-container"><Ordenes/></div>
+                  <div className="app-container">
+                    <Ordenes />
+                  </div>
                 </>
               }
             />

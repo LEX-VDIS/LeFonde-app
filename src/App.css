@@ -9,6 +9,11 @@ body {
 
 button {
   color: #000;
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .app-frame {
@@ -25,7 +30,7 @@ button {
 
 .app-header {
   height: 44px;
-  padding: 6px;
+  padding: 8px;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -41,6 +46,13 @@ button {
   background-color: whitesmoke;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px;
+}
+
 .titulo {
   align-self: center;
   font-size: 1.5rem;
@@ -49,7 +61,7 @@ button {
 }
 
 .panelButton {
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: default;
   border-style: solid;
   background-color: transparent;
@@ -61,17 +73,18 @@ button {
   z-index: 2;
   position: static;
 }
-
-.panelButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  cursor: default;
+@media (hover: hover) {
+  .panelButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: default;
+  }
 }
 
 .panelButton:active {
   background-color: #333;
   border-color: #e5e5e5;
   color: #e5e5e5;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .panelButton > span {
@@ -87,22 +100,17 @@ button {
   z-index: 3;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 6px;
-}
-
 .navbar a {
   text-decoration: none;
   color: black;
 }
 
-.panelButton.active:hover {
-  color: #c8c8c8;
-  background-color: #333;
-  border-color: #333;
+@media (hover: hover) {
+  .panelButton.active:hover {
+    color: #c8c8c8;
+    background-color: #333;
+    border-color: #333;
+  }
 }
 
 .panelButton.active:active {
@@ -196,20 +204,23 @@ button {
   flex-direction: column;
   position: sticky;
   top: 0px;
+  height: 62px;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .panel-header > .left {
-  margin-left: 56px;
-  margin-right: 8px;
-  height: 56px;
+  height: 62px;
+  margin-left: 60px;
+  margin-right: 60px;
   display: flex;
   justify-content: center;
 }
 
 .panel-header > .right {
-  margin-left: 8px;
-  margin-right: 56px;
-  height: 56px;
+  height: 62px;
+  margin-left: 60px;
+  margin-right: 60px;
   display: flex;
   justify-content: center;
 }
@@ -253,7 +264,7 @@ button {
 }
 
 div .group {
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: #333;
   padding: 8px;
   display: flex;
@@ -261,8 +272,22 @@ div .group {
   gap: 8px;
 }
 
-div .group > .title {
-  color: white;
+div .left > .home {
+  height: 26px;
+  padding: 8px;
+  color: #888;
+  text-decoration: none;
+}
+@media (hover: hover) {
+  div .left > .home:hover {
+    color: #aaa;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+}
+div .left > .active {
+  color: #fff;
+  border-radius: 8px;
 }
 
 div .rows {
@@ -308,11 +333,12 @@ select.panel {
   width: -webkit-fill-available;
   height: 32px;
 }
-
-select.panel:hover {
-  border-radius: 3px;
-  background-color: #777;
-  border-color: #777;
+@media (hover: hover) {
+  select.panel:hover {
+    border-radius: 3px;
+    background-color: #777;
+    border-color: #777;
+  }
 }
 
 .panel-body > .group button {
@@ -322,23 +348,25 @@ select.panel:hover {
   font-weight: bold;
   width: -webkit-fill-available;
   height: 32px;
-  border-radius: 3px;
+  border-radius: 6px;
   color: #c8c8c8;
   background-color: #555;
   border-color: #777;
   border-style: solid;
 }
 
-.panel-body > .group button:hover {
-  border-radius: 3px;
-  background-color: #777;
-  border-color: #777;
+@media (hover: hover) {
+  .panel-body > .group button:hover {
+    border-radius: 6px;
+    background-color: #777;
+    border-color: #777;
+  }
 }
 
 .panel-body > .group button:active {
   color: #222;
   background-color: #777;
-  border-radius: 5px;
+  border-radius: 6px;
   border-color: #333;
 }
 
@@ -370,12 +398,22 @@ select.panel:hover {
   color: #888;
   background-color: transparent;
   padding: 8px;
-  border-radius: 4px;
   text-decoration: none;
   font-weight: normal;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  border-radius: 8px;
+}
+@media (hover: hover) {
+  .left-panel > div > div > a:hover {
+    color: #aaa;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+.left-panel > div > div > a.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .left-panel > div > div > a > div > a {
@@ -385,50 +423,35 @@ select.panel:hover {
   padding-bottom: 6px;
   padding-left: 8px;
   padding-right: 8px;
-  border-radius: 4px;
   text-decoration: none;
   font-weight: normal;
-
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: nowrap;
+  border-radius: 6px;
 }
-
-.left-panel > div > div > a > div {
-  color: #c8c8c8;
-  background-color: transparent;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: normal;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.left-panel > div > div > a:hover {
-  color: #aaa;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.left-panel > div > div > a > div > a:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.left-panel > div > div > a.active {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+@media (hover: hover) {
+  .left-panel > div > div > a > div > a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 }
 
 .left-panel > div > div > a > div > a.active {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+}
+
+.left-panel > div > div > a > div {
+  color: #c8c8c8;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .left-panel > div > div > div {
