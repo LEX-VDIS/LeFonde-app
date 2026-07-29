@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Ordenes.css";
-import Ejemplo from "./Ejemplo";
+import Mesa from "./Mesa";
 
 const cantidad = 12;
 
@@ -26,7 +26,7 @@ export default function Ordenes() {
         </section>
         <section className="section_body">
           {Array.from({ length: cantidad }, (_, index) => (
-            <Ejemplo key={index} />
+            <Mesa key={index} />
           ))}
         </section>
       </section>
