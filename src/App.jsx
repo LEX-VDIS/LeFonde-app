@@ -10,16 +10,23 @@ import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import Ordenes from "./Ordenes.jsx";
+import Mesas from "./Mesas.jsx";
 import { parseJwt, logout } from "./sesion.js";
 
 let usuario = {};
 let logueado = false;
 
 const navegacion = [
-  [["Operación", "operacion"], [["Órdenes", "ordenes", "hand_meal"]]],
   [
-    ["Administración", "administracion"],
-    [["Reportes", "reportes", "query_stats"]],
+    ["Operación", "operacion"],[
+      ["Órdenes", "ordenes", "hand_meal"],
+      ["Mesas", "mesas", "table_restaurant"]
+    ],
+  ],
+  [
+    ["Administración", "administracion"],[
+      ["Reportes", "reportes", "query_stats"]
+    ],
   ],
 ];
 
@@ -67,7 +74,9 @@ function App() {
                   <div className="left">
                     <NavLink
                       to={{ pathname: "/", search: "?" }}
-                      className={({ isActive }) => (isActive ? "home active" : "home")}
+                      className={({ isActive }) =>
+                        isActive ? "home active" : "home"
+                      }
                     >
                       <span style={{ fontSize: "1.5em" }}>LeFondé</span>
                     </NavLink>
@@ -135,7 +144,6 @@ function App() {
                   {OpenLP ? "menu_open" : "menu"}
                 </span>
               </button>
-              
             )}
             {!log && <span className="titulo">LeFondé</span>}
             {log && (
@@ -205,7 +213,17 @@ function App() {
                 </>
               }
             />
-
+            <Route
+              key="page"
+              path="/operacion/mesas"
+              element={
+                <>
+                  <div className="app-container">
+                    <Mesas />
+                  </div>
+                </>
+              }
+            />
             <Route
               key="page"
               path="/:page"
@@ -230,7 +248,7 @@ function App() {
               element={
                 <>
                   <div className="app-container">
-                    <Ordenes />
+                    <Home />
                   </div>
                 </>
               }

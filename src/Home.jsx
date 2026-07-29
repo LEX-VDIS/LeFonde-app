@@ -4,7 +4,7 @@ import Ejemplo from "./Ejemplo";
 
 export default function Home() {
   return (
-    <div className="app-body">
+    <div className="app-body">INICIO
     </div>
   );
 }
