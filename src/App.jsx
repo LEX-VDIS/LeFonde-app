@@ -18,15 +18,16 @@ let logueado = false;
 
 const navegacion = [
   [
-    ["Operación", "operacion"],[
+    ["Operación", "operacion"],
+    [
       ["Órdenes", "ordenes", "hand_meal"],
-      ["Mesas", "mesas", "table_restaurant"]
+      ["Mesas", "mesas", "table_restaurant"],
+      ["Productos", "productos", "fastfood"],
     ],
   ],
   [
-    ["Administración", "administracion"],[
-      ["Reportes", "reportes", "query_stats"]
-    ],
+    ["Administración", "administracion"],
+    [["Reportes", "reportes", "query_stats"]],
   ],
 ];
 
