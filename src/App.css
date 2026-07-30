@@ -55,6 +55,15 @@ a {
   margin: 8px;
 }
 
+.app-body {
+  width: stretch;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 .titulo {
   align-self: center;
   font-size: 1.5rem;
@@ -206,13 +215,17 @@ a {
   flex-direction: column;
   position: sticky;
   top: 0px;
-  height: 62px;
+  height: 60px;
   justify-content: center;
   flex-wrap: nowrap;
+  box-shadow:
+    inset 0 -1em 1em rgba(0, 0, 0, 0),
+    0 0 0 0px white,
+    0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .panel-header > .left {
-  height: 62px;
+  height: 60px;
   margin-left: 60px;
   margin-right: 60px;
   display: flex;
@@ -220,7 +233,7 @@ a {
 }
 
 .panel-header > .right {
-  height: 62px;
+  height: 60px;
   margin-left: 60px;
   margin-right: 60px;
   display: flex;
@@ -412,11 +425,19 @@ select.panel {
   .left-panel > div > div > a:hover {
     color: #aaa;
     background-color: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 -1em 1em rgba(0, 0, 0, 0),
+      0 0 0 0px white,
+      0px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }
 .left-panel > div > div > a.active {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 -1em 1em rgba(0, 0, 0, 0),
+    0 0 0 0px white,
+    0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .left-panel > div > div > a > div > a {
@@ -439,12 +460,20 @@ select.panel {
   .left-panel > div > div > a > div > a:hover {
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 -1em 1em rgba(0, 0, 0, 0),
+      0 0 0 0px white,
+      0px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
 .left-panel > div > div > a > div > a.active {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 -1em 1em rgba(0, 0, 0, 0),
+    0 0 0 0px white,
+    0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .left-panel > div > div > a > div {
@@ -466,4 +495,8 @@ select.panel {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  box-shadow:
+    inset 0 -1em 1em rgba(0, 0, 0, 0),
+    0 0 0 0px white,
+    0px 2px 2px rgba(0, 0, 0, 0.2);
 }

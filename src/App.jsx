@@ -82,9 +82,6 @@ function App() {
                       <span style={{ fontSize: "1.5em" }}>LeFondé</span>
                     </NavLink>
                   </div>
-                  <div>
-                    <hr className="sp-hr" />
-                  </div>
                 </div>
                 <div className="panel-body">
                   {navegacion.map((elemento, indice) => {
@@ -164,9 +161,6 @@ function App() {
                   <div className="right">
                     {" "}
                     <span className="title">{nombre}</span>
-                  </div>
-                  <div>
-                    <hr className="sp-hr" />
                   </div>
                 </div>
                 <div className="panel-body">
