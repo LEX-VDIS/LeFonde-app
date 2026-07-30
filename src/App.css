@@ -5,6 +5,8 @@ body {
   font-family: "Sofia Sans", "Trebuchet MS", system-ui;
   margin: 0px;
   background-color: whitesmoke;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 button {

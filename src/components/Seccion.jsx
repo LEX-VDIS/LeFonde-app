@@ -1,0 +1,36 @@
+import { useState } from "react";
+import "./Seccion.css";
+
+export default function Seccion({ propiedades }) {
+  const [visible, setVisible] = useState(true);
+  const cambiarVisibilidad = () => {
+    setVisible((prev) => !prev);
+  }; //Muestra/oculta el cuerpo de la seccion
+
+  return (
+    <section className="section">
+      <section className="section_head">
+        <button onClick={cambiarVisibilidad}>
+          <span className="section_title">
+            <span className="icon material-symbols-rounded">
+              {propiedades.icono}
+            </span>
+            <span>{propiedades.titulo}</span>
+          </span>
+          <span className="section_action">
+            {visible ? (
+              <span className="icon material-symbols-rounded">
+                expand_circle_up
+              </span>
+            ) : (
+              <span className="icon material-symbols-rounded">
+                expand_circle_down
+              </span>
+            )}
+          </span>
+        </button>
+      </section>
+      <section style={{ display: visible ? "" : "none" }} className="section_body">{propiedades.contenido}</section>
+    </section>
+  );
+}

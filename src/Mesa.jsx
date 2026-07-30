@@ -1,11 +1,11 @@
 import "./Mesa.css";
 
-export default function Mesa() {
+export default function Mesa({ propiedades }) {
   return (
     <div className="tarjeta">
       <div className="row">
         <span className="icon material-symbols-rounded">table_restaurant</span>
-        <label>Mesa</label>
+        <label>Mesa {propiedades.numero}</label>
       </div>
     </div>
   );

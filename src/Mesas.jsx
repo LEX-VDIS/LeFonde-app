@@ -1,36 +1,92 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Ordenes.css";
+import Seccion from "./components/Seccion.jsx";
 import Mesa from "./Mesa";
 
 const cantidad = 12;
+const mesobas = Array.from({ length: cantidad }, (_, index) => (
+  <Mesa key={index} propiedades={{ numero: index }} />
+));
+
+function obtener_mesas() {
+  const fetchOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  };
+  const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
+
+  fetch(fetchURL, fetchOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      if (result) {
+        var mesastre = Array.from(result.mesas, (mesa, index) => (
+          <Mesa
+            key={index}
+            propiedades={{
+              numero: mesa.numero,
+              disponible: mesa.disponible === 1 ? true : false,
+            }}
+          />
+        ));
+
+        return mesastre;
+      } else {
+        alert(result.mensaje);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 export default function Ordenes() {
+  const [mesas_disp, setMesas_disp] = useState([]);
+
+  useEffect(() => {
+    const fetchOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
+    fetch(fetchURL, fetchOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result) {
+          const mesastre = Array.from(result.mesas, (mesa, index) => (
+            <Mesa
+              key={index}
+              propiedades={{
+                numero: mesa.numero,
+                disponible: mesa.disponible === 1 ? true : false,
+              }}
+            />
+          ));
+          setMesas_disp(mesastre);
+        } else {
+          alert(result.mensaje);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="app-body">
-
-      <section className="section">
-        <section className="section_head">
-          <button>
-            <span className="section_title">
-              <span className="icon material-symbols-rounded">
-                table_restaurant
-              </span>
-              <span>Mesas</span>
-            </span>
-            <span className="section_action">
-              <span className="icon material-symbols-rounded">
-                expand_circle_down
-              </span>
-            </span>
-          </button>
-        </section>
-        <section className="section_body">
-          {Array.from({ length: cantidad }, (_, index) => (
-            <Mesa key={index} />
-          ))}
-        </section>
-      </section>
-
+      <Seccion
+        propiedades={{
+          icono: "table_restaurant",
+          titulo: "Mesas disponibles",
+          contenido: mesas_disp,
+        }}
+      />
+      <Seccion
+        propiedades={{
+          icono: "table_restaurant",
+          titulo: "Mesas no disponibles",
+          contenido: mesobas,
+        }}
+      />
     </div>
   );
 }
