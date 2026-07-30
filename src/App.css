@@ -355,6 +355,7 @@ select.panel {
   background-color: #555;
   border-color: #777;
   border-style: solid;
+  border-width: 2px;
 }
 
 @media (hover: hover) {
@@ -453,7 +454,7 @@ select.panel {
   font-weight: normal;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .left-panel > div > div > div {

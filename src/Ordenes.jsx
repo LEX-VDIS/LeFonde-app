@@ -3,8 +3,8 @@ import "./Ordenes.css";
 import Ejemplo from "./Ejemplo";
 import Seccion from "./components/Seccion.jsx";
 
-const cantidad = 33;
-const mesobas = Array.from({ length: cantidad }, (_, index) => (
+const cantidad = 5;
+const ejemplo = Array.from({ length: cantidad }, (_, index) => (
   <Ejemplo key={index} propiedades={{ numero: index }} />
 ));
 
@@ -15,7 +15,7 @@ export default function Ordenes() {
         propiedades={{
           icono: "order_play",
           titulo: "Órdenes activas",
-          contenido: mesobas }}
+          contenido: ejemplo }}
       />
       <Seccion
         propiedades={{
