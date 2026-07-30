@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./Seccion.css";
 
 export default function Seccion({ propiedades }) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const cambiarVisibilidad = () => {
-    setVisible((prev) => !prev);
+    setVisible((valor) => !valor);
   }; //Muestra/oculta el cuerpo de la seccion
 
   return (

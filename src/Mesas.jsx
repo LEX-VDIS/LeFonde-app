@@ -3,11 +3,6 @@ import "./Ordenes.css";
 import Seccion from "./components/Seccion.jsx";
 import Mesa from "./Mesa";
 
-const cantidad = 12;
-const mesobas = Array.from({ length: cantidad }, (_, index) => (
-  <Mesa key={index} propiedades={{ numero: index }} />
-));
-
 export default function Ordenes() {
   const [mesas_disp, setMesas_disp] = useState([]);
 
@@ -21,7 +16,7 @@ export default function Ordenes() {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          const mesastre = Array.from(result.mesas, (mesa, index) => (
+          const mesas = Array.from(result.mesas, (mesa, index) => (
             <Mesa
               key={index}
               propiedades={{
@@ -30,7 +25,7 @@ export default function Ordenes() {
               }}
             />
           ));
-          setMesas_disp(mesastre);
+          setMesas_disp(mesas);
         } else {
           alert(result.mensaje);
         }
@@ -52,8 +47,8 @@ export default function Ordenes() {
       <Seccion
         propiedades={{
           icono: "table_restaurant",
-          titulo: "Mesas no disponibles",
-          contenido: mesobas,
+          titulo: "Mesas ocupadas",
+          contenido: mesas_disp,
         }}
       />
     </div>
