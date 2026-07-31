@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import "./Ordenes.css";
+import "./Mesas.css";
 import Seccion from "./components/Seccion.jsx";
 import Mesa from "./Mesa";
 
-export default function Ordenes() {
+export default function Mesas() {
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
 
