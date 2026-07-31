@@ -51,7 +51,7 @@ try {
 
 function App() {
   const [log, setLog] = useState(logueado); // estado para comprobar el logueo
-  const [nombre, setNombre] = useState();
+  const [nombre, setNombre] = useState(usuario.nombre + " " + usuario.apellido);
   const [OpenLP, setOpenLP] = useState(false);
   const toggleIsOpenLP = () => {
     setOpenLP((on) => !on);
@@ -63,7 +63,7 @@ function App() {
 
   useEffect(() => {
     setNombre(usuario.nombre + " " + usuario.apellido);
-  }, []);
+  }, [log]);
 
   document.addEventListener("click", (e) => {
     if (
@@ -171,7 +171,6 @@ function App() {
               <div>
                 <div className="panel-header">
                   <div className="right">
-                    {" "}
                     <span className="title">{nombre}</span>
                   </div>
                 </div>
@@ -179,6 +178,7 @@ function App() {
                   <div className="group">
                     <button
                       onClick={() => {
+                        setNombre(null);
                         setLog(false);
                         localStorage.removeItem("tokenme");
                         setOpenLP(false);
@@ -223,6 +223,17 @@ function App() {
             <Route
               key="page/subpage"
               path="/operacion/mesas"
+              element={
+                <>
+                  <div className="app-container">
+                    <Mesas />
+                  </div>
+                </>
+              }
+            />
+            <Route
+              key="page/subpage"
+              path="/menu/bebidas"
               element={
                 <>
                   <div className="app-container">
