@@ -63,7 +63,7 @@ function App() {
 
   useEffect(() => {
     setNombre(usuario.nombre + " " + usuario.apellido);
-  }, [log]);
+  }, [usuario.nombre, usuario.apellido]); // actualiza el nombre del usuario al iniciar sesión
 
   document.addEventListener("click", (e) => {
     if (
@@ -178,7 +178,6 @@ function App() {
                   <div className="group">
                     <button
                       onClick={() => {
-                        setNombre(null);
                         setLog(false);
                         localStorage.removeItem("tokenme");
                         setOpenLP(false);
