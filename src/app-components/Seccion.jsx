@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Seccion.css";
 
-export default function Seccion({ propiedades }) {
-  const [visible, setVisible] = useState(true);
+export default function Seccion({ activo = false, propiedades }) {
+  const [visible, setVisible] = useState(activo);
   const cambiarVisibilidad = () => {
     setVisible((valor) => !valor);
   }; //Muestra/oculta el cuerpo de la seccion
@@ -30,7 +30,12 @@ export default function Seccion({ propiedades }) {
           </span>
         </button>
       </section>
-      <section style={{ display: visible ? "" : "none" }} className="section_body">{propiedades.contenido}</section>
+      <section
+        style={{ display: visible ? "" : "none" }}
+        className="section_body"
+      >
+        {propiedades.contenido}
+      </section>
     </section>
   );
 }

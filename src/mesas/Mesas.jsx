@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Mesas.css";
-import Seccion from "./components/Seccion.jsx";
-import Mesa from "./Mesa";
+import Seccion from "../app-components/Seccion.jsx";
+import Mesa from "./Mesa.jsx";
 
 export default function Mesas() {
   const [mesas_disp, setMesas_disp] = useState([]);
@@ -50,6 +50,7 @@ export default function Mesas() {
   return (
     <div className="app-body">
       <Seccion
+        activo={true}
         propiedades={{
           icono: "table_restaurant",
           titulo: "Mesas disponibles",
@@ -57,6 +58,7 @@ export default function Mesas() {
         }}
       />
       <Seccion
+        activo={false}
         propiedades={{
           icono: "table_restaurant",
           titulo: "Mesas ocupadas",

@@ -9,9 +9,9 @@ import {
 import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
-import Ordenes from "./Ordenes.jsx";
-import Mesas from "./Mesas.jsx";
-import Productos from "./Productos.jsx";
+import Ordenes from "./ordenes/Ordenes.jsx";
+import Mesas from "./mesas/Mesas.jsx";
+import Productos from "./productos/Productos.jsx";
 import { parseJwt, logout } from "./sesion.js";
 
 let usuario = {};
@@ -145,25 +145,31 @@ function App() {
           )}
           <div className="app-header">
             {log && (
-              <button
-                id="menu"
-                className={OpenLP ? "active panelButton" : "panelButton"}
-                onClick={toggleIsOpenLP}
-              >
-                <span className="icon material-symbols-rounded">
-                  {OpenLP ? "menu_open" : "menu"}
-                </span>
-              </button>
+              <section>
+                <button
+                  id="menu"
+                  className={OpenLP ? "active panelButton" : "panelButton"}
+                  onClick={toggleIsOpenLP}
+                >
+                  <span className="icon material-symbols-rounded">
+                    {OpenLP ? "menu_open" : "menu"}
+                  </span>
+                </button>
+              </section>
             )}
             {!log && <span className="titulo">LeFondé</span>}
             {log && (
-              <button
-                id="user"
-                className={OpenRP ? " active panelButton" : "panelButton"}
-                onClick={toggleIsOpenRP}
-              >
-                <span className="icon material-symbols-rounded">settings</span>
-              </button>
+              <section>
+                <button
+                  id="user"
+                  className={OpenRP ? " active panelButton" : "panelButton"}
+                  onClick={toggleIsOpenRP}
+                >
+                  <span className="icon material-symbols-rounded">
+                    settings
+                  </span>
+                </button>
+              </section>
             )}
           </div>
           {OpenRP && (

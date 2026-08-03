@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Productos.css";
-import Seccion from "./components/Seccion.jsx";
+import Seccion from "../app-components/Seccion.jsx";
 
 export default function Productos() {
   return (
