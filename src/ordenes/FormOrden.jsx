@@ -146,6 +146,56 @@ export default function FormOrden() {
                   <td>$1.00</td>
                   <td>$5.00</td>
                 </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>platillo 1</td>
+                  <td>$1.00</td>
+                  <td>$5.00</td>
+                </tr>
+
+                
               </tbody>
               <tfoot>
                 <tr>
