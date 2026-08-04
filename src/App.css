@@ -77,27 +77,11 @@ a {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.abd-left {
-  order: 1;
-  flex-grow: 1;
-  flex-basis: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 
-}
-.abd-right {
-  order: 2;
-  flex-grow: 1.5;
-  flex-basis: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
- 
-}
 
 .seccion-header {
   height: 44px;
+  font-size: 22px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

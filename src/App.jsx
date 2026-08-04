@@ -21,7 +21,7 @@ const navegacion = [
   [
     ["Operación", "operacion"],
     [
-      ["Órdenes", "ordenes", "hand_meal"],
+      ["Ordenes", "ordenes", "hand_meal"],
       ["Mesas", "mesas", "table_restaurant"],
     ],
   ],

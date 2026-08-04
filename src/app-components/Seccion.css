@@ -2,7 +2,7 @@
   width: -webkit-fill-available;
   width: stretch;
   padding: 8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -11,7 +11,7 @@
     box-shadow:
     inset 0 -1em 1em rgba(0, 0, 0, 0),
     0 0 0 0px white,
-    0px 2px 2px rgba(0, 0, 0, 0.2);
+    0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .section_head {

@@ -10,14 +10,14 @@ export default function Ordenes() {
     <div key="ordenes" className="app-body">
       <header className="seccion-header">
         <span>
-          <button onClick={() => setNuevaOrden(true)}>Nueva Órden</button>
+          <button onClick={() => setNuevaOrden(true)}>Nueva Orden</button>
         </span>
       </header>
       <Seccion
         activo={false}
         propiedades={{
           icono: "order_play",
-          titulo: "Órdenes activas",
+          titulo: "Ordenes activas",
           contenido: null,
         }}
       />
@@ -25,7 +25,7 @@ export default function Ordenes() {
         activo={false}
         propiedades={{
           icono: "inactive_order",
-          titulo: "Órdenes pausadas",
+          titulo: "Ordenes pausadas",
           contenido: null,
         }}
       />
@@ -33,7 +33,7 @@ export default function Ordenes() {
         activo={false}
         propiedades={{
           icono: "order_approve",
-          titulo: "Órdenes finalizadas",
+          titulo: "Ordenes finalizadas",
           contenido: null,
         }}
       />
