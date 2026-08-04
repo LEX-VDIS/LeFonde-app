@@ -13,6 +13,7 @@ export default function Mesas() {
       headers: { "Content-Type": "application/json" },
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
+
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -37,7 +38,6 @@ export default function Mesas() {
           ));
           setMesas_disp(mesas1);
           setMesas_ocup(mesas2);
-          //console.log(mesas1, mesas2);
         } else {
           alert(result.mensaje);
         }

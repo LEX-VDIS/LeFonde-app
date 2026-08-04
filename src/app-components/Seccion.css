@@ -1,5 +1,6 @@
 .section {
-  width: 100%;
+  width: -webkit-fill-available;
+  width: stretch;
   padding: 8px;
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;

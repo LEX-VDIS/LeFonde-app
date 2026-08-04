@@ -47,10 +47,10 @@ a {
     0px 2px 2px rgba(0, 0, 0, 0.2);
   background-color: whitesmoke;
 }
-.app-header > section{
+.app-header > section {
   display: flex;
   flex-direction: row;
-  gap: 8px
+  gap: 8px;
 }
 
 .app-container {
@@ -61,7 +61,6 @@ a {
 }
 
 .app-body {
-
   width: 100%;
   display: flex;
   gap: 8px;
@@ -70,6 +69,40 @@ a {
   justify-content: flex-start;
 }
 
+.app-body-double {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.abd-left {
+  order: 1;
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+}
+.abd-right {
+  order: 2;
+  flex-grow: 1.5;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+ 
+}
+
+.seccion-header {
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .titulo {
   align-self: center;
   font-size: 1.5rem;
@@ -291,7 +324,7 @@ div .group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-    box-shadow:
+  box-shadow:
     inset 0 -1em 1em rgba(0, 0, 0, 0),
     0 0 0 0px white,
     0px 2px 2px rgba(0, 0, 0, 0.2);
