@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./FormOrden.css";
 import Seccion from "../app-components/Seccion.jsx";
-import Producto from "../productos/Producto.jsx";
+import ProductoChckBx from "./ProductoChckBx.jsx";
 
 const detenerSubmit = (evento) => {
   evento.preventDefault();
@@ -27,9 +27,10 @@ export default function FormOrden() {
           const productos0 = Array.from(
             result.productos[0],
             (producto, index) => (
-              <Producto
-                key={index}
+              <ProductoChckBx
+                key={producto.idproducto}
                 propiedades={{
+                  id: producto.idproducto,
                   nombre: producto.nombre,
                 }}
               />
@@ -38,9 +39,10 @@ export default function FormOrden() {
           const productos1 = Array.from(
             result.productos[1],
             (producto, index) => (
-              <Producto
-                key={index}
+              <ProductoChckBx
+                key={producto.idproducto}
                 propiedades={{
+                  id: producto.idproducto,
                   nombre: producto.nombre,
                 }}
               />
@@ -49,9 +51,10 @@ export default function FormOrden() {
           const productos2 = Array.from(
             result.productos[2],
             (producto, index) => (
-              <Producto
-                key={index}
+              <ProductoChckBx
+                key={producto.idproducto}
                 propiedades={{
+                  id: producto.idproducto,
                   nombre: producto.nombre,
                 }}
               />
@@ -158,42 +161,7 @@ export default function FormOrden() {
                   <td>$1.00</td>
                   <td>$5.00</td>
                 </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
-                </tr>
+
 
                 
               </tbody>

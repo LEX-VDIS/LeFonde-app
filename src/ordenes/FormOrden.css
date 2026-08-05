@@ -56,6 +56,12 @@ table.detalle {
 table.detlle > tbody {
   background-color: rgba(0, 0, 0, 0.05);
 }
+table.detalle > tbody > tr{
+  background-color: rgba(0, 0, 0, 0.00);
+}
+table.detalle > tbody > tr > td{
+  border-radius: 6px;
+}
 
 .form-header-span {
   display: flex;
@@ -69,7 +75,7 @@ table.detlle > tbody {
 }
 .form-header-span > span > select {
   font-family: "Sofia Sans", "Trebuchet MS", system-ui;
-  font-size: 16px;
+  font-size: 15px;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 4px;
   border-width: 2px;
