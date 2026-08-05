@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import "./ProductoChckBx.css";
+import "./ProductoCheck.css";
 
-export default function ProductoChckBx({ propiedades }) {
+export default function ProductoCheck({ propiedades }) {
   const [seleccionado, setSeleccionado] = useState(false);
 
   const toggleCheck = (activar) => {
@@ -25,17 +25,21 @@ export default function ProductoChckBx({ propiedades }) {
 
   return (
     <label htmlFor={propiedades.id}>
-      <div className="tarjeta">
-        <div className="row">
-          <label htmlFor={propiedades.id}>{propiedades.nombre}</label>
-          <input
-            id={propiedades.id}
-            name={propiedades.id}
-            type="checkbox"
-            checked={seleccionado}
-            onChange={toggleCheck}
-          />
-        </div>
+      <div className="check-card">
+        <span className="row">
+          <strong>{propiedades.nombre}</strong>
+          <span>
+            ${propiedades.precio}
+            <input
+              id={propiedades.id}
+              name={propiedades.id}
+              type="checkbox"
+              checked={seleccionado}
+              onChange={toggleCheck}
+            />
+          </span>
+        </span>
+        <span>{propiedades.detalle}</span>
       </div>
     </label>
   );
