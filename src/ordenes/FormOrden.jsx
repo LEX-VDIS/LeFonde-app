@@ -257,10 +257,12 @@ const productos = {
     ],
   ],
 };
+
 export default function FormOrden() {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
+  const [complementos, setComplementos] = useState([]);
 
   useEffect(() => {
     const fetchOptions = {
@@ -316,9 +318,24 @@ export default function FormOrden() {
               />
             ),
           );
+          const productos3 = Array.from(
+            result.productos[3],
+            (producto, index) => (
+              <ProductoCheck
+                key={producto.idproducto}
+                propiedades={{
+                  id: producto.idproducto,
+                  nombre: producto.nombre,
+                  precio: producto.precio,
+                  detalle: producto.descripcion,
+                }}
+              />
+            ),
+          );
           setAlimentos(productos0);
           setBebidas(productos1);
           setPostres(productos2);
+          setComplementos(productos3);
         } else {
           alert(result.mensaje);
         }
@@ -330,41 +347,25 @@ export default function FormOrden() {
 
   const cantidad = 12;
 
-  const filtro = (alimentos) => {
-    return alimentos.filter((alimentos) => {
-      return alimentos.precio >= 8;
-    });
-  };
-
-  console.log(filtro);
-
   return (
     <div className="app-body">
       <form className="form-orden" onSubmit={detenerSubmit}>
         <header className="form-header">
-
           <span className="form-header-span">
-
             <span>
               <span className="icon material-symbols-rounded">hand_meal</span>
               <label>#66</label>
             </span>
-
           </span>
-
           <span className="form-header-span">
-
             <span>
-              <span className="icon material-symbols-rounded">
-                concierge
-              </span>
+              <span className="icon material-symbols-rounded">concierge</span>
               <select id="serv" name="serv">
                 <option value="0">Mesa</option>
                 <option value="1">Llevar</option>
                 <option value="2">Enviar</option>
               </select>
             </span>
-
             <span>
               <span className="icon material-symbols-rounded">
                 table_restaurant
@@ -375,13 +376,14 @@ export default function FormOrden() {
                 ))}
               </select>
             </span>
-
           </span>
-          
         </header>
-
         <div className="form-body">
           <div className="abd-left">
+            <span className="orden-title">
+              <span className="icon material-symbols-rounded">menu_book_2</span>
+              <span>Menú</span>
+            </span>
             <Seccion
               activo={false}
               propiedades={{
@@ -401,6 +403,14 @@ export default function FormOrden() {
             <Seccion
               activo={false}
               propiedades={{
+                icono: "kebab_dining",
+                titulo: "Complementos",
+                contenido: complementos,
+              }}
+            />
+            <Seccion
+              activo={false}
+              propiedades={{
                 icono: "icecream",
                 titulo: "Postres",
                 contenido: postres,
@@ -408,11 +418,12 @@ export default function FormOrden() {
             />
           </div>
           <div className="abd-right">
+            <span className="orden-title">
+              <span className="icon material-symbols-rounded">orders</span>
+              <span>Productos en la orden</span>
+            </span>
             <table className="detalle">
               <thead>
-                <tr>
-                  <th colSpan={4}>Productos en la orden</th>
-                </tr>
                 <tr>
                   <th>Cantidad</th>
                   <th>Producto</th>
@@ -422,19 +433,37 @@ export default function FormOrden() {
               </thead>
               <tbody>
                 <tr>
-                  <td>5</td>
+                  <td>
+                    <span>
+                      <button>-</button>
+                      <small>5</small>
+                      <button>+</button>
+                    </span>
+                  </td>
                   <td>platillo 1</td>
                   <td>$1.00</td>
                   <td>$5.00</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>
+                    <span>
+                      <button>-</button>
+                      <small>5</small>
+                      <button>+</button>
+                    </span>
+                  </td>
                   <td>platillo 1</td>
                   <td>$1.00</td>
                   <td>$5.00</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>
+                    <span>
+                      <button>-</button>
+                      <small>5</small>
+                      <button>+</button>
+                    </span>
+                  </td>
                   <td>platillo 1</td>
                   <td>$1.00</td>
                   <td>$5.00</td>
@@ -442,10 +471,9 @@ export default function FormOrden() {
               </tbody>
               <tfoot>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th>15</th>
+                  <th colSpan={2}></th>
+                  <th>$15.00</th>
                 </tr>
               </tfoot>
             </table>

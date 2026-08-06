@@ -27,17 +27,16 @@ export default function ProductoCheck({ propiedades }) {
     <label htmlFor={propiedades.id}>
       <div className="check-card">
         <span className="row">
-          <strong>{propiedades.nombre}</strong>
           <span>
-            ${propiedades.precio}
-            <input
-              id={propiedades.id}
-              name={propiedades.id}
-              type="checkbox"
-              checked={seleccionado}
-              onChange={toggleCheck}
-            />
+            <strong>{propiedades.nombre}</strong><strong>${propiedades.precio}</strong>
           </span>
+          <input
+            id={propiedades.id}
+            name={propiedades.id}
+            type="checkbox"
+            checked={seleccionado}
+            onChange={toggleCheck}
+          />
         </span>
         <span>{propiedades.detalle}</span>
       </div>

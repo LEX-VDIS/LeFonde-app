@@ -31,7 +31,7 @@ export default function Login({ setLog }) {
         .then((result) => {
           if (result.token) {
             localStorage.setItem("tokenme", result.token);
-            console.log(parseJwt(result.token));
+            //console.log(parseJwt(result.token));
             setLog(true);
           } else {
             alert(result.mensaje);
@@ -49,14 +49,14 @@ export default function Login({ setLog }) {
       <form className="login" onSubmit={evitarError}>
         <h1>Iniciar Sesión</h1>
         <section className="lab_txt">
-          <label for="user">Usuario</label>
+          <label htmlFor="user">Usuario</label>
           <input
             id="user"
             type="text"
             value={name}
             onChange={(teclazo) => setName(teclazo.target.value)}
           />
-          <label for="pass">Contraseña</label>
+          <label htmlFor="pass">Contraseña</label>
           <input
             id="pass"
             type="password"
