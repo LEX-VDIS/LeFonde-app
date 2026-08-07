@@ -81,7 +81,7 @@ a {
 
 .seccion-header {
   height: 44px;
-  font-size: 22px;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -123,7 +123,7 @@ a {
 
 .panelButton > span {
   display: block;
-  font-size: 24px !important;
+  font-size: 1.5rem !important;
 }
 
 .panelButton.active {
@@ -176,7 +176,7 @@ a {
 
 .route > span {
   display: block;
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 .navbar {
@@ -229,7 +229,7 @@ a {
 .slash {
   color: #808080;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1rem;
 }
 
 .panel-header {
@@ -264,7 +264,7 @@ a {
 }
 
 .panel-body {
-  font-size: 1.2em;
+  font-size: 1.25rem;
   background-color: #222;
   display: flex;
   flex-direction: column;
@@ -298,7 +298,7 @@ a {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   z-index: 2;
-  font-size: 1.2em;
+  font-size: 1.25rem;
 }
 
 div .group {
@@ -352,7 +352,7 @@ div .labsel {
 }
 
 div .labsel > label {
-  font-size: 16px;
+  font-size: 1rem;
   white-space: nowrap;
   margin-left: 4px;
   margin-right: 12px;
@@ -367,7 +367,7 @@ div .body {
 
 select.panel {
   font-family: "Sofia Sans";
-  font-size: 16px;
+  font-size: 1rem;
   justify-content: center;
   font-weight: bold;
   border-radius: 3px;
@@ -389,7 +389,7 @@ select.panel {
 
 .panel-body > .group button {
   font-family: "Sofia Sans";
-  font-size: 16px;
+  font-size: 1rem;
   justify-content: center;
   font-weight: bold;
   width: -webkit-fill-available;

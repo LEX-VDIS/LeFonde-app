@@ -426,47 +426,131 @@ export default function FormOrden() {
               <thead>
                 <tr>
                   <th>Cantidad</th>
-                  <th>Producto</th>
+                  <th className="left">Producto</th>
                   <th>Precio</th>
                   <th>Subtotal</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    <span>
-                      <button>-</button>
-                      <small>5</small>
-                      <button>+</button>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
                     </span>
                   </td>
                   <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
                 </tr>
-                <tr>
-                  <td>
-                    <span>
-                      <button>-</button>
-                      <small>5</small>
-                      <button>+</button>
+                                <tr>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
                     </span>
                   </td>
                   <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
                 </tr>
-                <tr>
-                  <td>
-                    <span>
-                      <button>-</button>
-                      <small>5</small>
-                      <button>+</button>
+                                <tr>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
                     </span>
                   </td>
                   <td>platillo 1</td>
-                  <td>$1.00</td>
-                  <td>$5.00</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
+                </tr>
+                                <tr>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
+                    </span>
+                  </td>
+                  <td>platillo 1</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
+                </tr>
+                                <tr>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
+                    </span>
+                  </td>
+                  <td>platillo 1</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
+                </tr>
+                                <tr>
+                  <td className="center">
+                    <span className="masmenos">
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          do_not_disturb_on
+                        </span>
+                      </button>
+                      5
+                      <button className="cantidad">
+                        <span className="icon material-symbols-rounded">
+                          add_circle
+                        </span>
+                      </button>
+                    </span>
+                  </td>
+                  <td>platillo 1</td>
+                  <td className="center">$1.00</td>
+                  <td className="center">$5.00</td>
                 </tr>
               </tbody>
               <tfoot>
