@@ -3,14 +3,19 @@ import "./Ordenes.css";
 import Ejemplo from "../Ejemplo.jsx";
 import Seccion from "../app-components/Seccion.jsx";
 import FormOrden from "./FormOrden.jsx";
+import { CartProvider } from "./Cart.jsx";
 
 export default function Ordenes() {
   const [nuevaOrden, setNuevaOrden] = useState(false);
   return !nuevaOrden ? (
     <div key="ordenes" className="app-body">
       <header className="seccion-header">
+        <span></span>
         <span>
-          <button onClick={() => setNuevaOrden(true)}>Nueva Orden</button>
+          <button className="accion" onClick={() => setNuevaOrden(true)}>
+            <span className="material-symbols-rounded">add_circle</span>Nueva
+            Orden
+          </button>
         </span>
       </header>
       <Seccion
@@ -39,6 +44,8 @@ export default function Ordenes() {
       />
     </div>
   ) : (
-    <FormOrden />
+    <CartProvider>
+      <FormOrden />
+    </CartProvider>
   );
 }

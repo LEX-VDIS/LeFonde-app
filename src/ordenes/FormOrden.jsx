@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./FormOrden.css";
 import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
+import { useCart } from "./useCart.js";
 
 const detenerSubmit = (evento) => {
   evento.preventDefault();
@@ -258,11 +259,35 @@ const productos = {
   ],
 };
 
+function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
+  return (
+    <tr>
+      <td className="center">
+        <span className="masmenos">
+          <button className="cantidad" onClick={removeFromCart}>
+            <span className="icon material-symbols-rounded">
+              do_not_disturb_on
+            </span>
+          </button>
+          {quantity}
+          <button className="cantidad" onClick={addToCart}>
+            <span className="icon material-symbols-rounded">add_circle</span>
+          </button>
+        </span>
+      </td>
+      <td>{producto}</td>
+      <td className="center">${precio}</td>
+      <td className="center">${(quantity * precio).toFixed(2)}</td>
+    </tr>
+  );
+}
+
 export default function FormOrden() {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
   const [complementos, setComplementos] = useState([]);
+  const { addToCart, removeFromCart, clearCart, cart } = useCart();
 
   useEffect(() => {
     const fetchOptions = {
@@ -432,126 +457,15 @@ export default function FormOrden() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
-                                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
-                                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
-                                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
-                                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
-                                <tr>
-                  <td className="center">
-                    <span className="masmenos">
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          do_not_disturb_on
-                        </span>
-                      </button>
-                      5
-                      <button className="cantidad">
-                        <span className="icon material-symbols-rounded">
-                          add_circle
-                        </span>
-                      </button>
-                    </span>
-                  </td>
-                  <td>platillo 1</td>
-                  <td className="center">$1.00</td>
-                  <td className="center">$5.00</td>
-                </tr>
+                {cart.map((item) =>
+                  cartItem(
+                    item.quantity,
+                    item.nombre,
+                    item.precio,
+                    () => addToCart(item),
+                    () => removeFromCart(item.id),
+                  ),
+                )}
               </tbody>
               <tfoot>
                 <tr>
@@ -562,6 +476,16 @@ export default function FormOrden() {
               </tfoot>
             </table>
           </div>
+        </div>
+        <div className="form-footer">
+          <button className="accion" onClick={clearCart}>
+            <span className="icon material-symbols-rounded">delete</span>
+            Limpiar orden
+          </button>
+          <button className="accion">
+            <span className="icon material-symbols-rounded">save</span>
+            Guardar orden
+          </button>
         </div>
       </form>
     </div>

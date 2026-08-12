@@ -1,11 +1,21 @@
 import { useState, useEffect } from "react";
 import "./ProductoCheck.css";
+import { useCart } from "./useCart.js";
 
 export default function ProductoCheck({ propiedades }) {
   const [seleccionado, setSeleccionado] = useState(false);
+  const { addToCart, removeFromCart, clearCart, cart } = useCart();
 
   const toggleCheck = (activar) => {
     setSeleccionado(activar.target.checked);
+
+    const checkedProductInCart = (product) => {
+      return cart.some((item) => item.id === product.id);
+    };
+
+    checkedProductInCart(propiedades)
+      ? removeFromCart(propiedades.id)
+      : addToCart(propiedades);
   };
 
   function OpcionesMultiples() {
@@ -28,7 +38,8 @@ export default function ProductoCheck({ propiedades }) {
       <div className="check-card">
         <span className="row">
           <span>
-            <strong>{propiedades.nombre}</strong><strong>${propiedades.precio}</strong>
+            <strong>{propiedades.nombre}</strong>
+            <strong>${propiedades.precio}</strong>
           </span>
           <input
             id={propiedades.id}
