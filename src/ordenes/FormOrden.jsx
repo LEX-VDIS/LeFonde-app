@@ -469,9 +469,9 @@ export default function FormOrden() {
               </tbody>
               <tfoot>
                 <tr>
-                  <th>15</th>
+                  <th>{cart.reduce((total, item) => total + item.quantity, 0)}</th>
                   <th colSpan={2}></th>
-                  <th>$15.00</th>
+                  <th>${(cart.reduce((total, item) => total + item.quantity * item.precio, 0)).toFixed(2)}</th>
                 </tr>
               </tfoot>
             </table>
