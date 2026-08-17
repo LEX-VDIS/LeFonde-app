@@ -3,261 +3,7 @@ import "./FormOrden.css";
 import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
-
-const detenerSubmit = (evento) => {
-  evento.preventDefault();
-};
-
-const productos = {
-  productos: [
-    [
-      {
-        idproducto: 11,
-        categoria: 1,
-        tipo: 1,
-        nombre: "platillo 0",
-        precio: "10.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 12,
-        categoria: 1,
-        tipo: 2,
-        nombre: "platillo 1",
-        precio: "1.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 13,
-        categoria: 1,
-        tipo: 1,
-        nombre: "platillo 2",
-        precio: "2.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 14,
-        categoria: 1,
-        tipo: 2,
-        nombre: "platillo 3",
-        precio: "3.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 15,
-        categoria: 1,
-        tipo: 3,
-        nombre: "platillo 4",
-        precio: "4.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 16,
-        categoria: 1,
-        tipo: 1,
-        nombre: "platillo 5",
-        precio: "5.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 17,
-        categoria: 1,
-        tipo: 2,
-        nombre: "platillo 6",
-        precio: "6.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 18,
-        categoria: 1,
-        tipo: 3,
-        nombre: "platillo 7",
-        precio: "7.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 19,
-        categoria: 1,
-        tipo: 4,
-        nombre: "platillo 8",
-        precio: "8.00",
-        descripcion: "descripcion del platillo",
-      },
-      {
-        idproducto: 20,
-        categoria: 1,
-        tipo: 1,
-        nombre: "platillo 9",
-        precio: "9.00",
-        descripcion: "descripcion del platillo",
-      },
-    ],
-    [
-      {
-        idproducto: 21,
-        categoria: 2,
-        tipo: 1,
-        nombre: "bebida 0",
-        precio: "10.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 22,
-        categoria: 2,
-        tipo: 2,
-        nombre: "bebida 1",
-        precio: "1.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 23,
-        categoria: 2,
-        tipo: 1,
-        nombre: "bebida 2",
-        precio: "2.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 24,
-        categoria: 2,
-        tipo: 2,
-        nombre: "bebida 3",
-        precio: "3.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 25,
-        categoria: 2,
-        tipo: 3,
-        nombre: "bebida 4",
-        precio: "4.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 26,
-        categoria: 2,
-        tipo: 1,
-        nombre: "bebida 5",
-        precio: "5.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 27,
-        categoria: 2,
-        tipo: 2,
-        nombre: "bebida 6",
-        precio: "6.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 28,
-        categoria: 2,
-        tipo: 3,
-        nombre: "bebida 7",
-        precio: "7.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 29,
-        categoria: 2,
-        tipo: 4,
-        nombre: "bebida 8",
-        precio: "8.00",
-        descripcion: "descripcion de la bebida",
-      },
-      {
-        idproducto: 30,
-        categoria: 2,
-        tipo: 1,
-        nombre: "bebida 9",
-        precio: "9.00",
-        descripcion: "descripcion de la bebida",
-      },
-    ],
-    [
-      {
-        idproducto: 31,
-        categoria: 3,
-        tipo: 1,
-        nombre: "postre 0",
-        precio: "10.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 32,
-        categoria: 3,
-        tipo: 2,
-        nombre: "postre 1",
-        precio: "1.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 33,
-        categoria: 3,
-        tipo: 1,
-        nombre: "postre 2",
-        precio: "2.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 34,
-        categoria: 3,
-        tipo: 2,
-        nombre: "postre 3",
-        precio: "3.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 35,
-        categoria: 3,
-        tipo: 3,
-        nombre: "postre 4",
-        precio: "4.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 36,
-        categoria: 3,
-        tipo: 1,
-        nombre: "postre 5",
-        precio: "5.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 37,
-        categoria: 3,
-        tipo: 2,
-        nombre: "postre 6",
-        precio: "6.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 38,
-        categoria: 3,
-        tipo: 3,
-        nombre: "postre 7",
-        precio: "7.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 39,
-        categoria: 3,
-        tipo: 4,
-        nombre: "postre 8",
-        precio: "8.00",
-        descripcion: "descripcion del postre",
-      },
-      {
-        idproducto: 40,
-        categoria: 3,
-        tipo: 1,
-        nombre: "postre 9",
-        precio: "9.00",
-        descripcion: "descripcion del postre",
-      },
-    ],
-  ],
-};
+import { useForm } from "react-hook-form";
 
 function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
   return (
@@ -288,6 +34,34 @@ export default function FormOrden() {
   const [postres, setPostres] = useState([]);
   const [complementos, setComplementos] = useState([]);
   const { addToCart, removeFromCart, clearCart, cart } = useCart();
+  const [mesas_disp, setMesas_disp] = useState([]);
+
+  useEffect(() => {
+    const fetchOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
+
+    fetch(fetchURL, fetchOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result) {
+          console.log(result);
+          const mesas = Array.from(result.mesas, (mesa, index) => (
+            <option key={index} value={mesa.numero}>
+              {mesa.numero}
+            </option>
+          ));
+          setMesas_disp(mesas);
+        } else {
+          alert(result.mensaje);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []); //Efecto para obtener las mesas disponibles
 
   useEffect(() => {
     const fetchOptions = {
@@ -370,37 +144,68 @@ export default function FormOrden() {
       });
   }, []); //Efecto para obtener los productos de la base de datos y mostrarlos en la orden
 
-  const cantidad = 12;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+  console.log(errors);
+  const enviarOrden = handleSubmit((data) => {
+    const fetchOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: data, productos: cart }),
+    };
+    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/orden`;
+    fetch(fetchURL, fetchOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   return (
     <div className="app-body">
-      <form className="form-orden" onSubmit={detenerSubmit}>
+      <form className="form-orden" id="form-orden" onSubmit={enviarOrden}>
         <header className="form-header">
           <span className="form-header-span">
             <span>
               <span className="icon material-symbols-rounded">hand_meal</span>
-              <label>#66</label>
+              <label>Nueva Orden</label>
             </span>
           </span>
           <span className="form-header-span">
             <span>
               <span className="icon material-symbols-rounded">concierge</span>
-              <select id="serv" name="serv">
+              Servicio
+              <select
+                id="serv"
+                name="servicio"
+                {...register("servicio", { required: true })}
+              >
                 <option value="0">Mesa</option>
                 <option value="1">Llevar</option>
                 <option value="2">Enviar</option>
               </select>
             </span>
-            <span>
-              <span className="icon material-symbols-rounded">
-                table_restaurant
+            {watch("servicio") === "0" && (
+              <span id="mesa-span">
+                <span className="icon material-symbols-rounded">
+                  table_restaurant
+                </span>
+                <select
+                  id="mesa"
+                  name="mesa"
+                  {...register("mesa", { required: true })}
+                >
+                  {mesas_disp}
+                </select>
               </span>
-              <select id="mesa" name="mesa">
-                {Array.from({ length: cantidad }, (_, index) => (
-                  <option key={index}>{index + 1}</option>
-                ))}
-              </select>
-            </span>
+            )}
           </span>
         </header>
         <div className="form-body">
@@ -469,24 +274,35 @@ export default function FormOrden() {
               </tbody>
               <tfoot>
                 <tr>
-                  <th>{cart.reduce((total, item) => total + item.quantity, 0)}</th>
+                  <th>
+                    {cart.reduce((total, item) => total + item.quantity, 0)}
+                  </th>
                   <th colSpan={2}></th>
-                  <th>${(cart.reduce((total, item) => total + item.quantity * item.precio, 0)).toFixed(2)}</th>
+                  <th>
+                    $
+                    {cart
+                      .reduce(
+                        (total, item) => total + item.quantity * item.precio,
+                        0,
+                      )
+                      .toFixed(2)}
+                  </th>
                 </tr>
               </tfoot>
             </table>
           </div>
         </div>
         <div className="form-footer">
-          <button className="accion" onClick={clearCart}>
+          <button className="accion" type="button" onClick={clearCart}>
             <span className="icon material-symbols-rounded">delete</span>
             Limpiar orden
           </button>
-          <button className="accion">
+          <button className="accion" type="submit">
             <span className="icon material-symbols-rounded">save</span>
-            Guardar orden
+            Enviar orden
           </button>
         </div>
+        <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </form>
     </div>
   );

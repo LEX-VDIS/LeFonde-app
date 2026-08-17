@@ -10,7 +10,7 @@ export default function Seccion({ activo = false, propiedades }) {
   return (
     <section className="section">
       <section className="section_head">
-        <button onClick={cambiarVisibilidad}>
+        <button type="button" onClick={cambiarVisibilidad}>
           <span className="section_title">
             <span className="icon material-symbols-rounded">
               {propiedades.icono}
