@@ -1,0 +1,25 @@
+.tarjetaOrden {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  box-sizing: border-box;
+  gap: 4px;
+}
+.tarjetaOrden:hover {
+  box-shadow:
+    0px 2px 8px rgba(0, 0, 0, .3);
+}
+
+.rowOrden {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}

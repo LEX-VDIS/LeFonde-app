@@ -38,6 +38,22 @@
   justify-content: space-between;
   align-items: center;
 }
+.form-footer-left {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.form-footer-right {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 .abd-left {
   background-color: rgba(0, 0, 0, 0.05);

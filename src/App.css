@@ -541,8 +541,6 @@ button.accion {
   height: 44px;
   font-family: "Sofia Sans", "Trebuchet MS", system-ui;
   font-size: 1.25rem;
-  color: #fff;
-  background-color: #699edd;
   border-style: none;
   border-radius: 8px;
   box-shadow:
@@ -552,15 +550,33 @@ button.accion {
 }
 @media (hover: hover) {
   button.accion:hover {
-    background-color: #699edd;
+    box-shadow:
+      inset 0 -1em 1em rgba(0, 0, 0, 0),
+      0 0 0 0px white,
+      0px 2px 2px rgba(0, 0, 0, 0.25);
   }
 }
 button.accion:active {
-  background-color: #699edd;
-  border-style: none;
   border-radius: 8px;
   box-shadow:
     inset 0px 2px 4px rgba(0, 0, 0, 0.4),
     0 0 0 0px white,
     0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+button.yellow {
+  background-color: #d7dd69;
+  color: #000;
+}
+button.red {
+  background-color: #dd6f69;
+  color: #fff;
+}
+button.green {
+  background-color: #9edd69;
+  color: #000;
+}
+button.blue {
+  background-color: #699edd;
+  color: #fff;
 }

@@ -1,9 +1,9 @@
-import "./Mesa.css";
+import "./MesaCard.css";
 
-export default function Mesa({ propiedades }) {
+export default function MesaCard({ propiedades }) {
   return (
-    <div className="tarjeta">
-      <div className="row">
+    <div className="tarjetaMesa">
+      <div className="rowMesa">
         <span className="icon material-symbols-rounded">table_restaurant</span>
         <label>Mesa {propiedades.numero}</label>
       </div>

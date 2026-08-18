@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Mesas.css";
 import Seccion from "../app-components/Seccion.jsx";
-import Mesa from "./Mesa.jsx";
+import MesaCard from "./MesaCard.jsx";
 
 export default function Mesas() {
   const [mesas_disp, setMesas_disp] = useState([]);
@@ -19,7 +19,7 @@ export default function Mesas() {
       .then((result) => {
         if (result) {
           const mesas1 = Array.from(result.mesas[0], (mesa, index) => (
-            <Mesa
+            <MesaCard
               key={index}
               propiedades={{
                 numero: mesa.numero,
@@ -28,7 +28,7 @@ export default function Mesas() {
             />
           ));
           const mesas2 = Array.from(result.mesas[1], (mesa, index) => (
-            <Mesa
+            <MesaCard
               key={index}
               propiedades={{
                 numero: mesa.numero,

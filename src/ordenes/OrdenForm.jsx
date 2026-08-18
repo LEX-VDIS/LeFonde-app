@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./FormOrden.css";
+import "./OrdenForm.css";
 import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
@@ -10,13 +10,13 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
     <tr>
       <td className="center">
         <span className="masmenos">
-          <button className="cantidad" onClick={removeFromCart}>
+          <button type="button" className="cantidad" onClick={removeFromCart}>
             <span className="icon material-symbols-rounded">
               do_not_disturb_on
             </span>
           </button>
           {quantity}
-          <button className="cantidad" onClick={addToCart}>
+          <button type="button" className="cantidad" onClick={addToCart}>
             <span className="icon material-symbols-rounded">add_circle</span>
           </button>
         </span>
@@ -28,7 +28,7 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
   );
 }
 
-export default function FormOrden() {
+export default function OrdenForm({ setNuevaOrden }) {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
@@ -166,6 +166,7 @@ export default function FormOrden() {
       .catch((error) => {
         console.log(error);
       });
+    setNuevaOrden(false);
   });
 
   return (
@@ -290,18 +291,33 @@ export default function FormOrden() {
                 </tr>
               </tfoot>
             </table>
+            <div className="form-footer">
+              <div className="form-footer-left">
+                <button
+                  className="accion red"
+                  type="button"
+                  onClick={() => setNuevaOrden(false)}
+                >
+                  <span className="icon material-symbols-rounded">cancel</span>
+                  Cancelar
+                </button>
+                <button className="accion blue" type="button" onClick={clearCart}>
+                  <span className="icon material-symbols-rounded">delete</span>
+                  
+                </button>
+              </div>
+              <div className="form-footer-right">
+                <button className="accion blue" type="submit">
+                  <span className="icon material-symbols-rounded">
+                    check_circle
+                  </span>
+                  Enviar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="form-footer">
-          <button className="accion" type="button" onClick={clearCart}>
-            <span className="icon material-symbols-rounded">delete</span>
-            Limpiar orden
-          </button>
-          <button className="accion" type="submit">
-            <span className="icon material-symbols-rounded">save</span>
-            Enviar orden
-          </button>
-        </div>
+
         <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </form>
     </div>
