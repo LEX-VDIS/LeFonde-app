@@ -36,7 +36,7 @@ export default function ProductoCheck({ propiedades }) {
   return (
     <label htmlFor={propiedades.id}>
       <div className="check-card">
-        <span className="row">
+        <span className="check-card-header">
           <span>
             <strong>{propiedades.nombre}</strong>
             <strong>${propiedades.precio}</strong>
