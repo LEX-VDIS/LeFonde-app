@@ -147,10 +147,30 @@ export default function OrdenForm({ setNuevaOrden }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch,
-  } = useForm();
-  console.log(errors);
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: async () => {
+      const fetchOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      };
+      const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
+
+      const response = await fetch(fetchURL, fetchOptions);
+      const result = await response.json();
+      if (result) {
+        return { servicio: 0, mesa: result.mesas[0].numero };
+      } else {
+        alert(result.mensaje);
+        return { servicio: 0, mesa: 0 };
+      }
+    },
+  });
+  console.log("ERROR", errors);
+
+
   const enviarOrden = handleSubmit((data) => {
     const fetchOptions = {
       method: "POST",
@@ -169,6 +189,22 @@ export default function OrdenForm({ setNuevaOrden }) {
     setNuevaOrden(false);
   });
 
+  const mostrarMesas = (e) => {
+    if (e.target.value === "0") {
+      setValue("mesa", mesas_disp[0].props.value, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+    } else {
+      setValue("mesa", 0, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+    }
+  };
+
   return (
     <div className="app-body">
       <form className="form-orden" id="form-orden" onSubmit={enviarOrden}>
@@ -186,14 +222,17 @@ export default function OrdenForm({ setNuevaOrden }) {
               <select
                 id="serv"
                 name="servicio"
-                {...register("servicio", { required: true })}
+                {...register("servicio", {
+                  required: true,
+                  onChange: mostrarMesas,
+                  valueAsNumber: true,
+                })}
               >
                 <option value="0">Mesa</option>
-                <option value="1">Llevar</option>
-                <option value="2">Enviar</option>
+                <option value="1">Mostrador</option>
               </select>
             </span>
-            {watch("servicio") === "0" && (
+            {watch("servicio") === 0 && (
               <span id="mesa-span">
                 <span className="icon material-symbols-rounded">
                   table_restaurant
@@ -201,7 +240,11 @@ export default function OrdenForm({ setNuevaOrden }) {
                 <select
                   id="mesa"
                   name="mesa"
-                  {...register("mesa", { required: true })}
+                  {...register("mesa", {
+                    required: true,
+                    validate: (value) => value !== "0",
+                    valueAsNumber: true,
+                  })}
                 >
                   {mesas_disp}
                 </select>
@@ -301,9 +344,12 @@ export default function OrdenForm({ setNuevaOrden }) {
                   <span className="icon material-symbols-rounded">cancel</span>
                   Cancelar
                 </button>
-                <button className="accion blue" type="button" onClick={clearCart}>
+                <button
+                  className="accion blue"
+                  type="button"
+                  onClick={clearCart}
+                >
                   <span className="icon material-symbols-rounded">delete</span>
-                  
                 </button>
               </div>
               <div className="form-footer-right">
@@ -317,8 +363,6 @@ export default function OrdenForm({ setNuevaOrden }) {
             </div>
           </div>
         </div>
-
-        <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </form>
     </div>
   );
