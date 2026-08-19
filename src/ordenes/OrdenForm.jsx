@@ -157,7 +157,6 @@ export default function OrdenForm({ setNuevaOrden }) {
         headers: { "Content-Type": "application/json" },
       };
       const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/mesas`;
-
       const response = await fetch(fetchURL, fetchOptions);
       const result = await response.json();
       if (result) {
@@ -169,7 +168,6 @@ export default function OrdenForm({ setNuevaOrden }) {
     },
   });
   console.log("ERROR", errors);
-
 
   const enviarOrden = handleSubmit((data) => {
     const fetchOptions = {

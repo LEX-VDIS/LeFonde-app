@@ -1,7 +1,7 @@
 import "./OrdenCard.css";
 
 export default function Orden({ propiedades }) {
-  console.log("propiedades", propiedades);
+  //console.log("propiedades", propiedades);
   return (
     <div className="tarjetaOrden">
       <div className="rowOrden">
