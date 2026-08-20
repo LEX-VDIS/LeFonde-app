@@ -8,7 +8,7 @@ const iconos = [
   { id: 3, icon: "icecream" },
 ];
 
-export default function DetalleCard({ propiedades }) {
+export default function DetalleCard({ propiedades, setRefrescar }) {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     const fetchOptions = {
@@ -37,11 +37,11 @@ export default function DetalleCard({ propiedades }) {
       });
   }, []); //Efecto para obtener los productos de la base de datos y mostrarlos en la orden
 
-  const servirProducto = (idproducto, accion) => {
+  const servirProducto = (idproducto, accion, cantidad) => {
     const fetchOptions = {
       method: accion,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ producto: idproducto }),
+      body: JSON.stringify({ producto: idproducto, cantidad: cantidad }),
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/servir`;
     fetch(fetchURL, fetchOptions)
@@ -49,6 +49,7 @@ export default function DetalleCard({ propiedades }) {
       .then((result) => {
         if (result) {
           console.log(`Producto con ID ${idproducto} marcado como ${accion}.`);
+          setRefrescar((prev) => !prev);
         } else {
           alert(result.mensaje);
         }
@@ -56,9 +57,9 @@ export default function DetalleCard({ propiedades }) {
       .catch((error) => {
         console.log(error);
       });
-      setProductos((prevProductos) =>
-        prevProductos.filter((producto) => producto.idproducto !== idproducto)
-      );
+    setProductos((prevProductos) =>
+      prevProductos.filter((producto) => producto.idproducto !== idproducto),
+    );
   };
 
   const icono = productos.find(
@@ -70,26 +71,35 @@ export default function DetalleCard({ propiedades }) {
     <div className="tarjetaDetalle">
       <div className="rowDetalle">
         <span className="icon material-symbols-rounded">{iconoNombre}</span>
-        <label>
-          {
-            productos.find(
-              (producto) => producto.idproducto === propiedades.idproducto,
-            )?.nombre
-          }
-        </label>
+
+        <div className="rowProducto text-card">
+          <span className="detalle-nombre-precio">
+            <label>
+              {
+                productos.find(
+                  (producto) => producto.idproducto === propiedades.idproducto,
+                )?.nombre
+              }
+            </label>
+            <span className="detalle-precio">
+              Cantidad: {propiedades.cantidad} 
+            </span>
+          </span>
+        </div>
       </div>
       <div className="rowDetalle">
         <button
           className="accion card red"
           type="button"
-          onClick={() => servirProducto(propiedades.iddetalle, "DELETE")}
+          onClick={() => servirProducto(propiedades.iddetalle, "DELETE", propiedades.cantidad)}
         >
           <span className="icon material-symbols-rounded">delete</span>
         </button>
-        <button
+
+        <button style={propiedades.cantidad === 0? { display: "none" } : {}}
           className="accion card blue"
           type="button"
-          onClick={() => servirProducto(propiedades.iddetalle, "PUT")}
+          onClick={() => servirProducto(propiedades.iddetalle, "PUT", propiedades.cantidad)}
         >
           <span className="icon material-symbols-rounded">check_circle</span>
         </button>

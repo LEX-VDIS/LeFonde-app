@@ -9,10 +9,17 @@ export default function Orden({ propiedades }) {
         <span className="icon material-symbols-rounded">hand_meal</span>
         <label>Orden #{propiedades.idorden}</label>
       </div>
-      <div className="rowOrden">
-        <span className="icon material-symbols-rounded">table_restaurant</span>
-        <label> Mesa #{propiedades.idmesa}</label>
-      </div>
+      {propiedades.idmesa !== 0 ? (
+        <div className="rowOrden">
+          <span className="icon material-symbols-rounded">table_restaurant</span>
+          <label> Mesa #{propiedades.idmesa}</label>
+        </div>
+      ) : (
+        <div className="rowOrden">
+          <span className="icon material-symbols-rounded">takeout_dining_2</span>
+          <label>Mostrador</label>
+        </div>
+      )}
     </div>
   );
 }

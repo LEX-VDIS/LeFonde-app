@@ -92,6 +92,7 @@
 }
 
 .orden-title {
+  width: -webkit-fill-available;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -100,6 +101,9 @@
   height: 38px;
   font-size: 1.5rem;
   font-family: "Sofia Sans";
+}
+.title-text {
+  white-space: nowrap;
 }
 
 table.detalle {
@@ -178,7 +182,61 @@ span.masmenos {
   background-color: rgba(0, 0, 0, 0.1);
   border-color: rgba(0, 0, 0, 0);
 }
-  
-select{
+
+select {
   field-sizing: content;
+}
+
+.tarjetaProducto {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  box-sizing: border-box;
+  gap: 4px;
+}
+.tarjetaProducto:hover {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rowProducto {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.rowProducto + .text-card {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  padding: 0px 4px;
+}
+
+.detalle-nombre-precio {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+}
+.detalle-precio {
+  color: rgba(0, 0, 0, 0.6);
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+}
+
+label.quantity {
+  padding: 0px 6px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
 }

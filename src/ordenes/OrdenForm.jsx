@@ -5,27 +5,43 @@ import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
 import { useForm } from "react-hook-form";
+import DetalleCard from "./DetalleCard.jsx";
+
+const iconos = [
+  { id: 2, icon: "sports_bar" },
+  { id: 1, icon: "dinner_dining" },
+  { id: 4, icon: "kebab_dining" },
+  { id: 3, icon: "icecream" },
+];
 
 function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
   return (
-    <tr>
-      <td className="center">
-        <span className="masmenos">
-          <button type="button" className="cantidad" onClick={removeFromCart}>
-            <span className="icon material-symbols-rounded">
-              do_not_disturb_on
-            </span>
-          </button>
-          {quantity}
-          <button type="button" className="cantidad" onClick={addToCart}>
-            <span className="icon material-symbols-rounded">add_circle</span>
-          </button>
+    <div className="tarjetaProducto">
+      <div className="rowProducto">
+        <button
+          className="accion card blue"
+          type="button"
+          onClick={removeFromCart}
+        >
+          <span className="icon material-symbols-rounded">
+            {quantity > 1 ? "remove_circle" : "delete"}
+          </span>
+        </button>
+      </div>
+      <div className="rowProducto text-card">
+        <span className="detalle-nombre-precio">
+          <label>{producto}</label>
+          <span className="detalle-precio">
+            ${precio} | Cantidad: {quantity} | ${(quantity * precio).toFixed(2)}
+          </span>
         </span>
-      </td>
-      <td>{producto}</td>
-      <td className="center">${precio}</td>
-      <td className="center">${(quantity * precio).toFixed(2)}</td>
-    </tr>
+      </div>
+      <div className="rowProducto ">
+        <button className="accion card blue" type="button" onClick={addToCart}>
+          <span className="icon material-symbols-rounded">add_circle</span>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -174,7 +190,11 @@ export default function OrdenForm({ setNuevaOrden }) {
     const fetchOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data: data, productos: cart, usuario: parseJwt(localStorage.getItem("tokenme")).usuario[0].idusuario }),
+      body: JSON.stringify({
+        data: data,
+        productos: cart,
+        usuario: parseJwt(localStorage.getItem("tokenme")).usuario[0].idusuario,
+      }),
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/nuevaorden`;
     fetch(fetchURL, fetchOptions)
@@ -210,7 +230,9 @@ export default function OrdenForm({ setNuevaOrden }) {
         <header className="form-header">
           <span className="form-header-span">
             <span>
-              <span className="icon material-symbols-rounded">room_service</span>
+              <span className="icon material-symbols-rounded">
+                room_service
+              </span>
               Servicio en
               <select
                 id="serv"
@@ -300,44 +322,42 @@ export default function OrdenForm({ setNuevaOrden }) {
               <span className="icon material-symbols-rounded">orders</span>
               <span>Productos en la orden</span>
             </span>
-            <table className="detalle">
-              <thead>
-                <tr>
-                  <th>Cantidad</th>
-                  <th className="left">Producto</th>
-                  <th>Precio</th>
-                  <th>Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cart.map((item) =>
-                  cartItem(
-                    item.quantity,
-                    item.nombre,
-                    item.precio,
-                    () => addToCart(item),
-                    () => removeFromCart(item.id),
-                  ),
-                )}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>
+            <div className="detallecard-container">
+              {cart.map((item) =>
+                cartItem(
+                  item.quantity,
+                  item.nombre,
+                  item.precio,
+                  () => addToCart(item),
+                  () => removeFromCart(item.id),
+                ),
+              )}
+            </div>
+            <div className="form-footer">
+              <div className="form-footer-left">
+                <span className="orden-title">
+                  <span>
+                    Cantidad:{" "}
                     {cart.reduce((total, item) => total + item.quantity, 0)}
-                  </th>
-                  <th colSpan={2}></th>
-                  <th>
-                    $
+                  </span>
+                  <input type="hidden" {...register("cantidad", { value: cart.reduce((total, item) => total + item.quantity, 0) })} />
+                </span>
+              </div>
+              <div className="form-footer-right">
+                <span className="orden-title">
+                  <span>
+                    Total: $
                     {cart
                       .reduce(
                         (total, item) => total + item.quantity * item.precio,
                         0,
                       )
                       .toFixed(2)}
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
+                  </span>
+                  <input type="hidden" {...register("total", { value: cart.reduce((total, item) => total + item.quantity * item.precio, 0).toFixed(2) })} />
+                </span>
+              </div>
+            </div>
             <div className="form-footer">
               <div className="form-footer-left">
                 <button

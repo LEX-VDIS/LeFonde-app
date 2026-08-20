@@ -17,6 +17,7 @@ export default function Orden() {
   const [productosAgregados, setProductosAgregados] = useState([]);
   const [productosServidos, setProductosServidos] = useState([]);
   const [mesas_disp, setMesas_disp] = useState([]);
+  const [refrescar, setRefrescar] = useState(false);
 
   const {
     register,
@@ -74,7 +75,7 @@ export default function Orden() {
         }
       })
       .catch((error) => console.error("Error fetching productos:", error));
-  }, [productosServidos, productosAgregados]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
+  }, [refrescar]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
 
   return (
     <div className="app-body">
@@ -114,22 +115,22 @@ export default function Orden() {
           <div className="abd-left">
             <span className="orden-title">
               <span className="icon material-symbols-rounded">concierge</span>
-              <span>Productos por servir</span>
+              <span className="title-text">Productos por servir</span>
             </span>
             <div className="detallecard-container">
               {productosAgregados.map((producto, index) => (
-                <DetalleCard key={index} propiedades={{ ...producto }} />
+                <DetalleCard key={index} propiedades={{ ...producto }} setRefrescar={setRefrescar} />
               ))}
             </div>
           </div>
           <div className="abd-right">
             <span className="orden-title">
               <span className="icon material-symbols-rounded">hand_meal</span>
-              <span>Productos servidos</span>
+              <span className="title-text">Productos servidos</span>
             </span>
             <div className="detallecard-container">
               {productosServidos.map((producto, index) => (
-                <DetalleCard key={index} propiedades={{ ...producto}} />
+                <DetalleCard key={index} propiedades={{ ...producto }} setRefrescar={setRefrescar} />
               ))}
             </div>
             <div className="form-footer">

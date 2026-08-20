@@ -66,7 +66,7 @@ export default function Ordenes() {
         }}
       />
       <Seccion
-        activo={false}
+        activo={true}
         propiedades={{
           icono: "inactive_order",
           titulo: "Ordenes servidas",
@@ -74,7 +74,7 @@ export default function Ordenes() {
         }}
       />
       <Seccion
-        activo={false}
+        activo={true}
         propiedades={{
           icono: "order_approve",
           titulo: "Ordenes finalizadas",
