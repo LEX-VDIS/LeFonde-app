@@ -64,7 +64,6 @@ export default function OrdenForm({ setNuevaOrden }) {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          console.log(result);
           const mesas = Array.from(result.mesas, (mesa, index) => (
             <option key={index} value={mesa.numero}>
               {mesa.numero}
@@ -91,7 +90,6 @@ export default function OrdenForm({ setNuevaOrden }) {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          console.log(result);
           const productos0 = Array.from(
             result.productos[0],
             (producto, index) => (
@@ -177,16 +175,33 @@ export default function OrdenForm({ setNuevaOrden }) {
       const response = await fetch(fetchURL, fetchOptions);
       const result = await response.json();
       if (result) {
-        return { servicio: 0, mesa: result.mesas[0].numero };
+        return {
+          servicio: 0,
+          mesa: result.mesas[0].numero,
+          cantidad: 0,
+          total: 0,
+        };
       } else {
         alert(result.mensaje);
-        return { servicio: 0, mesa: 0 };
+        return { servicio: 0, mesa: 0, cantidad: 0, total: 0 };
       }
     },
   });
   console.log("ERROR", errors);
 
+  setValue(
+    "cantidad",
+    cart.reduce((total, item) => total + item.quantity, 0),
+  );
+  setValue(
+    "total",
+    cart
+      .reduce((total, item) => total + item.quantity * item.precio, 0)
+      .toFixed(2),
+  );
+
   const enviarOrden = handleSubmit((data) => {
+    console.log("Datos del formulario:", data);
     const fetchOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -340,13 +355,12 @@ export default function OrdenForm({ setNuevaOrden }) {
                     Cantidad:{" "}
                     {cart.reduce((total, item) => total + item.quantity, 0)}
                   </span>
-                  <input type="hidden" {...register("cantidad", { value: cart.reduce((total, item) => total + item.quantity, 0) })} />
                 </span>
               </div>
               <div className="form-footer-right">
                 <span className="orden-title">
                   <span>
-                    Total: $
+                    Total: ${" "}
                     {cart
                       .reduce(
                         (total, item) => total + item.quantity * item.precio,
@@ -354,7 +368,6 @@ export default function OrdenForm({ setNuevaOrden }) {
                       )
                       .toFixed(2)}
                   </span>
-                  <input type="hidden" {...register("total", { value: cart.reduce((total, item) => total + item.quantity * item.precio, 0).toFixed(2) })} />
                 </span>
               </div>
             </div>
