@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { parseJwt } from "../sesion.js";
 import "./OrdenForm.css";
 import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
@@ -173,9 +174,9 @@ export default function OrdenForm({ setNuevaOrden }) {
     const fetchOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data: data, productos: cart }),
+      body: JSON.stringify({ data: data, productos: cart, usuario: parseJwt(localStorage.getItem("tokenme")).usuario[0].idusuario }),
     };
-    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/orden`;
+    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/nuevaorden`;
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -209,14 +210,8 @@ export default function OrdenForm({ setNuevaOrden }) {
         <header className="form-header">
           <span className="form-header-span">
             <span>
-              <span className="icon material-symbols-rounded">hand_meal</span>
-              <label>Nueva Orden</label>
-            </span>
-          </span>
-          <span className="form-header-span">
-            <span>
-              <span className="icon material-symbols-rounded">concierge</span>
-              Servicio
+              <span className="icon material-symbols-rounded">room_service</span>
+              Servicio en
               <select
                 id="serv"
                 name="servicio"
@@ -248,6 +243,17 @@ export default function OrdenForm({ setNuevaOrden }) {
                 </select>
               </span>
             )}
+          </span>
+          <span className="form-header-span">
+            <span>
+              <span className="icon material-symbols-rounded">
+                person_apron
+              </span>
+              <label>
+                Atendido por{" "}
+                {parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}
+              </label>
+            </span>
           </span>
         </header>
         <div className="form-body">
@@ -335,7 +341,7 @@ export default function OrdenForm({ setNuevaOrden }) {
             <div className="form-footer">
               <div className="form-footer-left">
                 <button
-                  className="accion red"
+                  className="accion seccion red"
                   type="button"
                   onClick={() => setNuevaOrden(false)}
                 >
@@ -343,7 +349,7 @@ export default function OrdenForm({ setNuevaOrden }) {
                   Cancelar
                 </button>
                 <button
-                  className="accion blue"
+                  className="accion seccion blue"
                   type="button"
                   onClick={clearCart}
                 >
@@ -351,7 +357,7 @@ export default function OrdenForm({ setNuevaOrden }) {
                 </button>
               </div>
               <div className="form-footer-right">
-                <button className="accion blue" type="submit">
+                <button className="accion seccion blue" type="submit">
                   <span className="icon material-symbols-rounded">
                     check_circle
                   </span>

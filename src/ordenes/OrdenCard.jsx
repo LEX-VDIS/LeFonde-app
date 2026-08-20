@@ -1,9 +1,10 @@
 import "./OrdenCard.css";
+import {useNavigate} from "react-router-dom";
 
 export default function Orden({ propiedades }) {
-  //console.log("propiedades", propiedades);
+  const navigate = useNavigate();
   return (
-    <div className="tarjetaOrden">
+    <div className="tarjetaOrden" onClick={() => navigate(`/operacion/ordenes/${propiedades.idorden}`)}>
       <div className="rowOrden">
         <span className="icon material-symbols-rounded">hand_meal</span>
         <label>Orden #{propiedades.idorden}</label>

@@ -10,6 +10,7 @@ import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import Ordenes from "./ordenes/Ordenes.jsx";
+import Orden from "./ordenes/Orden.jsx";
 import Mesas from "./mesas/Mesas.jsx";
 import Productos from "./productos/Productos.jsx";
 import { parseJwt, logout } from "./sesion.js";
@@ -21,7 +22,7 @@ const navegacion = [
   [
     ["Operación", "operacion"],
     [
-      ["Ordenes", "ordenes", "hand_meal"],
+      ["Ordenes", "ordenes", "receipt"],
       ["Mesas", "mesas", "table_restaurant"],
     ],
   ],
@@ -30,6 +31,7 @@ const navegacion = [
     [
       ["Bebidas", "bebidas", "sports_bar"],
       ["Platillos", "platillos", "dinner_dining"],
+      ["Complementos", "complementos", "kebab_dining"],
       ["Postres", "postres", "icecream"],
     ],
   ],
@@ -226,19 +228,19 @@ function App() {
               }
             />
             <Route
-              key="page/subpage"
-              path="/operacion/mesas"
+              key="page/subpage/item"
+              path="/operacion/ordenes/:id"
               element={
                 <>
                   <div className="app-container">
-                    <Mesas />
+                    <Orden />
                   </div>
                 </>
               }
             />
             <Route
               key="page/subpage"
-              path="/menu/bebidas"
+              path="/operacion/mesas"
               element={
                 <>
                   <div className="app-container">

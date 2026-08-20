@@ -548,6 +548,12 @@ button.accion {
     0 0 0 0px white,
     0px 2px 2px rgba(0, 0, 0, 0.2);
 }
+button.card {
+  border-radius: 4px;
+}
+button.seccion {
+  border-radius: 6px;
+}
 @media (hover: hover) {
   button.accion:hover {
     box-shadow:
@@ -557,7 +563,7 @@ button.accion {
   }
 }
 button.accion:active {
-  border-radius: 8px;
+
   box-shadow:
     inset 0px 2px 4px rgba(0, 0, 0, 0.4),
     0 0 0 0px white,
