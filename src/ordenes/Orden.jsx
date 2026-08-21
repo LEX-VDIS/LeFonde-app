@@ -30,7 +30,7 @@ export default function Orden() {
 
   useEffect(() => {
     const fetchOptions = {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/productos`;

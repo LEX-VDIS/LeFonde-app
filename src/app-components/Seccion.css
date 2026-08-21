@@ -25,9 +25,8 @@
 .section_body {
   background-color: rgba(0, 0, 0, 0);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 8px;
-
   grid-auto-flow: row;
 }
 

@@ -1,0 +1,59 @@
+.form-header-menu {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  padding: 0px;
+  font-size: 1.5rem;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.producto-rowcard {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  box-sizing: border-box;
+  gap: 8px;
+}
+.producto-rowcard:hover {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.producto-rowcard-span {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 0px;
+}
+
+.producto-rowcard-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.producto-nombre {
+
+  font-weight: bold;
+}
+.producto-precio {
+
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+}

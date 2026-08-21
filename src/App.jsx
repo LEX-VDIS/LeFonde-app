@@ -13,6 +13,7 @@ import Ordenes from "./ordenes/Ordenes.jsx";
 import Orden from "./ordenes/Orden.jsx";
 import Mesas from "./mesas/Mesas.jsx";
 import Productos from "./productos/Productos.jsx";
+import Categoria from "./productos/Categoria.jsx";
 import { parseJwt, logout } from "./sesion.js";
 
 let usuario = {};
@@ -20,7 +21,7 @@ let logueado = false;
 
 const navegacion = [
   [
-    ["Operación", "operacion"],
+    ["Servicio", "servicio"],
     [
       ["Ordenes", "ordenes", "receipt"],
       ["Mesas", "mesas", "table_restaurant"],
@@ -30,7 +31,7 @@ const navegacion = [
     ["Productos", "productos"],
     [
       ["Bebidas", "bebidas", "sports_bar"],
-      ["Platillos", "platillos", "dinner_dining"],
+      ["Alimentos", "alimentos", "dinner_dining"],
       ["Complementos", "complementos", "kebab_dining"],
       ["Postres", "postres", "icecream"],
     ],
@@ -40,7 +41,6 @@ const navegacion = [
     [
       ["Reportes", "reportes", "query_stats"],
       ["Personal", "personal", "person"],
-      ["Contabilidad", "contabilidad", "money_range"],
     ],
   ],
 ];
@@ -218,7 +218,7 @@ function App() {
             />
             <Route
               key="page/subpage"
-              path="/operacion/ordenes"
+              path="/servicio/ordenes"
               element={
                 <>
                   <div className="app-container">
@@ -229,7 +229,7 @@ function App() {
             />
             <Route
               key="page/subpage/item"
-              path="/operacion/ordenes/:id"
+              path="/servicio/ordenes/:id"
               element={
                 <>
                   <div className="app-container">
@@ -240,7 +240,7 @@ function App() {
             />
             <Route
               key="page/subpage"
-              path="/operacion/mesas"
+              path="/servicio/mesas"
               element={
                 <>
                   <div className="app-container">
@@ -250,12 +250,23 @@ function App() {
               }
             />
             <Route
-              key="page/subpage"
-              path="/operacion/productos"
+              key="page/"
+              path="/productos/"
               element={
                 <>
                   <div className="app-container">
                     <Productos />
+                  </div>
+                </>
+              }
+            />
+            <Route
+              key="page/subpage"
+              path="/productos/:categoria"
+              element={
+                <>
+                  <div className="app-container">
+                    <Categoria />
                   </div>
                 </>
               }

@@ -58,7 +58,7 @@ export default function Mesas() {
         }}
       />
       <Seccion
-        activo={false}
+        activo={true}
         propiedades={{
           icono: "table_restaurant",
           titulo: "Mesas ocupadas",

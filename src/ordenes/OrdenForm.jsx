@@ -81,7 +81,7 @@ export default function OrdenForm({ setNuevaOrden }) {
 
   useEffect(() => {
     const fetchOptions = {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/productos`;
