@@ -9,12 +9,13 @@ import {
 import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
-import Servicio from "./Servicio.jsx";
-import Ordenes from "./ordenes/Ordenes.jsx";
-import Orden from "./ordenes/Orden.jsx";
-import Mesas from "./mesas/Mesas.jsx";
+import Servicio from "./servicio/Servicio.jsx";
+import Ordenes from "./servicio/ordenes/Ordenes.jsx";
+import Orden from "./servicio/ordenes/Orden.jsx";
+import Mesas from "./servicio/mesas/Mesas.jsx";
 import Productos from "./productos/Productos.jsx";
 import Categoria from "./productos/Categoria.jsx";
+import Reportes from "./administracion/reportes/Reportes.jsx";
 import { parseJwt, logout } from "./sesion.js";
 
 let usuario = {};
@@ -279,6 +280,17 @@ function App() {
                 <>
                   <div className="app-container">
                     <Categoria />
+                  </div>
+                </>
+              }
+            />
+            <Route
+              key="page/subpage"
+              path="/administracion/reportes"
+              element={
+                <>
+                  <div className="app-container">
+                    <Reportes />
                   </div>
                 </>
               }

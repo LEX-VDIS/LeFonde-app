@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { parseJwt } from "../sesion.js";
+import { parseJwt } from "../../sesion.js";
 import "./OrdenForm.css";
-import Seccion from "../app-components/Seccion.jsx";
+import Seccion from "../../../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
 import { useForm } from "react-hook-form";

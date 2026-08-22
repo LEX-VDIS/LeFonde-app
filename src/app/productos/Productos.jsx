@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Productos.css";
-import Seccion from "../app-components/Seccion.jsx";
+import Seccion from "../../app-components/Seccion.jsx";
 import ProductoCard from "./ProductoCard.jsx";
 
 export default function Productos() {

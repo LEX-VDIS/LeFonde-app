@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
-import { parseJwt } from "../sesion.js";
-import Seccion from "../app-components/Seccion.jsx";
+import { parseJwt } from "../../sesion.js";
+import Seccion from "../../../app-components/Seccion.jsx";
 import DetalleCard from "./DetalleCard.jsx";
 import "./Ordenes.css";
 import "./Orden.css";

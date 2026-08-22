@@ -7,7 +7,7 @@
     "dev": "vite --port 4444 --host",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --port 4444 --host"
   },
   "dependencies": {
     "react": "^19.2.8",

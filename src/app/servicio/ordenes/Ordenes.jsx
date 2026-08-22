@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Seccion from "../app-components/Seccion.jsx";
+import Seccion from "../../../app-components/Seccion.jsx";
 import "./Ordenes.css";
 import OrdenCard from "./OrdenCard.jsx";
 import OrdenForm from "./OrdenForm.jsx";

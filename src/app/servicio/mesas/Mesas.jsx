@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Mesas.css";
-import Seccion from "../app-components/Seccion.jsx";
+import Seccion from "../../../app-components/Seccion.jsx";
 import MesaCard from "./MesaCard.jsx";
 
 export default function Mesas() {
