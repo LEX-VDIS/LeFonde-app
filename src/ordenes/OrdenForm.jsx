@@ -5,7 +5,7 @@ import Seccion from "../app-components/Seccion.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
 import { useForm } from "react-hook-form";
-import DetalleCard from "./DetalleCard.jsx";
+import { useSearchParams } from "react-router-dom";
 
 const iconos = [
   { id: 2, icon: "sports_bar" },
@@ -45,13 +45,14 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
   );
 }
 
-export default function OrdenForm({ setNuevaOrden }) {
+export default function OrdenForm({ setNuevaOrden, mesa }) {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
   const [complementos, setComplementos] = useState([]);
   const { addToCart, removeFromCart, clearCart, cart } = useCart();
   const [mesas_disp, setMesas_disp] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchOptions = {
@@ -177,13 +178,13 @@ export default function OrdenForm({ setNuevaOrden }) {
       if (result) {
         return {
           servicio: 0,
-          mesa: result.mesas[0].numero,
+          mesa: mesa ? mesa : result.mesas[0].numero,
           cantidad: 0,
           total: 0,
         };
       } else {
         alert(result.mensaje);
-        return { servicio: 0, mesa: 0, cantidad: 0, total: 0 };
+        return { servicio: 0, mesa: mesa ? mesa : 0, cantidad: 0, total: 0 };
       }
     },
   });
@@ -221,6 +222,7 @@ export default function OrdenForm({ setNuevaOrden }) {
         console.log(error);
       });
     setNuevaOrden(false);
+    setSearchParams({ });
   });
 
   const mostrarMesas = (e) => {
@@ -376,7 +378,10 @@ export default function OrdenForm({ setNuevaOrden }) {
                 <button
                   className="accion seccion red"
                   type="button"
-                  onClick={() => setNuevaOrden(false)}
+                  onClick={() => {
+                    setNuevaOrden(false);
+                    setSearchParams({});
+                  }}
                 >
                   <span className="icon material-symbols-rounded">cancel</span>
                   Cancelar

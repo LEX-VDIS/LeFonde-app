@@ -23,7 +23,7 @@ const navegacion = [
   [
     ["Servicio", "servicio"],
     [
-      ["Ordenes", "ordenes", "receipt"],
+      ["Ordenes", "ordenes", "room_service"],
       ["Mesas", "mesas", "table_restaurant"],
     ],
   ],

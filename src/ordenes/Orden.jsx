@@ -90,7 +90,7 @@ export default function Orden() {
               <span className="icon material-symbols-rounded">
                 room_service
               </span>
-              Servicio en{" "}
+              Orden #{orden[0] && orden[0].idorden} servida en{" "}
               {orden[0] && orden[0].servicio === 0 ? "Mesa" : "Mostrador"}
             </span>
             {orden[0] && orden[0].servicio === 0 && (

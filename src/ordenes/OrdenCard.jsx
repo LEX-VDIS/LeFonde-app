@@ -4,9 +4,9 @@ import {useNavigate} from "react-router-dom";
 export default function Orden({ propiedades }) {
   const navigate = useNavigate();
   return (
-    <div className="tarjetaOrden" onClick={() => navigate(`/operacion/ordenes/${propiedades.idorden}`)}>
+    <div className="tarjetaOrden" onClick={() => navigate(`/servicio/ordenes/${propiedades.idorden}`)}>
       <div className="rowOrden">
-        <span className="icon material-symbols-rounded">hand_meal</span>
+        <span className="icon material-symbols-rounded">room_service</span>
         <label>Orden #{propiedades.idorden}</label>
       </div>
       {propiedades.idmesa !== 0 ? (

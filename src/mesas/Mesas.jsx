@@ -6,6 +6,7 @@ import MesaCard from "./MesaCard.jsx";
 export default function Mesas() {
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
+  const [orden, setOrden] = useState([]);
 
   useEffect(() => {
     const fetchOptions = {
@@ -17,12 +18,14 @@ export default function Mesas() {
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         if (result) {
           const mesas1 = Array.from(result.mesas[0], (mesa, index) => (
             <MesaCard
               key={index}
               propiedades={{
                 numero: mesa.numero,
+                orden: null,
                 disponible: mesa.disponible === 1 ? true : false,
               }}
             />
@@ -32,6 +35,7 @@ export default function Mesas() {
               key={index}
               propiedades={{
                 numero: mesa.numero,
+                orden: result.mesas[2].find((o) => o.idmesa === mesa.numero),
                 disponible: mesa.disponible === 1 ? true : false,
               }}
             />
