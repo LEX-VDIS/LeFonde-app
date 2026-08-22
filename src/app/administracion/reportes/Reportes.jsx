@@ -67,10 +67,25 @@ export default function Reportes() {
                 </div>
                 <div className="colText">
                   <label className="key"> Total de ganancia</label>
-                  <label className="value"> ${ordenes.reduce((acc, orden) => acc + parseInt(orden.total), 0)}</label>
+                  <label className="value">
+                    {" "}
+                    $
+                    {ordenes.reduce(
+                      (acc, orden) => acc + parseInt(orden.total),
+                      0,
+                    )}
+                  </label>
                 </div>
               </div>
-              
+            </div>
+            <div className="form-footer">
+              <div className="form-footer-left"></div>
+              <div className="form-footer-right">
+                <button className="accion seccion blue" type="submit">
+                  <span className="icon material-symbols-rounded">save</span>
+                  Exportar
+                </button>
+              </div>
             </div>
           </div>
           <div className="abd-right">
@@ -111,20 +126,6 @@ export default function Reportes() {
                     ))}
                 </tbody>
               </table>
-            </div>
-            <div className="form-footer">
-              <div className="form-footer-left">
-                <button className="accion seccion red" type="button">
-                  <span className="icon material-symbols-rounded">cancel</span>
-                  Cancelar
-                </button>
-              </div>
-              <div className="form-footer-right">
-                <button className="accion seccion blue" type="submit">
-                  <span className="icon material-symbols-rounded">save</span>
-                  Exportar
-                </button>
-              </div>
             </div>
           </div>
         </div>
