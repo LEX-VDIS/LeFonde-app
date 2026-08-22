@@ -1,0 +1,51 @@
+.app-section {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  padding: 8px;
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-body-item {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: start;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  box-sizing: border-box;
+  gap: 8px;
+}
+.form-body-item:hover {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.form-header-title{
+    width: stretch;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: start;
+    gap: 8px;
+}
+.title-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 6px;
+}

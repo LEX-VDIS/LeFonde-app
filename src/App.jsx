@@ -9,6 +9,7 @@ import {
 import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
+import Servicio from "./Servicio.jsx";
 import Ordenes from "./ordenes/Ordenes.jsx";
 import Orden from "./ordenes/Orden.jsx";
 import Mesas from "./mesas/Mesas.jsx";
@@ -212,6 +213,17 @@ function App() {
                 <>
                   <div className="app-container">
                     <Home />
+                  </div>
+                </>
+              }
+            />
+            <Route
+              key="page/"
+              path="/servicio/"
+              element={
+                <>
+                  <div className="app-container">
+                    <Servicio />
                   </div>
                 </>
               }

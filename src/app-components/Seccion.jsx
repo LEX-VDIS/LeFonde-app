@@ -17,7 +17,7 @@ export default function Seccion({ activo = false, propiedades }) {
             </span>
             <span>{propiedades.titulo}</span>
           </span>
-          <span className="section_action">
+          <span className="section_action" style={{ width: "34px" }}>
             {visible ? (
               <span className="icon material-symbols-rounded">
                 expand_circle_up

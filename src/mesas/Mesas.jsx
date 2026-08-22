@@ -6,7 +6,6 @@ import MesaCard from "./MesaCard.jsx";
 export default function Mesas() {
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
-  const [orden, setOrden] = useState([]);
 
   useEffect(() => {
     const fetchOptions = {
@@ -56,7 +55,7 @@ export default function Mesas() {
       <Seccion
         activo={true}
         propiedades={{
-          icono: "table_restaurant",
+          icono: "dine_lamp",
           titulo: "Mesas disponibles",
           contenido: mesas_disp,
         }}
@@ -64,7 +63,7 @@ export default function Mesas() {
       <Seccion
         activo={true}
         propiedades={{
-          icono: "table_restaurant",
+          icono: "dine_in",
           titulo: "Mesas ocupadas",
           contenido: mesas_ocup,
         }}

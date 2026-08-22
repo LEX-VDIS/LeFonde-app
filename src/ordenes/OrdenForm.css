@@ -9,6 +9,8 @@
 
 .form-header {
   width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
   padding: 8px;
   font-size: 1.5rem;
   display: flex;
@@ -166,7 +168,7 @@ span.masmenos {
 .form-header-span > span {
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: 8px;
   align-items: center;
 }
 .form-header-span > span > select {
