@@ -1,11 +1,6 @@
-.form-header-span {
-  width: stretch;
-  width: -webkit-fill-available;
-  width: -moz-available;
+.orden-title {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+
 }
 
 table{
