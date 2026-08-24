@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Categoria.css";
 
@@ -9,7 +9,19 @@ const categorias = [
   { id: 3, param: "postres", name: "Postres", icon: "icecream" },
 ];
 
-export default function Categoria() {
+export default function Categoria({ activarBoton, propsBoton }) {
+  useEffect(() => {
+    activarBoton(true);
+    propsBoton({
+      texto: "Agregar",
+      icono: "add_circle",
+      click: () => {
+        
+        
+      },
+    });
+  }, []);
+
   const categoria = categorias.find(
     (categoria) => categoria.param === useParams().categoria,
   );
@@ -52,9 +64,6 @@ export default function Categoria() {
           </span>
         </span>
         <span>
-          <button className="accion blue">
-            <span className="material-symbols-rounded">add_circle</span>Agregar
-          </button>
         </span>
       </header>
       <div className="form-body">

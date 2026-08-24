@@ -1,0 +1,45 @@
+.boton-accion {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 4px;
+  height: 44px;
+  font-family: "Sofia Sans", "Trebuchet MS", system-ui;
+  font-size: 1.25rem;
+  border-style: none;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 -1em 1em rgba(0, 0, 0, 0),
+    0 0 0 0px white,
+    0px 2px 2px rgba(0, 0, 0, 0);
+}
+
+@media (hover: hover) {
+  .boton-accion:hover {
+    box-shadow:
+      inset 0 -1em 1em rgba(0, 0, 0, 0),
+      0 0 0 0px white,
+      0px 2px 2px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.boton-accion:active {
+  box-shadow:
+    inset 0px 2px 4px rgba(0, 0, 0, 0.4),
+    0 0 0 0px white,
+    0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.boton-accion + .blue {
+  background-color: #699edd;
+  color: #fff;
+}
+.boton-accion + .red {
+  background-color: #dd6f69;
+  color: #fff;
+}

@@ -3,7 +3,8 @@ import "./Productos.css";
 import Seccion from "../../app-components/Seccion.jsx";
 import ProductoCard from "./ProductoCard.jsx";
 
-export default function Productos() {
+export default function Productos({ activarBoton }) {
+  activarBoton(false);
   const [bebidas, setBebidas] = useState([]);
   const [alimentos, setAlimentos] = useState([]);
   const [complementos, setComplementos] = useState([]);

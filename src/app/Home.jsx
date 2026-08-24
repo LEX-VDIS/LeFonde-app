@@ -27,7 +27,8 @@ const navegacion = [
   ],
 ];
 
-export default function Home() {
+export default function Home({ activarBoton }) {
+  activarBoton(false);
   const navigate = useNavigate();
   return (
     <div className="app-body">

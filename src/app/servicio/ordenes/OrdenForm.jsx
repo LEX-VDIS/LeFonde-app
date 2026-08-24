@@ -45,7 +45,12 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
   );
 }
 
-export default function OrdenForm({ setNuevaOrden, mesa }) {
+export default function OrdenForm({
+  setNuevaOrden,
+  mesa,
+  activarBoton,
+  propsBoton,
+}) {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
@@ -222,7 +227,8 @@ export default function OrdenForm({ setNuevaOrden, mesa }) {
         console.log(error);
       });
     setNuevaOrden(false);
-    setSearchParams({ });
+    activarBoton(true);
+    setSearchParams({});
   });
 
   const mostrarMesas = (e) => {
@@ -379,6 +385,7 @@ export default function OrdenForm({ setNuevaOrden, mesa }) {
                   className="accion seccion red"
                   type="button"
                   onClick={() => {
+                    activarBoton(true);
                     setNuevaOrden(false);
                     setSearchParams({});
                   }}

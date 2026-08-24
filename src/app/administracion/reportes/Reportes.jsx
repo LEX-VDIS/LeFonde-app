@@ -1,7 +1,8 @@
 import "./Reportes.css";
 import { useEffect, useState } from "react";
 
-export default function Reportes() {
+export default function Reportes({ activarBoton }) {
+  activarBoton(false);
   const [ordenes, setOrdenes] = useState([]);
   useEffect(() => {
     const fetchOptions = {
@@ -24,21 +25,21 @@ export default function Reportes() {
 
   return (
     <div className="app-body">
-      <header className="form-header">
-        <span className="form-header-span">
-          <span className="orden-title">
+      <header className="form-header ">
+        <span className="form-header-span ">
+          <span className=" reportes-header">
             <span className="icon material-symbols-rounded">query_stats</span>
             <label style={{ whiteSpace: "nowrap" }}>Reporte de ventas</label>
             <select id="serv" name="servicio">
               <option value="0">por dia</option>
               <option value="1">por rango</option>
             </select>
-          </span>
-          <span id="mesa-span">
-            <span className="icon material-symbols-rounded">
-              calendar_month
+            <span className="fecha-span">
+              <span className="icon material-symbols-rounded">
+                calendar_month
+              </span>
+              <label>{new Date().toLocaleDateString()}</label>
             </span>
-            <label>{new Date().toLocaleDateString()}</label>
           </span>
         </span>
       </header>

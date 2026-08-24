@@ -16,7 +16,9 @@ import Mesas from "./servicio/mesas/Mesas.jsx";
 import Productos from "./productos/Productos.jsx";
 import Categoria from "./productos/Categoria.jsx";
 import Reportes from "./administracion/reportes/Reportes.jsx";
+import Boton from "../app-components/Boton.jsx";
 import { parseJwt, logout } from "./sesion.js";
+import { set } from "react-hook-form";
 
 let usuario = {};
 let logueado = false;
@@ -64,10 +66,17 @@ function App() {
   const toggleIsOpenRP = () => {
     setOpenRP((on) => !on);
   }; // estado para abrir y cerrar el panel derecho
+  const [backButton, setBackButton] = useState(false);
+  const [actionButton, setActionButton] = useState(false);
+  const [actionButtonProps, setActionButtonProps] = useState({
+    icono: null,
+    texto: null,
+    click: null,
+  }); // estado para el botón de acción en el header
 
   useEffect(() => {
     setNombre(usuario.nombre + " " + usuario.apellido);
-  }, [usuario.nombre, usuario.apellido]); // actualiza el nombre del usuario al iniciar sesión
+  }, [open]); // actualiza el nombre del usuario al iniciar sesión
 
   document.addEventListener("click", (e) => {
     if (
@@ -81,253 +90,260 @@ function App() {
   }); // evento para cerrar los paneles laterales al hacer click fuera de ellos
 
   return (
-    <>
-      <BrowserRouter>
-        <div className="app-frame">
-          {OpenLP && (
-            <nav style={{}} className={"left-panel " + (OpenLP ? "open" : "")}>
-              <div>
-                <div className="panel-header">
-                  <div className="left">
-                    <NavLink
-                      to={{ pathname: "/", search: "?" }}
-                      className={({ isActive }) =>
-                        isActive ? "home active" : "home"
-                      }
-                    >
-                      <span style={{ fontSize: "1.5em" }}>LeFondé</span>
-                    </NavLink>
-                  </div>
+    <BrowserRouter>
+      <div className="app-frame">
+        {OpenLP && (
+          <nav style={{}} className={"left-panel " + (OpenLP ? "open" : "")}>
+            <div>
+              <div className="panel-header">
+                <div className="left">
+                  <NavLink
+                    to={{ pathname: "/", search: "?" }}
+                    className={({ isActive }) =>
+                      isActive ? "home active" : "home"
+                    }
+                    onClick={() => {
+                      setOpenLP(false);
+                    }}
+                  >
+                    <span style={{ fontSize: "1.5em" }}>LeFondé</span>
+                  </NavLink>
                 </div>
-                <div className="panel-body">
-                  {navegacion.map((elemento, indice) => {
-                    return (
-                      <Fragment key={"grupo_" + indice}>
-                        <NavLink
-                          key={elemento[1]}
-                          to={{
-                            pathname: "/" + elemento[0][1],
-                            search: "?",
-                          }}
-                          className={({ isActive }) =>
-                            isActive ? "active" : ""
-                          }
-                        >
-                          <span key={"h2_" + indice}>{elemento[0][0]}</span>
+              </div>
+              <div className="panel-body">
+                {navegacion.map((elemento, indice) => {
+                  return (
+                    <Fragment key={"grupo_" + indice}>
+                      <NavLink
+                        key={elemento[1]}
+                        to={{
+                          pathname: "/" + elemento[0][1],
+                          search: "?",
+                        }}
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                        onClick={() => {
+                          setOpenLP(false);
+                        }}
+                      >
+                        <span key={"h2_" + indice}>{elemento[0][0]}</span>
 
-                          <div key={"div_" + elemento[0][1]}>
-                            {elemento[1].map((elementoa, indicea) => {
-                              return (
-                                <NavLink
-                                  key={elementoa[1]}
-                                  to={{
-                                    pathname:
-                                      "/" + elemento[0][1] + "/" + elementoa[1],
-                                    search: "?",
-                                  }}
-                                  className={({ isActive }) =>
-                                    isActive ? "active" : ""
-                                  }
-                                >
-                                  <span className="icon material-symbols-rounded">
-                                    {elementoa[2]}
-                                  </span>
-                                  <span key={"h3_" + elementoa[1]}>
-                                    {elementoa[0]}
-                                  </span>
-                                </NavLink>
-                              );
-                            })}
-                          </div>
-                        </NavLink>
-                      </Fragment>
-                    );
-                  })}
-                </div>
+                        <div key={"div_" + elemento[0][1]}>
+                          {elemento[1].map((elementoa, indicea) => {
+                            return (
+                              <NavLink
+                                key={elementoa[1]}
+                                to={{
+                                  pathname:
+                                    "/" + elemento[0][1] + "/" + elementoa[1],
+                                  search: "?",
+                                }}
+                                className={({ isActive }) =>
+                                  isActive ? "active" : ""
+                                }
+                              >
+                                <span className="icon material-symbols-rounded">
+                                  {elementoa[2]}
+                                </span>
+                                <span key={"h3_" + elementoa[1]}>
+                                  {elementoa[0]}
+                                </span>
+                              </NavLink>
+                            );
+                          })}
+                        </div>
+                      </NavLink>
+                    </Fragment>
+                  );
+                })}
               </div>
-            </nav>
+            </div>
+          </nav>
+        )}
+        <div className="app-header">
+          {log && (
+            <section>
+              <button
+                id="menu"
+                className={OpenLP ? "active panelButton" : "panelButton"}
+                onClick={toggleIsOpenLP}
+              >
+                <span className="icon material-symbols-rounded">
+                  {OpenLP ? "menu_open" : "menu"}
+                </span>
+              </button>
+            </section>
           )}
-          <div className="app-header">
-            {log && (
-              <section>
-                <button
-                  id="menu"
-                  className={OpenLP ? "active panelButton" : "panelButton"}
-                  onClick={toggleIsOpenLP}
-                >
-                  <span className="icon material-symbols-rounded">
-                    {OpenLP ? "menu_open" : "menu"}
-                  </span>
-                </button>
-              </section>
-            )}
-            {!log && <span className="titulo">LeFondé</span>}
-            {log && (
-              <section>
-                <button
-                  id="user"
-                  className={OpenRP ? " active panelButton" : "panelButton"}
-                  onClick={toggleIsOpenRP}
-                >
-                  <span className="icon material-symbols-rounded">
-                    settings
-                  </span>
-                </button>
-              </section>
-            )}
-          </div>
-          {OpenRP && (
-            <nav className={"right-panel " + (OpenRP ? "open" : "")}>
-              <div>
-                <div className="panel-header">
-                  <div className="right">
-                    <span className="title">{nombre}</span>
-                  </div>
-                </div>
-                <div className="panel-body">
-                  <div className="group">
-                    <button
-                      onClick={() => {
-                        setLog(false);
-                        localStorage.removeItem("tokenme");
-                        setOpenLP(false);
-                        setOpenRP(false);
-                      }}
-                    >
-                      Cerrar Sesión
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </nav>
+          {!log && <span className="titulo">LeFondé</span>}
+          {log && (
+            <section>
+              {actionButton && <Boton {...actionButtonProps} />}
+              <button
+                id="user"
+                className={OpenRP ? " active panelButton" : "panelButton"}
+                onClick={toggleIsOpenRP}
+              >
+                <span className="icon material-symbols-rounded">settings</span>
+              </button>
+            </section>
           )}
         </div>
-
-        {!log ? (
-          <Login setLog={setLog} />
-        ) : (
-          <Routes>
-            <Route
-              key="root"
-              path="/"
-              element={
-                <>
-                  <div className="app-container">
-                    <Home />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/"
-              path="/servicio/"
-              element={
-                <>
-                  <div className="app-container">
-                    <Servicio />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/subpage"
-              path="/servicio/ordenes"
-              element={
-                <>
-                  <div className="app-container">
-                    <Ordenes />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/subpage/item"
-              path="/servicio/ordenes/:id"
-              element={
-                <>
-                  <div className="app-container">
-                    <Orden />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/subpage"
-              path="/servicio/mesas"
-              element={
-                <>
-                  <div className="app-container">
-                    <Mesas />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/"
-              path="/productos/"
-              element={
-                <>
-                  <div className="app-container">
-                    <Productos />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/subpage"
-              path="/productos/:categoria"
-              element={
-                <>
-                  <div className="app-container">
-                    <Categoria />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page/subpage"
-              path="/administracion/reportes"
-              element={
-                <>
-                  <div className="app-container">
-                    <Reportes />
-                  </div>
-                </>
-              }
-            />
-            <Route
-              key="page"
-              path="/:page"
-              element={
-                <>
-                  <div className="app-container"></div>
-                </>
-              }
-            />
-            <Route
-              key="subpage"
-              path="/:page/:subpage"
-              element={
-                <>
-                  <div className="app-container"></div>
-                </>
-              }
-            />
-            <Route
-              key="else"
-              path="*"
-              element={
-                <>
-                  <div className="app-container">
-                    <Home />
-                  </div>
-                </>
-              }
-            />
-          </Routes>
+        {OpenRP && (
+          <nav className={"right-panel " + (OpenRP ? "open" : "")}>
+            <div>
+              <div className="panel-header">
+                <div className="right">
+                  <span className="title">{nombre}</span>
+                </div>
+              </div>
+              <div className="panel-body">
+                <div className="group">
+                  <button
+                    onClick={() => {
+                      setLog(false);
+                      localStorage.removeItem("tokenme");
+                      setOpenLP(false);
+                      setOpenRP(false);
+                    }}
+                  >
+                    Cerrar Sesión
+                  </button>
+                </div>
+              </div>
+            </div>
+          </nav>
         )}
-      </BrowserRouter>
-    </>
+      </div>
+
+      {!log ? (
+        <Login setLog={setLog} />
+      ) : (
+        <Routes>
+          <Route
+            key="root"
+            path="/"
+            element={
+              <>
+                <div className="app-container">
+                  <Home activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/"
+            path="/servicio/"
+            element={
+              <>
+                <div className="app-container">
+                  <Servicio activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage"
+            path="/servicio/ordenes"
+            element={
+              <>
+                <div className="app-container">
+                  <Ordenes
+                    activarBoton={setActionButton}
+                    propsBoton={setActionButtonProps}
+                  />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage/item"
+            path="/servicio/ordenes/:id"
+            element={
+              <>
+                <div className="app-container">
+                  <Orden activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage"
+            path="/servicio/mesas"
+            element={
+              <>
+                <div className="app-container">
+                  <Mesas activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/"
+            path="/productos/"
+            element={
+              <>
+                <div className="app-container">
+                  <Productos activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage"
+            path="/productos/:categoria"
+            element={
+              <>
+                <div className="app-container">
+                  <Categoria
+                    activarBoton={setActionButton}
+                    propsBoton={setActionButtonProps}
+                  />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage"
+            path="/administracion/reportes"
+            element={
+              <>
+                <div className="app-container">
+                  <Reportes activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page"
+            path="/:page"
+            element={
+              <>
+                <div className="app-container"></div>
+              </>
+            }
+          />
+          <Route
+            key="subpage"
+            path="/:page/:subpage"
+            element={
+              <>
+                <div className="app-container"></div>
+              </>
+            }
+          />
+          <Route
+            key="else"
+            path="*"
+            element={
+              <>
+                <div className="app-container">
+                  <Home activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+        </Routes>
+      )}
+    </BrowserRouter>
   );
 }
 

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./Login.css";
 import { parseJwt } from "./sesion.js";
+import { set } from "react-hook-form";
 
 export default function Login({ setLog }) {
+
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);

@@ -6,7 +6,19 @@ import OrdenForm from "./OrdenForm.jsx";
 import { CartProvider } from "./Cart.jsx";
 import { useLocation } from "react-router-dom";
 
-export default function Ordenes() {
+export default function Ordenes({ activarBoton, propsBoton }) {
+  useEffect(() => {
+    activarBoton(true);
+    propsBoton({
+      texto: "Nueva",
+      icono: "add_circle",
+      click: () => {
+        setNuevaOrden(true);
+        activarBoton((prev) => !prev);
+      },
+    });
+  }, [activarBoton, propsBoton]); //Efecto para activar el botón de nueva orden en el header al cargar la página
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const newOrderParam = queryParams.get("new");
@@ -71,15 +83,6 @@ export default function Ordenes() {
 
   return !nuevaOrden ? (
     <div key="ordenes" className="app-body">
-      <header className="seccion-header">
-        <span></span>
-        <span>
-          <button className="accion blue" onClick={() => setNuevaOrden(true)}>
-            <span className="material-symbols-rounded">add_circle</span>Nueva
-            Orden
-          </button>
-        </span>
-      </header>
       <Seccion
         activo={true}
         propiedades={{
@@ -107,7 +110,12 @@ export default function Ordenes() {
     </div>
   ) : (
     <CartProvider>
-      <OrdenForm setNuevaOrden={setNuevaOrden} mesa={mesaParam} />
+      <OrdenForm
+        setNuevaOrden={setNuevaOrden}
+        mesa={mesaParam}
+        activarBoton={activarBoton}
+        propsBoton={propsBoton}
+      />
     </CartProvider>
   );
 }

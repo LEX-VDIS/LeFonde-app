@@ -7,7 +7,8 @@ import "./Ordenes.css";
 import "./Orden.css";
 import { useForm } from "react-hook-form";
 
-export default function Orden() {
+export default function Orden({ activarBoton }) {
+  activarBoton(false);
   const navigate = useNavigate();
   const [ordenid, setOrdenid] = useState(
     window.location.pathname.split("/").pop(),

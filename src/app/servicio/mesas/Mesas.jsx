@@ -3,7 +3,8 @@ import "./Mesas.css";
 import Seccion from "../../../app-components/Seccion.jsx";
 import MesaCard from "./MesaCard.jsx";
 
-export default function Mesas() {
+export default function Mesas({ activarBoton }) {
+  activarBoton(false);
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
 

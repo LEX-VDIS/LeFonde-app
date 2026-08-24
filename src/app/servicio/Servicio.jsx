@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { set } from "react-hook-form";
 
-export default function Servicio() {
+export default function Servicio({ activarBoton }) {
+  activarBoton(false);
   const navigate = useNavigate();
   const [conteo, setConteo] = useState({
     ordenesActivas: 0,
