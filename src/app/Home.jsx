@@ -40,6 +40,7 @@ export default function Home({ activarBoton }) {
             icono: seccion[0][2],
             titulo: seccion[0][0],
             ruta: `/${seccion[0][1]}`,
+            mostrar: "flex"
           }}
         >
           <div className="form-body">

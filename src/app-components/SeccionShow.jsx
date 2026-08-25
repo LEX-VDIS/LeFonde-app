@@ -8,15 +8,15 @@ export default function SeccionShow({ activo = false, propiedades, children }) {
   }; //Muestra/oculta el cuerpo de la seccion
 
   return (
-    <section className="SeccionLink">
-      <header className="SeccionLink-header" onClick={cambiarVisibilidad}>
-        <span className="SeccionLink-title">
+    <section className="Seccion">
+      <header className="Seccion-header" onClick={cambiarVisibilidad}>
+        <span className="Seccion-title">
           <span className="icon material-symbols-rounded">
             {propiedades.icono}
           </span>
           <span>{propiedades.titulo}</span>
         </span>
-        <span className="SeccionLink-action">
+        <span className="Seccion-action">
           <span>{propiedades.cantidad}</span>
           {visible ? (
             <span className="icon material-symbols-rounded">
@@ -31,7 +31,7 @@ export default function SeccionShow({ activo = false, propiedades, children }) {
       </header>
       <div
         style={{ display: visible ? "" : "none" }}
-        className="SeccionShow-content"
+        className={`Seccion-content-${propiedades.mostrar}`}
       >
         {children}
       </div>

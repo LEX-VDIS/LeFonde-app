@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { parseJwt } from "../../sesion.js";
 import "./OrdenForm.css";
+import Seccion from "../../../app-components/Seccion.jsx";
 import SeccionShow from "../../../app-components/SeccionShow.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
@@ -321,17 +322,21 @@ export default function OrdenForm({
           </span>
         </header>
         <div className="form-body">
-          <div className="abd-left">
-            <span className="orden-title">
-              <span className="icon material-symbols-rounded">menu_book_2</span>
-              <span>Menú</span>
-            </span>
+          <SeccionShow
+            activo={true}
+            propiedades={{
+              icono: "menu_book_2",
+              titulo: "Productos",
+              mostrar: "flex",
+            }}
+          >
             <SeccionShow
               activo={false}
               propiedades={{
                 icono: "sports_bar",
                 titulo: "Bebidas",
                 cantidad: productos[1],
+                mostrar: "grid",
               }}
             >
               {bebidas}
@@ -342,6 +347,7 @@ export default function OrdenForm({
                 icono: "dinner_dining",
                 titulo: "Alimentos",
                 cantidad: productos[0],
+                mostrar: "grid",
               }}
             >
               {alimentos}
@@ -352,6 +358,7 @@ export default function OrdenForm({
                 icono: "kebab_dining",
                 titulo: "Complementos",
                 cantidad: productos[3],
+                mostrar: "grid",
               }}
             >
               {complementos}
@@ -362,16 +369,19 @@ export default function OrdenForm({
                 icono: "icecream",
                 titulo: "Postres",
                 cantidad: productos[2],
+                mostrar: "grid",
               }}
             >
               {postres}
             </SeccionShow>
-          </div>
+          </SeccionShow>
+
           <div className="abd-right">
             <span className="orden-title">
               <span className="icon material-symbols-rounded">orders</span>
               <span>Productos en la orden</span>
             </span>
+
             <div className="detallecard-container">
               {cart.map((item) =>
                 cartItem(

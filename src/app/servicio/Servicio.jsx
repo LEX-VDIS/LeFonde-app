@@ -55,6 +55,7 @@ export default function Servicio({ activarBoton }) {
           icono: "room_service",
           titulo: "Ordenes",
           ruta: "/servicio/ordenes",
+          mostrar: "flex"
         }}
       >
         <InfoCard
@@ -78,6 +79,7 @@ export default function Servicio({ activarBoton }) {
           icono: "table_restaurant",
           titulo: "Mesas",
           ruta: "/servicio/mesas",
+          mostrar: "flex"
         }}
       >
         <InfoCard

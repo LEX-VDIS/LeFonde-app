@@ -82,6 +82,7 @@ export default function Mesas({ activarBoton }) {
           icono: "dine_lamp",
           titulo: "Mesas disponibles",
           cantidad: mesas[0],
+          mostrar: "grid"
         }}
       >
         {mesas_disp}
@@ -92,6 +93,7 @@ export default function Mesas({ activarBoton }) {
           icono: "dine_in",
           titulo: "Mesas ocupadas",
           cantidad: mesas[1],
+          mostrar: "grid"
         }}
       >
         {mesas_ocup}

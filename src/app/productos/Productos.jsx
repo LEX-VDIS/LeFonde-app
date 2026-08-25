@@ -94,6 +94,7 @@ export default function Productos({ activarBoton }) {
           icono: "sports_bar",
           titulo: "Bebidas",
           cantidad: productos[1],
+          mostrar: "grid"
         }}
       >
         {bebidas}
@@ -104,6 +105,7 @@ export default function Productos({ activarBoton }) {
           icono: "dinner_dining",
           titulo: "Alimentos",
           cantidad: productos[0],
+          mostrar: "grid"
         }}
       >
         {alimentos}
@@ -114,6 +116,7 @@ export default function Productos({ activarBoton }) {
           icono: "kebab_dining",
           titulo: "Complementos",
           cantidad: productos[3],
+          mostrar: "grid"
         }}
       >
         {complementos}
@@ -124,6 +127,7 @@ export default function Productos({ activarBoton }) {
           icono: "icecream",
           titulo: "Postres",
           cantidad: productos[2],
+          mostrar: "grid"
         }}
       >
         {postres}

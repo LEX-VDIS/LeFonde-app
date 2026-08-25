@@ -1,4 +1,4 @@
-.SeccionLink {
+.Seccion {
   width: -webkit-fill-available;
   width: stretch;
   padding: 8px;
@@ -14,7 +14,7 @@
     0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.SeccionLink-header {
+.Seccion-header {
   width: stretch;
   width: -webkit-fill-available;
   width: -moz-available;
@@ -29,29 +29,29 @@
   border-radius: 6px;
 }
 @media (hover: hover) {
-  .SeccionLink-header:hover {
+  .Seccion-header:hover {
     background-color: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0);
   }
 }
-.SeccionLink-header:active {
+.Seccion-header:active {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.SeccionLink-title {
+.Seccion-title {
   display: flex;
   gap: 8px;
   flex-direction: row;
   align-items: center;
 }
-.SeccionLink-action {
+.Seccion-action {
   display: flex;
   gap: 8px;
   flex-direction: row;
   align-items: center;
 }
 
-.SeccionLink-content {
+.Seccion-content-flex{
   width: stretch;
   width: -webkit-fill-available;
   display: flex;
@@ -59,8 +59,7 @@
   flex-wrap: wrap;
   gap: 8px;
 }
-
-.SeccionShow-content {
+.Seccion-content-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
   gap: 8px;

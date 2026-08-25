@@ -116,6 +116,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
           icono: "order_play",
           titulo: "Ordenes activas",
           cantidad: ordenes[0],
+          mostrar: "grid"
         }}
       >
         {ordenesActivas}
@@ -126,6 +127,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
           icono: "inactive_order",
           titulo: "Ordenes servidas",
           cantidad: ordenes[1],
+          mostrar: "grid"
         }}
       >
         {ordenesServidas}
@@ -136,6 +138,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
           icono: "order_approve",
           titulo: "Ordenes finalizadas",
           cantidad: ordenes[2],
+          mostrar: "grid"
         }}
       >
         {ordenesFinalizadas}
