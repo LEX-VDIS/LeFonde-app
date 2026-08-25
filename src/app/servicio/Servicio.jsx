@@ -1,11 +1,22 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SeccionLink from "../../app-components/SeccionLink.jsx";
 import InfoCard from "../../app-components/InfoCard.jsx";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 export default function Servicio({ activarBoton }) {
   activarBoton(false);
-  const navigate = useNavigate();
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    socket.on("mensaje", (data) => {
+      console.log("Mensaje del servidor:", data);
+      setUpdate((prev) => !prev);
+    });
+  }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
+
   const [conteo, setConteo] = useState({
     ordenesActivas: 0,
     ordenesServidas: 0,
@@ -35,7 +46,7 @@ export default function Servicio({ activarBoton }) {
           alert(result.mensaje);
         }
       });
-  }, []);
+  }, [update]); //Efecto para obtener los conteos de ordenes y mesas al cargar la página
 
   return (
     <div className="app-body">

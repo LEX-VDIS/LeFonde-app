@@ -2,12 +2,24 @@ import { useState, useEffect } from "react";
 import "./Mesas.css";
 import MesaCard from "./MesaCard.jsx";
 import SeccionShow from "../../../app-components/SeccionShow.jsx";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 export default function Mesas({ activarBoton }) {
   activarBoton(false);
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
   const [mesas, setMesas] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    socket.on("mensaje", (data) => {
+      console.log("Mensaje del servidor:", data);
+      setUpdate((prev) => !prev);
+    });
+  }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
 
   useEffect(() => {
     const fetchOptions = {
@@ -60,7 +72,7 @@ export default function Mesas({ activarBoton }) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [update]); //Efecto para obtener la lista de mesas al cargar la página y cuando se recibe un mensaje del servidor
 
   return (
     <div className="app-body">

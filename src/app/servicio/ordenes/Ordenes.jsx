@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import "./Ordenes.css";
 import OrdenCard from "./OrdenCard.jsx";
 import OrdenForm from "./OrdenForm.jsx";
 import SeccionShow from "../../../app-components/SeccionShow.jsx";
 import { CartProvider } from "./Cart.jsx";
 import { useLocation } from "react-router-dom";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 export default function Ordenes({ activarBoton, propsBoton }) {
   useEffect(() => {
@@ -28,6 +32,14 @@ export default function Ordenes({ activarBoton, propsBoton }) {
   const [ordenesServidas, setOrdenesServidas] = useState([]);
   const [ordenesFinalizadas, setOrdenesFinalizadas] = useState([]);
   const [ordenes, setOrdenes] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    socket.on("mensaje", (data) => {
+      console.log("Mensaje del servidor:", data);
+      setUpdate((prev) => !prev);
+    });
+  }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
 
   useEffect(() => {
     if (newOrderParam === "true") {
@@ -95,7 +107,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [nuevaOrden]); //Efecto para obtener las ordenes activas, servidas y finalizadas
+  }, [nuevaOrden, update]); //Efecto para obtener las ordenes activas, servidas y finalizadas
 
   return !nuevaOrden ? (
     <div key="ordenes" className="app-body">
@@ -137,6 +149,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
         mesa={mesaParam}
         activarBoton={activarBoton}
         propsBoton={propsBoton}
+        update={setUpdate}
       />
     </CartProvider>
   );

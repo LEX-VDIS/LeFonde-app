@@ -6,6 +6,10 @@ import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 const iconos = [
   { id: 2, icon: "sports_bar" },
@@ -50,6 +54,7 @@ export default function OrdenForm({
   mesa,
   activarBoton,
   propsBoton,
+  setUpdate,
 }) {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
@@ -238,6 +243,9 @@ export default function OrdenForm({
     setNuevaOrden(false);
     activarBoton(true);
     setSearchParams({});
+
+    socket.emit("mensaje", "Nueva orden agregada");
+    setUpdate((prev) => !prev);
   });
 
   const mostrarMesas = (e) => {
@@ -323,7 +331,9 @@ export default function OrdenForm({
                 titulo: "Bebidas",
                 cantidad: productos[1],
               }}
-            >{bebidas}</SeccionShow>
+            >
+              {bebidas}
+            </SeccionShow>
             <SeccionShow
               activo={false}
               propiedades={{
@@ -331,7 +341,9 @@ export default function OrdenForm({
                 titulo: "Alimentos",
                 cantidad: productos[0],
               }}
-            >{alimentos}</SeccionShow>
+            >
+              {alimentos}
+            </SeccionShow>
             <SeccionShow
               activo={false}
               propiedades={{
@@ -339,7 +351,9 @@ export default function OrdenForm({
                 titulo: "Complementos",
                 cantidad: productos[3],
               }}
-            >{complementos}</SeccionShow>
+            >
+              {complementos}
+            </SeccionShow>
             <SeccionShow
               activo={false}
               propiedades={{
@@ -347,7 +361,9 @@ export default function OrdenForm({
                 titulo: "Postres",
                 cantidad: productos[2],
               }}
-            >{postres}</SeccionShow>
+            >
+              {postres}
+            </SeccionShow>
           </div>
           <div className="abd-right">
             <span className="orden-title">
