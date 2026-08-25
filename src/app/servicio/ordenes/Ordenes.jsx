@@ -32,12 +32,11 @@ export default function Ordenes({ activarBoton, propsBoton }) {
   const [ordenesServidas, setOrdenesServidas] = useState([]);
   const [ordenesFinalizadas, setOrdenesFinalizadas] = useState([]);
   const [ordenes, setOrdenes] = useState([]);
-  const [update, setUpdate] = useState(false);
+  const [updateOrdenes, setUpdateOrdenes] = useState(false);
 
   useEffect(() => {
     socket.on("mensaje", (data) => {
-      console.log("Mensaje del servidor:", data);
-      setUpdate((prev) => !prev);
+      setUpdateOrdenes((prev) => !prev);
     });
   }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
 
@@ -107,7 +106,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [nuevaOrden, update]); //Efecto para obtener las ordenes activas, servidas y finalizadas
+  }, [nuevaOrden, updateOrdenes]); //Efecto para obtener las ordenes activas, servidas y finalizadas
 
   return !nuevaOrden ? (
     <div key="ordenes" className="app-body">
@@ -149,7 +148,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
         mesa={mesaParam}
         activarBoton={activarBoton}
         propsBoton={propsBoton}
-        update={setUpdate}
+        update={setUpdateOrdenes}
       />
     </CartProvider>
   );

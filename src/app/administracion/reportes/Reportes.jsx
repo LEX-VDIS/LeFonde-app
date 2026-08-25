@@ -1,10 +1,23 @@
 import "./Reportes.css";
 import InfoCard from "../../../app-components/InfoCard.jsx";
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 export default function Reportes({ activarBoton }) {
   activarBoton(false);
   const [ordenes, setOrdenes] = useState([]);
+  const [updateReportes, setUpdateReportes] = useState(false);
+
+  useEffect(() => {
+    socket.on("mensaje", (data) => {
+      console.log("Mensaje del servidor:", data);
+      setUpdateReportes((prev) => !prev);
+    });
+  }, [updateReportes]); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
+
   useEffect(() => {
     const fetchOptions = {
       method: "GET",
@@ -14,15 +27,12 @@ export default function Reportes({ activarBoton }) {
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched reportes:", data.ordenes[0]);
         setOrdenes(data.ordenes[0]);
       })
       .catch((error) => {
         console.error("Error fetching reportes:", error);
       });
-  }, []);
-
-  console.log(ordenes);
+  }, [updateReportes]); //Efecto para obtener la lista de reportes al cargar la página y cuando se recibe un mensaje del servidor
 
   return (
     <div className="app-body">

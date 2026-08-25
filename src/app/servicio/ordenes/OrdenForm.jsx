@@ -54,7 +54,7 @@ export default function OrdenForm({
   mesa,
   activarBoton,
   propsBoton,
-  setUpdate,
+  setUpdateOrdenes,
 }) {
   const [alimentos, setAlimentos] = useState([]);
   const [bebidas, setBebidas] = useState([]);
@@ -236,6 +236,8 @@ export default function OrdenForm({
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
+        socket.emit("mensaje", "Nueva orden agregada");
+        setUpdateOrdenes((prev) => !prev);
       })
       .catch((error) => {
         console.log(error);
@@ -243,9 +245,7 @@ export default function OrdenForm({
     setNuevaOrden(false);
     activarBoton(true);
     setSearchParams({});
-
-    socket.emit("mensaje", "Nueva orden agregada");
-    setUpdate((prev) => !prev);
+    setUpdateOrdenes((prev) => !prev);
   });
 
   const mostrarMesas = (e) => {

@@ -12,12 +12,12 @@ export default function Mesas({ activarBoton }) {
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
   const [mesas, setMesas] = useState([]);
-  const [update, setUpdate] = useState(false);
+  const [updateMesas, setUpdateMesas] = useState(false);
 
   useEffect(() => {
     socket.on("mensaje", (data) => {
       console.log("Mensaje del servidor:", data);
-      setUpdate((prev) => !prev);
+      setUpdateMesas((prev) => !prev);
     });
   }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
 
@@ -72,7 +72,7 @@ export default function Mesas({ activarBoton }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [update]); //Efecto para obtener la lista de mesas al cargar la página y cuando se recibe un mensaje del servidor
+  }, [updateMesas]); //Efecto para obtener la lista de mesas al cargar la página y cuando se recibe un mensaje del servidor
 
   return (
     <div className="app-body">
