@@ -1,4 +1,4 @@
-import "./SeccionLink.css";
+import "./Seccion.css";
 import { useNavigate } from "react-router-dom";
 
 export default function SeccionLink({ propiedades, children }) {

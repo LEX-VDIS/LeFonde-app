@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { parseJwt } from "../../sesion.js";
 import "./OrdenForm.css";
-import Seccion from "../../../app-components/Seccion.jsx";
 import SeccionShow from "../../../app-components/SeccionShow.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";

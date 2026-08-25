@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./SeccionLink.css";
+import "./Seccion.css";
 
 export default function SeccionShow({ activo = false, propiedades, children }) {
   const [visible, setVisible] = useState(activo);

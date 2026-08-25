@@ -1,4 +1,4 @@
-.section {
+.SeccionLink {
   width: -webkit-fill-available;
   width: stretch;
   padding: 8px;
@@ -14,70 +14,55 @@
     0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.section_head {
-  background-color: rgba(0, 0, 0, 0);
+.SeccionLink-header {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  padding: 8px;
+  font-size: 1.5rem;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+}
+@media (hover: hover) {
+  .SeccionLink-header:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0);
+  }
+}
+.SeccionLink-header:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.SeccionLink-title {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+}
+.SeccionLink-action {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.SeccionLink-content {
+  width: stretch;
+  width: -webkit-fill-available;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 8px;
 }
-.section_body {
-  background-color: rgba(0, 0, 0, 0);
+
+.SeccionShow-content {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
   gap: 8px;
   grid-auto-flow: row;
-}
-
-.section_title {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 8px;
-  height: 38px;
-  font-size: 1.5rem;
-  font-family: "Sofia Sans";
-}
-.section_title :first-child {
-  width: 34px;
-  text-align: center;
-}
-
-.section_action {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 4px;
-}
-.section_action :last-child {
-  width: 34px;
-}
-
-.section_head button {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 6px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0);
-  padding: 0px;
-  width: 100%;
-}
-@media (hover: hover) {
-  .section_head button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0);
-  }
-}
-.section_head button:active {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0);
 }
