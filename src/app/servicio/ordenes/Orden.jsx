@@ -1,10 +1,11 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { parseJwt } from "../../sesion.js";
 import DetalleCard from "./DetalleCard.jsx";
 import "./Ordenes.css";
 import "./Orden.css";
 import { useForm } from "react-hook-form";
+import Seccion from "../../../app-components/Seccion.jsx";
 
 export default function Orden({ activarBoton }) {
   activarBoton(false);
@@ -78,80 +79,102 @@ export default function Orden({ activarBoton }) {
   }, [refrescar]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
 
   return (
-    <div className="app-body">
-      <form
-        className="form-orden"
-        id="form-orden"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <header className="form-header">
-          <span className="form-header-span">
-            <span>
-              <span className="icon material-symbols-rounded">
-                room_service
+    <>
+      <div className="app-body">
+        <form
+          className="form-orden"
+          id="form-orden"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <header className="form-header">
+            <span className="form-header-span">
+              <span>
+                <span className="icon material-symbols-rounded">
+                  room_service
+                </span>
+                Orden #{orden[0] && orden[0].idorden} servida en{" "}
+                {orden[0] && orden[0].servicio === 0 ? "Mesa" : "Mostrador"}
               </span>
-              Orden #{orden[0] && orden[0].idorden} servida en{" "}
-              {orden[0] && orden[0].servicio === 0 ? "Mesa" : "Mostrador"}
+              {orden[0] && orden[0].servicio === 0 && (
+                <span id="mesa-span">
+                  <label>{orden[0].idmesa}</label>
+                </span>
+              )}
             </span>
-            {orden[0] && orden[0].servicio === 0 && (
-              <span id="mesa-span">
-                <label>{orden[0].idmesa}</label>
+            <span className="form-header-span">
+              <span>
+                <span className="icon material-symbols-rounded">
+                  person_apron
+                </span>
+                <label>
+                  Atendido por{" "}
+                  {parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}
+                </label>
               </span>
-            )}
-          </span>
-          <span className="form-header-span">
-            <span>
-              <span className="icon material-symbols-rounded">
-                person_apron
+            </span>
+          </header>
+          <div className="form-body">
+            <div className="abd-left">
+              <span className="orden-title">
+                <span className="icon material-symbols-rounded">concierge</span>
+                <span className="title-text">Productos por servir</span>
               </span>
-              <label>
-                Atendido por{" "}
-                {parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}
-              </label>
-            </span>
-          </span>
-        </header>
-        <div className="form-body">
-          <div className="abd-left">
-            <span className="orden-title">
-              <span className="icon material-symbols-rounded">concierge</span>
-              <span className="title-text">Productos por servir</span>
-            </span>
-            <div className="detallecard-container">
-              {productosAgregados.map((producto, index) => (
-                <DetalleCard key={index} propiedades={{ ...producto }} setRefrescar={setRefrescar} />
-              ))}
-            </div>
-          </div>
-          <div className="abd-right">
-            <span className="orden-title">
-              <span className="icon material-symbols-rounded">hand_meal</span>
-              <span className="title-text">Productos servidos</span>
-            </span>
-            <div className="detallecard-container">
-              {productosServidos.map((producto, index) => (
-                <DetalleCard key={index} propiedades={{ ...producto }} setRefrescar={setRefrescar} />
-              ))}
-            </div>
-            <div className="form-footer">
-              <div className="form-footer-left">
-                <button className="accion seccion blue" type="button" onClick={() => navigate(-1)}>
-                  <span className="icon material-symbols-rounded">arrow_circle_left</span>
-                  Regresar
-                </button>
-              </div>
-              <div className="form-footer-right">
-                <button className="accion seccion blue" type="submit">
-                  <span className="icon material-symbols-rounded">
-                    check_circle
-                  </span>
-                  Finalizar
-                </button>
+              <div className="detallecard-container">
+                {productosAgregados.map((producto, index) => (
+                  <DetalleCard
+                    key={index}
+                    propiedades={{ ...producto }}
+                    setRefrescar={setRefrescar}
+                  />
+                ))}
               </div>
             </div>
+            <div className="abd-right">
+              <span className="orden-title">
+                <span className="icon material-symbols-rounded">hand_meal</span>
+                <span className="title-text">Productos servidos</span>
+              </span>
+              <div className="detallecard-container">
+                {productosServidos.map((producto, index) => (
+                  <DetalleCard
+                    key={index}
+                    propiedades={{ ...producto }}
+                    setRefrescar={setRefrescar}
+                  />
+                ))}
+              </div>
+              <div className="form-footer">
+                <div className="form-footer-left">
+                  <button
+                    className="accion seccion blue"
+                    type="button"
+                    onClick={() => navigate(-1)}
+                  >
+                    <span className="icon material-symbols-rounded">
+                      arrow_circle_left
+                    </span>
+                    Regresar
+                  </button>
+                </div>
+                <div className="form-footer-right">
+                  <button className="accion seccion blue" type="submit">
+                    <span className="icon material-symbols-rounded">
+                      check_circle
+                    </span>
+                    Finalizar
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+      <br></br>
+      <div className="app-body">
+        <Seccion
+          propiedades={{ icono: "room_service", titulo: `Orden #${orden[0] && orden[0].idorden} servida en ${orden[0] && orden[0].servicio === 0 ? "Mesa" : "Mostrador"}`, mostrar: "flex" }}
+        />
+      </div>
+    </>
   );
 }
