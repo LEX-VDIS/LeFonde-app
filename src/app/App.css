@@ -474,10 +474,7 @@ select.panel {
 .left-panel > div > div > a > div > a {
   color: #c8c8c8;
   background-color: transparent;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 8px;
   text-decoration: none;
   font-weight: normal;
   display: flex;
@@ -514,18 +511,18 @@ select.panel {
   font-weight: normal;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .left-panel > div > div > div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 .right-panel > div > div > div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 button.accion {
@@ -563,7 +560,6 @@ button.seccion {
   }
 }
 button.accion:active {
-
   box-shadow:
     inset 0px 2px 4px rgba(0, 0, 0, 0.4),
     0 0 0 0px white,

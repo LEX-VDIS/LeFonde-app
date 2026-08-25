@@ -9,13 +9,19 @@ import {
 import "./App.css";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
+
 import Servicio from "./servicio/Servicio.jsx";
 import Ordenes from "./servicio/ordenes/Ordenes.jsx";
 import Orden from "./servicio/ordenes/Orden.jsx";
 import Mesas from "./servicio/mesas/Mesas.jsx";
+
 import Productos from "./productos/Productos.jsx";
 import Categoria from "./productos/Categoria.jsx";
+
+import Administracion from "./administracion/Administracion.jsx";
 import Reportes from "./administracion/reportes/Reportes.jsx";
+import Personal from "./administracion/personal/Personal.jsx";
+
 import Boton from "../app-components/Boton.jsx";
 import { parseJwt, logout } from "./sesion.js";
 import { set } from "react-hook-form";
@@ -302,12 +308,34 @@ function App() {
             }
           />
           <Route
+            key="page/"
+            path="/administracion/"
+            element={
+              <>
+                <div className="app-container">
+                  <Administracion activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
             key="page/subpage"
             path="/administracion/reportes"
             element={
               <>
                 <div className="app-container">
                   <Reportes activarBoton={setActionButton} />
+                </div>
+              </>
+            }
+          />
+          <Route
+            key="page/subpage"
+            path="/administracion/personal"
+            element={
+              <>
+                <div className="app-container">
+                  <Personal activarBoton={setActionButton} />
                 </div>
               </>
             }

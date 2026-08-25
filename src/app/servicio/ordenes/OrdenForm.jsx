@@ -65,6 +65,8 @@ export default function OrdenForm({
   const [mesas_disp, setMesas_disp] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  searchParams.get("new") && activarBoton(false); //Si se abre el formulario de nueva orden desde el link, se desactiva el botón de nueva orden en el header
+
   useEffect(() => {
     const fetchOptions = {
       method: "GET",
