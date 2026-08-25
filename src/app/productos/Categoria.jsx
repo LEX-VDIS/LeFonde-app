@@ -15,10 +15,7 @@ export default function Categoria({ activarBoton, propsBoton }) {
     propsBoton({
       texto: "Agregar",
       icono: "add_circle",
-      click: () => {
-        
-        
-      },
+      click: () => {},
     });
   }, []);
 
@@ -63,8 +60,7 @@ export default function Categoria({ activarBoton, propsBoton }) {
             <span>{categoria.name}</span>
           </span>
         </span>
-        <span>
-        </span>
+        <span></span>
       </header>
       <div className="form-body">
         <div className="abd-left">

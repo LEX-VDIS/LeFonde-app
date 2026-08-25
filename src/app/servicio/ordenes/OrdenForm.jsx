@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { parseJwt } from "../../sesion.js";
 import "./OrdenForm.css";
 import Seccion from "../../../app-components/Seccion.jsx";
+import SeccionShow from "../../../app-components/SeccionShow.jsx";
 import ProductoCheck from "./ProductoCheck.jsx";
 import { useCart } from "./useCart.js";
 import { useForm } from "react-hook-form";
@@ -55,6 +56,7 @@ export default function OrdenForm({
   const [bebidas, setBebidas] = useState([]);
   const [postres, setPostres] = useState([]);
   const [complementos, setComplementos] = useState([]);
+  const [productos, setProductos] = useState([]);
   const { addToCart, removeFromCart, clearCart, cart } = useCart();
   const [mesas_disp, setMesas_disp] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -96,6 +98,14 @@ export default function OrdenForm({
       .then((response) => response.json())
       .then((result) => {
         if (result) {
+          setProductos((prev) => {
+            const newProductos = [...prev];
+            newProductos[0] = result.productos[0].length;
+            newProductos[1] = result.productos[1].length;
+            newProductos[2] = result.productos[2].length;
+            newProductos[3] = result.productos[3].length;
+            return newProductos;
+          });
           const productos0 = Array.from(
             result.productos[0],
             (producto, index) => (
@@ -307,38 +317,38 @@ export default function OrdenForm({
               <span className="icon material-symbols-rounded">menu_book_2</span>
               <span>Menú</span>
             </span>
-            <Seccion
+            <SeccionShow
               activo={false}
               propiedades={{
                 icono: "sports_bar",
                 titulo: "Bebidas",
-                contenido: bebidas,
+                cantidad: productos[1],
               }}
-            />
-            <Seccion
+            >{bebidas}</SeccionShow>
+            <SeccionShow
               activo={false}
               propiedades={{
                 icono: "dinner_dining",
                 titulo: "Alimentos",
-                contenido: alimentos,
+                cantidad: productos[0],
               }}
-            />
-            <Seccion
+            >{alimentos}</SeccionShow>
+            <SeccionShow
               activo={false}
               propiedades={{
                 icono: "kebab_dining",
                 titulo: "Complementos",
-                contenido: complementos,
+                cantidad: productos[3],
               }}
-            />
-            <Seccion
+            >{complementos}</SeccionShow>
+            <SeccionShow
               activo={false}
               propiedades={{
                 icono: "icecream",
                 titulo: "Postres",
-                contenido: postres,
+                cantidad: productos[2],
               }}
-            />
+            >{postres}</SeccionShow>
           </div>
           <div className="abd-right">
             <span className="orden-title">

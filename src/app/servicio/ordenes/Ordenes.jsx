@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Seccion from "../../../app-components/Seccion.jsx";
 import "./Ordenes.css";
 import OrdenCard from "./OrdenCard.jsx";
 import OrdenForm from "./OrdenForm.jsx";
+import SeccionShow from "../../../app-components/SeccionShow.jsx";
 import { CartProvider } from "./Cart.jsx";
 import { useLocation } from "react-router-dom";
 
@@ -27,6 +27,7 @@ export default function Ordenes({ activarBoton, propsBoton }) {
   const [ordenesActivas, setOrdenesActivas] = useState([]);
   const [ordenesServidas, setOrdenesServidas] = useState([]);
   const [ordenesFinalizadas, setOrdenesFinalizadas] = useState([]);
+  const [ordenes, setOrdenes] = useState([]);
 
   useEffect(() => {
     if (newOrderParam === "true") {
@@ -51,18 +52,33 @@ export default function Ordenes({ activarBoton, propsBoton }) {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
+          setOrdenes((prev) => {
+            const newOrdenes = [...prev];
+            newOrdenes[0] = result.ordenes[0].length;
+            return newOrdenes;
+          });
           const ordenesActivas = Array.from(
             result.ordenes[0],
             (orden, index) => (
               <OrdenCard key={index} propiedades={{ ...orden }} />
             ),
           );
+          setOrdenes((prev) => {
+            const newOrdenes = [...prev];
+            newOrdenes[1] = result.ordenes[1].length;
+            return newOrdenes;
+          });
           const ordenesServidas = Array.from(
             result.ordenes[1],
             (orden, index) => (
               <OrdenCard key={index} propiedades={{ ...orden }} />
             ),
           );
+          setOrdenes((prev) => {
+            const newOrdenes = [...prev];
+            newOrdenes[2] = result.ordenes[2].length;
+            return newOrdenes;
+          });
           const ordenesFinalizadas = Array.from(
             result.ordenes[2],
             (orden, index) => (
@@ -83,30 +99,36 @@ export default function Ordenes({ activarBoton, propsBoton }) {
 
   return !nuevaOrden ? (
     <div key="ordenes" className="app-body">
-      <Seccion
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "order_play",
           titulo: "Ordenes activas",
-          contenido: ordenesActivas,
+          cantidad: ordenes[0],
         }}
-      />
-      <Seccion
+      >
+        {ordenesActivas}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "inactive_order",
           titulo: "Ordenes servidas",
-          contenido: ordenesServidas,
+          cantidad: ordenes[1],
         }}
-      />
-      <Seccion
+      >
+        {ordenesServidas}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "order_approve",
           titulo: "Ordenes finalizadas",
-          contenido: ordenesFinalizadas,
+          cantidad: ordenes[2],
         }}
-      />
+      >
+        {ordenesFinalizadas}
+      </SeccionShow>
     </div>
   ) : (
     <CartProvider>

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { set } from "react-hook-form";
+import SeccionLink from "../../app-components/SeccionLink.jsx";
+import InfoCard from "../../app-components/InfoCard.jsx";
 
 export default function Servicio({ activarBoton }) {
   activarBoton(false);
@@ -38,72 +39,47 @@ export default function Servicio({ activarBoton }) {
 
   return (
     <div className="app-body">
-      <div className="app-section">
-        <header
-          className="form-header title-link"
-          onClick={() => navigate(`/servicio/ordenes`)}
-        >
-          <span className="form-header-span">
-            <span className="form-header-title">
-              <span className="icon material-symbols-rounded">
-                room_service
-              </span>
-              <span>Ordenes</span>
-            </span>
-          </span>
-          <span className="section_action">
-            <span className="icon right material-symbols-rounded">
-              expand_circle_right
-            </span>
-          </span>
-        </header>
-        <div className="form-body">
-          <div className="form-body-item">
-            <span className="icon material-symbols-rounded">order_play</span>
-            <span>Ordenes activas: {conteo.ordenesActivas}</span>
-          </div>
-          <div className="form-body-item">
-            <span className="icon material-symbols-rounded">
-              inactive_order
-            </span>
-            <span>Ordenes servidas: {conteo.ordenesServidas}</span>
-          </div>
-          <div className="form-body-item">
-            <span className="icon material-symbols-rounded">order_approve</span>
-            <span>Ordenes finalizadas: {conteo.ordenesFinalizadas}</span>
-          </div>
-        </div>
-      </div>
-      <div className="app-section">
-        <header
-          className="form-header title-link"
-          onClick={() => navigate(`/servicio/mesas`)}
-        >
-          <span className="form-header-span">
-            <span className="form-header-title">
-              <span className="icon material-symbols-rounded">
-                table_restaurant
-              </span>
-              <span>Mesas</span>
-            </span>
-          </span>
-          <span className="section_action">
-            <span className="icon right material-symbols-rounded">
-              expand_circle_right
-            </span>
-          </span>
-        </header>
-        <div className="form-body">
-          <div className="form-body-item">
-            <span className="icon material-symbols-rounded">dine_lamp</span>
-            <span>Mesas disponibles: {conteo.mesasDisponibles}</span>
-          </div>
-          <div className="form-body-item">
-            <span className="icon material-symbols-rounded">dine_in</span>
-            <span>Mesas ocupadas: {conteo.mesasOcupadas}</span>
-          </div>
-        </div>
-      </div>
+      <SeccionLink
+        propiedades={{
+          icono: "room_service",
+          titulo: "Ordenes",
+          ruta: "/servicio/ordenes",
+        }}
+      >
+        <InfoCard
+          icon="order_play"
+          label="Ordenes activas"
+          value={conteo.ordenesActivas}
+        />
+        <InfoCard
+          icon="inactive_order"
+          label="Ordenes servidas"
+          value={conteo.ordenesServidas}
+        />
+        <InfoCard
+          icon="order_approve"
+          label="Ordenes finalizadas"
+          value={conteo.ordenesFinalizadas}
+        />
+      </SeccionLink>
+      <SeccionLink
+        propiedades={{
+          icono: "table_restaurant",
+          titulo: "Mesas",
+          ruta: "/servicio/mesas",
+        }}
+      >
+        <InfoCard
+          icon="dine_lamp"
+          label="Mesas disponibles"
+          value={conteo.mesasDisponibles}
+        />
+        <InfoCard
+          icon="dine_in"
+          label="Mesas ocupadas"
+          value={conteo.mesasOcupadas}
+        />
+      </SeccionLink>
     </div>
   );
 }

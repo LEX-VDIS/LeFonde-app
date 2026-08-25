@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Productos.css";
-import Seccion from "../../app-components/Seccion.jsx";
 import ProductoCard from "./ProductoCard.jsx";
+import SeccionShow from "../../app-components/SeccionShow.jsx";
 
 export default function Productos({ activarBoton }) {
   activarBoton(false);
@@ -9,6 +9,7 @@ export default function Productos({ activarBoton }) {
   const [alimentos, setAlimentos] = useState([]);
   const [complementos, setComplementos] = useState([]);
   const [postres, setPostres] = useState([]);
+  const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     const fetchOptions = {
@@ -21,6 +22,14 @@ export default function Productos({ activarBoton }) {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
+          setProductos((prev) => {
+            const newProductos = [...prev];
+            newProductos[0] = result.productos[0].length;
+            newProductos[1] = result.productos[1].length;
+            newProductos[2] = result.productos[2].length;
+            newProductos[3] = result.productos[3].length;
+            return newProductos;
+          });
           setBebidas(
             Array.from(result.productos[1], (producto, index) => (
               <ProductoCard
@@ -79,38 +88,46 @@ export default function Productos({ activarBoton }) {
 
   return (
     <div className="app-body">
-      <Seccion
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "sports_bar",
           titulo: "Bebidas",
-          contenido: bebidas,
+          cantidad: productos[1],
         }}
-      />
-      <Seccion
+      >
+        {bebidas}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "dinner_dining",
           titulo: "Alimentos",
-          contenido: alimentos,
+          cantidad: productos[0],
         }}
-      />
-      <Seccion
+      >
+        {alimentos}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "kebab_dining",
           titulo: "Complementos",
-          contenido: complementos,
+          cantidad: productos[3],
         }}
-      />
-      <Seccion
+      >
+        {complementos}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "icecream",
           titulo: "Postres",
-          contenido: postres,
+          cantidad: productos[2],
         }}
-      />
+      >
+        {postres}
+      </SeccionShow>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import "./Mesas.css";
-import Seccion from "../../../app-components/Seccion.jsx";
 import MesaCard from "./MesaCard.jsx";
+import SeccionShow from "../../../app-components/SeccionShow.jsx";
 
 export default function Mesas({ activarBoton }) {
   activarBoton(false);
   const [mesas_disp, setMesas_disp] = useState([]);
   const [mesas_ocup, setMesas_ocup] = useState([]);
+  const [mesas, setMesas] = useState([]);
 
   useEffect(() => {
     const fetchOptions = {
@@ -20,6 +21,11 @@ export default function Mesas({ activarBoton }) {
       .then((result) => {
         console.log(result);
         if (result) {
+          setMesas((prev) => {
+            const newMesas = [...prev];
+            newMesas[0] = result.mesas[0].length;
+            return newMesas;
+          });
           const mesas1 = Array.from(result.mesas[0], (mesa, index) => (
             <MesaCard
               key={index}
@@ -30,6 +36,11 @@ export default function Mesas({ activarBoton }) {
               }}
             />
           ));
+          setMesas((prev) => {
+            const newMesas = [...prev];
+            newMesas[1] = result.mesas[1].length;
+            return newMesas;
+          });
           const mesas2 = Array.from(result.mesas[1], (mesa, index) => (
             <MesaCard
               key={index}
@@ -53,22 +64,26 @@ export default function Mesas({ activarBoton }) {
 
   return (
     <div className="app-body">
-      <Seccion
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "dine_lamp",
           titulo: "Mesas disponibles",
-          contenido: mesas_disp,
+          cantidad: mesas[0],
         }}
-      />
-      <Seccion
+      >
+        {mesas_disp}
+      </SeccionShow>
+      <SeccionShow
         activo={true}
         propiedades={{
           icono: "dine_in",
           titulo: "Mesas ocupadas",
-          contenido: mesas_ocup,
+          cantidad: mesas[1],
         }}
-      />
+      >
+        {mesas_ocup}
+      </SeccionShow>
     </div>
   );
 }

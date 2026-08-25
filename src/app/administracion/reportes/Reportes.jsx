@@ -1,4 +1,5 @@
 import "./Reportes.css";
+import InfoCard from "../../../app-components/InfoCard.jsx";
 import { useEffect, useState } from "react";
 
 export default function Reportes({ activarBoton }) {
@@ -50,35 +51,19 @@ export default function Reportes({ activarBoton }) {
             <span>Resumen</span>
           </span>
           <div className="detallecard-container-cards">
-            <div className="infoCard">
-              <div className="colIcon">
-                <span className="icon material-symbols-rounded infoCard-icon">
-                  room_service
-                </span>
-              </div>
-              <div className="colText">
-                <label className="key"> Total de ordenes</label>
-                <label className="value"> {ordenes.length}</label>
-              </div>
-            </div>
-            <div className="infoCard">
-              <div className="colIcon">
-                <span className="icon material-symbols-rounded infoCard-icon">
-                  money_bag
-                </span>
-              </div>
-              <div className="colText">
-                <label className="key"> Total de ganancia</label>
-                <label className="value">
-                  {" "}
-                  $
-                  {ordenes.reduce(
-                    (acc, orden) => acc + parseInt(orden.total),
-                    0,
-                  )}
-                </label>
-              </div>
-            </div>
+            <InfoCard
+              icon="room_service"
+              label="Total de ordenes"
+              value={ordenes.length}
+            />
+            <InfoCard
+              icon="money_bag"
+              label="Total de ganancia"
+              value={`$${ordenes.reduce(
+                (acc, orden) => acc + parseInt(orden.total),
+                0,
+              )}`}
+            />
           </div>
           <div className="form-footer">
             <div className="form-footer-left"></div>
