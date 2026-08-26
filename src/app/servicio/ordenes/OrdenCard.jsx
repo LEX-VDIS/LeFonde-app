@@ -1,5 +1,6 @@
 import "./OrdenCard.css";
 import { useNavigate } from "react-router-dom";
+import { parseJwt } from "../../sesion";
 
 export default function Orden({ propiedades }) {
   const navigate = useNavigate();
@@ -36,14 +37,19 @@ export default function Orden({ propiedades }) {
       <div className="rowOrden">
         <span className="icon material-symbols-rounded">watch</span>
         <label>
-          {new Date(
-            `1970-01-01T${propiedades.hora}Z`,
-          ).toLocaleTimeString([], {
+          {new Date(`1970-01-01T${propiedades.hora}Z`).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })}
         </label>
       </div>
+      {parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador ===
+        1 && (
+        <div className="rowOrden">
+          <span className="icon material-symbols-rounded">person_apron</span>
+          <label>Mesero</label>
+        </div>
+      )}
     </div>
   );
 }

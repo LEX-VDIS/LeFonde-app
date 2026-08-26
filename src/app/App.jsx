@@ -29,31 +29,52 @@ import { set } from "react-hook-form";
 let usuario = {};
 let logueado = false;
 
-const navegacion = [
-  [
-    ["Servicio", "servicio"],
+if (parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador === 1) {
+  var navegacion = [
     [
-      ["Ordenes", "ordenes", "room_service"],
-      ["Mesas", "mesas", "table_restaurant"],
+      ["Servicio", "servicio", "flatware"],
+      [
+        ["Ordenes", "ordenes", "room_service"],
+        ["Mesas", "mesas", "table_restaurant"],
+      ],
     ],
-  ],
-  [
-    ["Productos", "productos"],
     [
-      ["Bebidas", "bebidas", "sports_bar"],
-      ["Alimentos", "alimentos", "dinner_dining"],
-      ["Complementos", "complementos", "kebab_dining"],
-      ["Postres", "postres", "icecream"],
+      ["Productos", "productos", "menu_book_2"],
+      [
+        ["Bebidas", "bebidas", "sports_bar"],
+        ["Alimentos", "alimentos", "dinner_dining"],
+        ["Complementos", "complementos", "kebab_dining"],
+        ["Postres", "postres", "icecream"],
+      ],
     ],
-  ],
-  [
-    ["Administración", "administracion"],
     [
-      ["Reportes", "reportes", "query_stats"],
-      ["Personal", "personal", "person"],
+      ["Administración", "administracion", "briefcase_meal"],
+      [
+        ["Reportes", "reportes", "query_stats"],
+        ["Personal", "personal", "person"],
+      ],
     ],
-  ],
-];
+  ];
+} else {
+  var navegacion = [
+    [
+      ["Servicio", "servicio", "flatware"],
+      [
+        ["Ordenes", "ordenes", "room_service"],
+        ["Mesas", "mesas", "table_restaurant"],
+      ],
+    ],
+    [
+      ["Productos", "productos", "menu_book_2"],
+      [
+        ["Bebidas", "bebidas", "sports_bar"],
+        ["Alimentos", "alimentos", "dinner_dining"],
+        ["Complementos", "complementos", "kebab_dining"],
+        ["Postres", "postres", "icecream"],
+      ],
+    ],
+  ];
+}
 
 try {
   parseJwt(localStorage.getItem("tokenme")).exp * 1000 > Date.now() &&

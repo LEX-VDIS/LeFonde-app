@@ -1,32 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import SeccionLink from "../app-components/SeccionLink.jsx";
+import { parseJwt } from "./sesion.js";
 
-const navegacion = [
-  [
-    ["Servicio", "servicio", "flatware"],
+console.log(parseJwt(localStorage.getItem("tokenme")).usuario[0]);
+
+if (parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador === 1) {
+  var navegacion = [
     [
-      ["Ordenes", "ordenes", "room_service"],
-      ["Mesas", "mesas", "table_restaurant"],
+      ["Servicio", "servicio", "flatware"],
+      [
+        ["Ordenes", "ordenes", "room_service"],
+        ["Mesas", "mesas", "table_restaurant"],
+      ],
     ],
-  ],
-  [
-    ["Productos", "productos", "menu_book_2"],
     [
-      ["Bebidas", "bebidas", "sports_bar"],
-      ["Alimentos", "alimentos", "dinner_dining"],
-      ["Complementos", "complementos", "kebab_dining"],
-      ["Postres", "postres", "icecream"],
+      ["Productos", "productos", "menu_book_2"],
+      [
+        ["Bebidas", "bebidas", "sports_bar"],
+        ["Alimentos", "alimentos", "dinner_dining"],
+        ["Complementos", "complementos", "kebab_dining"],
+        ["Postres", "postres", "icecream"],
+      ],
     ],
-  ],
-  [
-    ["Administración", "administracion", "briefcase_meal"],
     [
-      ["Reportes", "reportes", "query_stats"],
-      ["Personal", "personal", "person"],
+      ["Administración", "administracion", "briefcase_meal"],
+      [
+        ["Reportes", "reportes", "query_stats"],
+        ["Personal", "personal", "person"],
+      ],
     ],
-  ],
-];
+  ];
+} else {
+  var navegacion = [
+    [
+      ["Servicio", "servicio", "flatware"],
+      [
+        ["Ordenes", "ordenes", "room_service"],
+        ["Mesas", "mesas", "table_restaurant"],
+      ],
+    ],
+    [
+      ["Productos", "productos", "menu_book_2"],
+      [
+        ["Bebidas", "bebidas", "sports_bar"],
+        ["Alimentos", "alimentos", "dinner_dining"],
+        ["Complementos", "complementos", "kebab_dining"],
+        ["Postres", "postres", "icecream"],
+      ],
+    ],
+  ];
+}
 
 export default function Home({ activarBoton }) {
   activarBoton(false);
@@ -40,7 +64,7 @@ export default function Home({ activarBoton }) {
             icono: seccion[0][2],
             titulo: seccion[0][0],
             ruta: `/${seccion[0][1]}`,
-            mostrar: "flex"
+            mostrar: "flex",
           }}
         >
           <div className="form-body">
