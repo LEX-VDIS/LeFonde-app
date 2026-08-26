@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import "./ProductoCheck.css";
 import { useCart } from "./useCart.js";
 
-export default function ProductoCheck({ propiedades, toggleCheck }) {
-  const [seleccionado, setSeleccionado] = useState(toggleCheck);
-  const { addToCart, removeFromCart, removeProductFromCart, clearCart, cart } = useCart();
+export default function ProductoCheck({ propiedades, checked }) {
+  const [seleccionado, setSeleccionado] = useState(checked);
+  const { addToCart, removeProductFromCart, cart } = useCart();
 
   const handleToggleCheck = (activar) => {
     setSeleccionado(activar.target.checked);

@@ -27,10 +27,9 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
           className="accion card blue"
           type="button"
           onClick={removeFromCart}
+          disabled={quantity <= 1}
         >
-          <span className="icon material-symbols-rounded">
-            {quantity > 1 ? "remove_circle" : "delete"}
-          </span>
+          <span className="icon material-symbols-rounded">remove_circle</span>
         </button>
       </div>
       <div className="rowProducto text-card">
@@ -124,6 +123,7 @@ export default function OrdenForm({
                   precio: producto.precio,
                   detalle: producto.descripcion,
                 }}
+                checked={false}
               />
             ),
           );
@@ -138,6 +138,7 @@ export default function OrdenForm({
                   precio: producto.precio,
                   detalle: producto.descripcion,
                 }}
+                checked={false}
               />
             ),
           );
@@ -152,6 +153,7 @@ export default function OrdenForm({
                   precio: producto.precio,
                   detalle: producto.descripcion,
                 }}
+                checked={false}
               />
             ),
           );
@@ -166,6 +168,7 @@ export default function OrdenForm({
                   precio: producto.precio,
                   detalle: producto.descripcion,
                 }}
+                checked={false}
               />
             ),
           );
@@ -431,7 +434,11 @@ export default function OrdenForm({
             </button>
           </div>
           <div className="form-footer-right">
-            <button className="accion seccion blue" type="submit" disabled={cart.length === 0}>
+            <button
+              className="accion seccion blue"
+              type="submit"
+              disabled={cart.length === 0}
+            >
               <span className="icon material-symbols-rounded">
                 check_circle
               </span>
