@@ -91,6 +91,26 @@ export default function Orden({ activarBoton }) {
       .catch((error) => console.error("Error fetching productos:", error));
   }, [refrescar, updateOrden]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
 
+  const finalizarOrden = () => {
+    const fetchOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idorden: ordenid, mesa: orden[0].idmesa}),
+    };
+    const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/orden`;
+
+    fetch(fetchURL, fetchOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          socket.emit("mensaje", "Orden finalizada");
+        } else {
+          alert(data.mensaje);
+        }
+      })
+      .catch((error) => console.error("Error finalizing orden:", error));
+  };
+
   return (
     <div className="app-body">
       <Seccion
@@ -165,7 +185,7 @@ export default function Orden({ activarBoton }) {
           </button>
         </div>
         <div className="form-footer-right">
-          <button className="accion seccion blue" type="submit">
+          <button className="accion seccion blue" type="button" onClick={() => finalizarOrden()} disabled={productosAgregados.length !== 0}>
             <span className="icon material-symbols-rounded">check_circle</span>
             Finalizar
           </button>

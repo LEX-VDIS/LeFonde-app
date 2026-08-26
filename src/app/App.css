@@ -565,6 +565,9 @@ button.accion:active {
     0 0 0 0px white,
     0px 0px 0px rgba(0, 0, 0, 0);
 }
+button.accion:disabled {
+  opacity: 0.5;
+}
 
 button.yellow {
   background-color: #d7dd69;
