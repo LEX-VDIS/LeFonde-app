@@ -85,7 +85,7 @@ export default function Orden({ activarBoton }) {
         propiedades={{
           icono: ["room_service", "person_apron"],
           titulo: [
-            `Orden #${orden[0] && orden[0].idorden} servida en ${orden[0] && orden[0].servicio === 0 ? "Mesa " + orden[0].idmesa : "Mostrador"}`,
+            `Orden #${orden[0] && orden[0].idorden} en ${orden[0] && orden[0].servicio === 0 ? "mesa " + orden[0].idmesa : "mostrador"}`,
             `Atendido por ${parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}`,
           ],
           mostrar: "flex",

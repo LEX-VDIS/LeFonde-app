@@ -175,7 +175,7 @@ span.masmenos {
 }
 .form-header-span > span > select {
   font-family: "Sofia Sans", "Trebuchet MS", system-ui;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 4px;
   border-width: 2px;
@@ -192,6 +192,9 @@ select {
 }
 
 .tarjetaProducto {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
   display: flex;
   flex-direction: row;
   flex-grow: 1;

@@ -41,7 +41,7 @@ export default function DetalleCard({ propiedades, setRefrescar }) {
     const fetchOptions = {
       method: accion,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ producto: idproducto, cantidad: cantidad }),
+      body: JSON.stringify({ producto: idproducto, cantidad: 1 }),
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/servir`;
     fetch(fetchURL, fetchOptions)

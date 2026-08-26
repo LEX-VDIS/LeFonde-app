@@ -267,67 +267,68 @@ export default function OrdenForm({
     }
   };
 
+  const formHeder = (
+    <header>
+      <span className="form-header-span">
+        <span>
+          Orden en
+          <select
+            id="serv"
+            name="servicio"
+            {...register("servicio", {
+              required: true,
+              onChange: mostrarMesas,
+              valueAsNumber: true,
+            })}
+          >
+            <option value="0">Mesa</option>
+            <option value="1">Mostrador</option>
+          </select>
+        </span>
+        {watch("servicio") === 0 && (
+          <span id="mesa-span">
+            <span className="icon material-symbols-rounded">
+              table_restaurant
+            </span>
+            <select
+              id="mesa"
+              name="mesa"
+              {...register("mesa", {
+                required: true,
+                validate: (value) => value !== "0",
+                valueAsNumber: true,
+              })}
+            >
+              {mesas_disp}
+            </select>
+          </span>
+        )}
+      </span>
+    </header>
+  );
+
   return (
     <div className="app-body">
       <form className="form-orden" id="form-orden" onSubmit={enviarOrden}>
-        <header className="form-header">
-          <span className="form-header-span">
-            <span>
-              <span className="icon material-symbols-rounded">
-                room_service
-              </span>
-              Servicio en
-              <select
-                id="serv"
-                name="servicio"
-                {...register("servicio", {
-                  required: true,
-                  onChange: mostrarMesas,
-                  valueAsNumber: true,
-                })}
-              >
-                <option value="0">Mesa</option>
-                <option value="1">Mostrador</option>
-              </select>
-            </span>
-            {watch("servicio") === 0 && (
-              <span id="mesa-span">
-                <span className="icon material-symbols-rounded">
-                  table_restaurant
-                </span>
-                <select
-                  id="mesa"
-                  name="mesa"
-                  {...register("mesa", {
-                    required: true,
-                    validate: (value) => value !== "0",
-                    valueAsNumber: true,
-                  })}
-                >
-                  {mesas_disp}
-                </select>
-              </span>
-            )}
-          </span>
-          <span className="form-header-span">
-            <span>
-              <span className="icon material-symbols-rounded">
-                person_apron
-              </span>
-              <label>
-                Atendido por{" "}
-                {parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}
-              </label>
-            </span>
-          </span>
-        </header>
-        <div className="form-body">
+        <Seccion
+          propiedades={{
+            icono: ["room_service", "person_apron"],
+            titulo: [
+              formHeder,
+              `Atendido por ${parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}`,
+            ],
+            mostrar: "flex",
+            doble: true,
+          }}
+        >
           <SeccionShow
             activo={true}
             propiedades={{
               icono: "menu_book_2",
-              titulo: "Productos",
+              titulo: "Menú de productos",
               mostrar: "flex",
+              lado: "left",
+              pie: [false, {}],
             }}
           >
             <SeccionShow
@@ -375,78 +376,68 @@ export default function OrdenForm({
               {postres}
             </SeccionShow>
           </SeccionShow>
-
-          <div className="abd-right">
-            <span className="orden-title">
-              <span className="icon material-symbols-rounded">orders</span>
-              <span>Productos en la orden</span>
-            </span>
-
-            <div className="detallecard-container">
-              {cart.map((item) =>
-                cartItem(
-                  item.quantity,
-                  item.nombre,
-                  item.precio,
-                  () => addToCart(item),
-                  () => removeFromCart(item.id),
-                ),
-              )}
-            </div>
-            <div className="form-footer">
-              <div className="form-footer-left">
-                <span className="orden-title">
-                  <span>
-                    Cantidad:{" "}
-                    {cart.reduce((total, item) => total + item.quantity, 0)}
-                  </span>
-                </span>
-              </div>
-              <div className="form-footer-right">
-                <span className="orden-title">
-                  <span>
-                    Total: ${" "}
-                    {cart
-                      .reduce(
-                        (total, item) => total + item.quantity * item.precio,
-                        0,
-                      )
-                      .toFixed(2)}
-                  </span>
-                </span>
-              </div>
-            </div>
-            <div className="form-footer">
-              <div className="form-footer-left">
-                <button
-                  className="accion seccion red"
-                  type="button"
-                  onClick={() => {
-                    activarBoton(true);
-                    setNuevaOrden(false);
-                    setSearchParams({});
-                  }}
-                >
-                  <span className="icon material-symbols-rounded">cancel</span>
-                  Cancelar
-                </button>
-                <button
-                  className="accion seccion blue"
-                  type="button"
-                  onClick={clearCart}
-                >
-                  <span className="icon material-symbols-rounded">delete</span>
-                </button>
-              </div>
-              <div className="form-footer-right">
-                <button className="accion seccion blue" type="submit">
-                  <span className="icon material-symbols-rounded">
-                    check_circle
-                  </span>
-                  Enviar
-                </button>
-              </div>
-            </div>
+          <SeccionShow
+            activo={true}
+            propiedades={{
+              icono: "orders",
+              titulo: "Detalle de la orden",
+              cantidad: cart.length,
+              mostrar: "flex",
+              lado: "right",
+              pie: [
+                true,
+                {
+                  left: `Cantidad: ${cart.reduce((total, item) => total + item.quantity, 0)}`,
+                  right: `Total: $${cart
+                    .reduce(
+                      (total, item) => total + item.quantity * item.precio,
+                      0,
+                    )
+                    .toFixed(2)}`,
+                },
+              ],
+            }}
+          >
+            {cart.map((item) =>
+              cartItem(
+                item.quantity,
+                item.nombre,
+                item.precio,
+                () => addToCart(item),
+                () => removeFromCart(item.id),
+              ),
+            )}
+          </SeccionShow>
+        </Seccion>
+        <div className="form-footer">
+          <div className="form-footer-left">
+            <button
+              className="accion seccion red"
+              type="button"
+              onClick={() => {
+                activarBoton(true);
+                setNuevaOrden(false);
+                setSearchParams({});
+              }}
+            >
+              <span className="icon material-symbols-rounded">cancel</span>
+              Cancelar
+            </button>
+            <button
+              className="accion seccion blue"
+              type="button"
+              onClick={clearCart}
+            >
+              <span className="icon material-symbols-rounded">delete</span>
+            </button>
+          </div>
+          <div className="form-footer-right">
+            <button className="accion seccion blue" type="submit">
+              <span className="icon material-symbols-rounded">
+                check_circle
+              </span>
+              Enviar
+            </button>
           </div>
         </div>
       </form>

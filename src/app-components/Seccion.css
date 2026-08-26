@@ -78,7 +78,7 @@
 }
 .Seccion-content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 8px;
   grid-auto-flow: row;
 }
@@ -92,4 +92,18 @@
   order: 2;
   flex-grow: 1;
   flex-basis: 0;
+}
+
+.Seccion-footer {
+  font-size: 1.5em;
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }

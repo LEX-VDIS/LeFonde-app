@@ -35,6 +35,16 @@ export default function SeccionShow({ activo = false, propiedades, children }) {
       >
         {children}
       </div>
+      {propiedades.pie && propiedades.pie[0] === true && (
+        <footer className="Seccion-footer">
+          <span className="Seccion-title">
+            <span>{propiedades.pie[1].left}</span>
+          </span>
+          <span className="Seccion-title">
+            <span>{propiedades.pie[1].right}</span>
+          </span>
+        </footer>
+      )}
     </section>
   );
 }
