@@ -31,7 +31,6 @@ export default function Mesas({ activarBoton }) {
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result) {
           setMesas((prev) => {
             const newMesas = [...prev];

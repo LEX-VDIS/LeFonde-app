@@ -224,7 +224,6 @@ export default function OrdenForm({
   );
 
   const enviarOrden = handleSubmit((data) => {
-    console.log("Datos del formulario:", data);
     const fetchOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -238,7 +237,6 @@ export default function OrdenForm({
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         socket.emit("mensaje", "Nueva orden agregada");
         setUpdateOrdenes((prev) => !prev);
       })

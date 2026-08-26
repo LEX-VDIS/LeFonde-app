@@ -33,7 +33,6 @@ export default function Login({ setLog }) {
         .then((result) => {
           if (result.token) {
             localStorage.setItem("tokenme", result.token);
-            //console.log(parseJwt(result.token));
             setLog(true);
           } else {
             alert(result.mensaje);

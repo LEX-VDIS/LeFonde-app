@@ -18,7 +18,7 @@ export default function DetalleCard({
   conteo,
   botones,
 }) {
-  console.log("PROPIEDADES", propiedades);
+
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     const fetchOptions = {

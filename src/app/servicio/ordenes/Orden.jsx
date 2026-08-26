@@ -104,14 +104,13 @@ export default function Orden({ activarBoton }) {
       .then((data) => {
         if (data) {
           socket.emit("mensaje", "Orden finalizada");
+          navigate("/servicio/ordenes");
         } else {
           alert(data.mensaje);
         }
       })
       .catch((error) => console.error("Error finalizing orden:", error));
   };
-
-  
 
   return (
     <div className="app-body">
