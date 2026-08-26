@@ -30,7 +30,7 @@ export default function Orden({ propiedades }) {
       <div className="rowOrden">
         <span className="icon material-symbols-rounded">hand_meal</span>
         <label>
-          {propiedades.prod_servidos} de {propiedades.prod_totales} servidos
+          {propiedades.prod_servidos}/{propiedades.prod_totales} servidos
         </label>
       </div>
       <div className="rowOrden">

@@ -7,6 +7,10 @@ import "./Orden.css";
 import { useForm } from "react-hook-form";
 import Seccion from "../../../app-components/Seccion.jsx";
 import SeccionShow from "../../../app-components/SeccionShow.jsx";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 export default function Orden({ activarBoton }) {
   activarBoton(false);
@@ -20,6 +24,14 @@ export default function Orden({ activarBoton }) {
   const [productosServidos, setProductosServidos] = useState([]);
   const [mesas_disp, setMesas_disp] = useState([]);
   const [refrescar, setRefrescar] = useState(false);
+  const [updateOrden, setUpdateOrden] = useState(false);
+
+  useEffect(() => {
+    socket.on("mensaje", (data) => {
+      console.log("Mensaje del servidor:", data);
+      setUpdateOrden((prev) => !prev);
+    });
+  }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
 
   const {
     register,
@@ -77,7 +89,7 @@ export default function Orden({ activarBoton }) {
         }
       })
       .catch((error) => console.error("Error fetching productos:", error));
-  }, [refrescar]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
+  }, [refrescar, updateOrden]); //Efecto para obtener los productos de la orden y mostrarlos en la orden
 
   return (
     <div className="app-body">
@@ -97,7 +109,7 @@ export default function Orden({ activarBoton }) {
           propiedades={{
             icono: "concierge",
             titulo: "Productos por servir",
-            cantidad: productosAgregados.length,
+            cantidad: productosAgregados.reduce((acc, producto) => acc + producto.cantidad, 0),
             mostrar: "flex",
             lado: "left",
           }}
@@ -107,6 +119,11 @@ export default function Orden({ activarBoton }) {
               key={index}
               propiedades={{ ...producto }}
               setRefrescar={setRefrescar}
+              conteo={true}
+              botones={[
+                { activo: true, accion: null, icono: "delete" },
+                { activo: true, accion: 1, icono: "check_circle" },
+              ]}
             />
           ))}
         </SeccionShow>
@@ -115,7 +132,7 @@ export default function Orden({ activarBoton }) {
           propiedades={{
             icono: "hand_meal",
             titulo: "Productos servidos",
-            cantidad: productosServidos.length,
+            cantidad: productosServidos.reduce((acc, producto) => acc + producto.servido, 0),
             mostrar: "flex",
             lado: "right",
           }}
@@ -125,6 +142,11 @@ export default function Orden({ activarBoton }) {
               key={index}
               propiedades={{ ...producto }}
               setRefrescar={setRefrescar}
+              conteo={false}
+              botones={[
+                { activo: false, accion: null, icono: null },
+                { activo: true, accion: 0, icono: "cancel" },
+              ]}
             />
           ))}
         </SeccionShow>

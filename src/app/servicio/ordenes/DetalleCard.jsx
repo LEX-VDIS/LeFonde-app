@@ -1,5 +1,9 @@
 import "./DetalleCard.css";
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+const socket = io(
+  `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}`,
+);
 
 const iconos = [
   { id: 2, icon: "sports_bar" },
@@ -8,7 +12,7 @@ const iconos = [
   { id: 3, icon: "icecream" },
 ];
 
-export default function DetalleCard({ propiedades, setRefrescar }) {
+export default function DetalleCard({ propiedades, setRefrescar, conteo, botones }) {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     const fetchOptions = {
@@ -37,19 +41,19 @@ export default function DetalleCard({ propiedades, setRefrescar }) {
       });
   }, []); //Efecto para obtener los productos de la base de datos y mostrarlos en la orden
 
-  const servirProducto = (idproducto, accion, cantidad) => {
+  const servirProducto = (idproducto, accion, method) => {
     const fetchOptions = {
-      method: accion,
+      method: method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ producto: idproducto, cantidad: 1 }),
+      body: JSON.stringify({ producto: idproducto, accion: accion }),
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/servir`;
     fetch(fetchURL, fetchOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          console.log(`Producto con ID ${idproducto} marcado como ${accion}.`);
           setRefrescar((prev) => !prev);
+          socket.emit("mensaje", "Orden modificada");
         } else {
           alert(result.mensaje);
         }
@@ -82,26 +86,34 @@ export default function DetalleCard({ propiedades, setRefrescar }) {
               }
             </label>
             <span className="detalle-precio">
-              Cantidad: {propiedades.cantidad} 
+              {conteo === true ? (
+                <>Cantidad: {propiedades.cantidad} de {propiedades.cantidad + propiedades.servido}</>
+              ) : (
+                <>Cantidad: {propiedades.servido} de {propiedades.cantidad + propiedades.servido}</>
+              )}
             </span>
           </span>
         </div>
       </div>
       <div className="rowDetalle">
-        <button
-          className="accion card red"
-          type="button"
-          onClick={() => servirProducto(propiedades.iddetalle, "DELETE", propiedades.cantidad)}
-        >
-          <span className="icon material-symbols-rounded">delete</span>
-        </button>
+        {botones[0].activo && (
+          <button
+            className="accion card red"
+            type="button"
+            onClick={() => servirProducto(propiedades.iddetalle, botones[0].accion, "DELETE")}
+          >
+            <span className="icon material-symbols-rounded">{botones[0].icono}</span>
+          </button>
+        )}
 
-        <button style={propiedades.cantidad === 0? { display: "none" } : {}}
+        <button
           className="accion card blue"
           type="button"
-          onClick={() => servirProducto(propiedades.iddetalle, "PUT", propiedades.cantidad)}
+          onClick={() => servirProducto(propiedades.iddetalle, botones[1].accion, "PUT")}
         >
-          <span className="icon material-symbols-rounded">check_circle</span>
+          <span className="icon material-symbols-rounded">
+            {botones[1].icono}
+          </span>
         </button>
       </div>
     </div>
