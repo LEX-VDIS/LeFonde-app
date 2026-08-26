@@ -5,7 +5,7 @@ export default function SeccionLink({ propiedades, children }) {
     const navigate = useNavigate();
     return (
         <section className="Seccion">
-            <header className="Seccion-header" onClick={() => navigate(propiedades.ruta)}>
+            <header className="Seccion-header-dinamic" onClick={() => navigate(propiedades.ruta)}>
                 <span className="Seccion-title">
                     <span className="icon material-symbols-rounded">
                         {propiedades.icono}

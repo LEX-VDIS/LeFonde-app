@@ -8,8 +8,8 @@ export default function SeccionShow({ activo = false, propiedades, children }) {
   }; //Muestra/oculta el cuerpo de la seccion
 
   return (
-    <section className="Seccion">
-      <header className="Seccion-header" onClick={cambiarVisibilidad}>
+    <section className={`Seccion ${propiedades.lado ? propiedades.lado : ""}`}>
+      <header className="Seccion-header-dinamic" onClick={cambiarVisibilidad}>
         <span className="Seccion-title">
           <span className="icon material-symbols-rounded">
             {propiedades.icono}
