@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import "./ProductoCheck.css";
 import { useCart } from "./useCart.js";
 
-export default function ProductoCheck({ propiedades }) {
-  const [seleccionado, setSeleccionado] = useState(false);
-  const { addToCart, removeFromCart, clearCart, cart } = useCart();
+export default function ProductoCheck({ propiedades, toggleCheck }) {
+  const [seleccionado, setSeleccionado] = useState(toggleCheck);
+  const { addToCart, removeFromCart, removeProductFromCart, clearCart, cart } = useCart();
 
-  const toggleCheck = (activar) => {
+  const handleToggleCheck = (activar) => {
     setSeleccionado(activar.target.checked);
 
     const checkedProductInCart = (product) => {
@@ -14,7 +14,7 @@ export default function ProductoCheck({ propiedades }) {
     };
 
     checkedProductInCart(propiedades)
-      ? removeFromCart(propiedades.id)
+      ? removeProductFromCart(propiedades.id)
       : addToCart(propiedades);
   };
 
@@ -46,7 +46,7 @@ export default function ProductoCheck({ propiedades }) {
             name={propiedades.id}
             type="checkbox"
             checked={seleccionado}
-            onChange={toggleCheck}
+            onChange={handleToggleCheck}
           />
         </span>
         <span>{propiedades.detalle}</span>

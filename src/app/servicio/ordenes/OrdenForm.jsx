@@ -425,12 +425,13 @@ export default function OrdenForm({
               className="accion seccion blue"
               type="button"
               onClick={clearCart}
+              disabled={cart.length === 0}
             >
               <span className="icon material-symbols-rounded">delete</span>
             </button>
           </div>
           <div className="form-footer-right">
-            <button className="accion seccion blue" type="submit">
+            <button className="accion seccion blue" type="submit" disabled={cart.length === 0}>
               <span className="icon material-symbols-rounded">
                 check_circle
               </span>
