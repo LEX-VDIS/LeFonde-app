@@ -111,6 +111,8 @@ export default function Orden({ activarBoton }) {
       .catch((error) => console.error("Error finalizing orden:", error));
   };
 
+  
+
   return (
     <div className="app-body">
       <Seccion
@@ -165,7 +167,7 @@ export default function Orden({ activarBoton }) {
               conteo={false}
               botones={[
                 { activo: false, accion: null, icono: null },
-                { activo: true, accion: 0, icono: "cancel" },
+                { activo: orden[0] && orden[0].finalizado === 0 ? true : false, accion: 0, icono: "cancel" },
               ]}
             />
           ))}
@@ -185,7 +187,7 @@ export default function Orden({ activarBoton }) {
           </button>
         </div>
         <div className="form-footer-right">
-          <button className="accion seccion blue" type="button" onClick={() => finalizarOrden()} disabled={productosAgregados.length !== 0}>
+          <button className="accion seccion blue" type="button" onClick={() => finalizarOrden()} disabled={productosAgregados.length !== 0 || orden[0]?.finalizado === 1}>
             <span className="icon material-symbols-rounded">check_circle</span>
             Finalizar
           </button>

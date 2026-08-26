@@ -12,7 +12,13 @@ const iconos = [
   { id: 3, icon: "icecream" },
 ];
 
-export default function DetalleCard({ propiedades, setRefrescar, conteo, botones }) {
+export default function DetalleCard({
+  propiedades,
+  setRefrescar,
+  conteo,
+  botones,
+}) {
+  console.log("PROPIEDADES", propiedades);
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     const fetchOptions = {
@@ -75,7 +81,6 @@ export default function DetalleCard({ propiedades, setRefrescar, conteo, botones
     <div className="tarjetaDetalle">
       <div className="rowDetalle">
         <span className="icon material-symbols-rounded">{iconoNombre}</span>
-
         <div className="rowProducto text-card">
           <span className="detalle-nombre-precio">
             <label>
@@ -87,34 +92,49 @@ export default function DetalleCard({ propiedades, setRefrescar, conteo, botones
             </label>
             <span className="detalle-precio">
               {conteo === true ? (
-                <>Cantidad: {propiedades.cantidad} de {propiedades.cantidad + propiedades.servido}</>
+                <>
+                  Cantidad: {propiedades.cantidad} de{" "}
+                  {propiedades.cantidad + propiedades.servido}
+                </>
               ) : (
-                <>Cantidad: {propiedades.servido} de {propiedades.cantidad + propiedades.servido}</>
+                <>
+                  Cantidad: {propiedades.servido} de{" "}
+                  {propiedades.cantidad + propiedades.servido}
+                </>
               )}
             </span>
           </span>
         </div>
       </div>
+
       <div className="rowDetalle">
         {botones[0].activo && (
           <button
             className="accion card red"
             type="button"
-            onClick={() => servirProducto(propiedades.iddetalle, botones[0].accion, "DELETE")}
+            onClick={() =>
+              servirProducto(propiedades.iddetalle, botones[0].accion, "DELETE")
+            }
           >
-            <span className="icon material-symbols-rounded">{botones[0].icono}</span>
+            <span className="icon material-symbols-rounded">
+              {botones[0].icono}
+            </span>
           </button>
         )}
 
-        <button
-          className="accion card blue"
-          type="button"
-          onClick={() => servirProducto(propiedades.iddetalle, botones[1].accion, "PUT")}
-        >
-          <span className="icon material-symbols-rounded">
-            {botones[1].icono}
-          </span>
-        </button>
+        {botones[1].activo && (
+          <button
+            className="accion card blue"
+            type="button"
+            onClick={() =>
+              servirProducto(propiedades.iddetalle, botones[1].accion, "PUT")
+            }
+          >
+            <span className="icon material-symbols-rounded">
+              {botones[1].icono}
+            </span>
+          </button>
+        )}
       </div>
     </div>
   );
