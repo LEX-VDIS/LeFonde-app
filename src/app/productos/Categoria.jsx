@@ -1,6 +1,7 @@
 import { useState, useEffect, use } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Categoria.css";
+import Seccion from "../../app-components/Seccion";
 
 const categorias = [
   { id: 2, param: "bebidas", name: "Bebidas", icon: "sports_bar" },
@@ -51,39 +52,28 @@ export default function Categoria({ activarBoton, propsBoton }) {
 
   return (
     <div className="app-body">
-      <header className="form-header-menu">
-        <span className="form-header-span">
-          <span>
-            <span className="icon material-symbols-rounded">
-              {categoria.icon}
-            </span>
-            <span>{categoria.name}</span>
-          </span>
-        </span>
-        <span></span>
-      </header>
-      <div className="form-body">
-        <div className="abd-left">
-          {productos.map((producto, index) => (
-            <div key={index} className="producto-rowcard">
-              <span className="producto-rowcard-span">
-                <span className="producto-rowcard-header">
-                  <span className="producto-nombre">{producto.nombre}</span>
-                  <span className="producto-precio">${producto.precio}</span>
-                </span>
-                <span className="producto-rowcard-body">
-                  <span className="producto-descripcion">
-                    {producto.descripcion}
-                  </span>
+      <Seccion
+        propiedades={{ icono: [categoria.icon], titulo: [categoria.name], mostrar: "flex"}}
+      >
+        {productos.map((producto, index) => (
+          <div key={index} className="producto-rowcard">
+            <span className="producto-rowcard-span">
+              <span className="producto-rowcard-header">
+                <span className="producto-nombre">{producto.nombre}</span>
+                <span className="producto-precio">${producto.precio}</span>
+              </span>
+              <span className="producto-rowcard-body">
+                <span className="producto-descripcion">
+                  {producto.descripcion}
                 </span>
               </span>
-              <button className="accion blue card">
-                <span className="material-symbols-rounded">edit</span>
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+            </span>
+            <button className="accion blue card">
+              <span className="material-symbols-rounded">edit</span>
+            </button>
+          </div>
+        ))}
+      </Seccion>
     </div>
   );
 }

@@ -12,6 +12,10 @@
   align-items: center;
 }
 .producto-rowcard {
+  width: stretch;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
