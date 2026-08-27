@@ -356,7 +356,10 @@ function App() {
             element={
               <>
                 <div className="app-container">
-                  <Personal activarBoton={setActionButton} />
+                  <Personal
+                    activarBoton={setActionButton}
+                    propsBoton={setActionButtonProps}
+                  />
                 </div>
               </>
             }

@@ -24,6 +24,7 @@ export default function Servicio({ activarBoton }) {
     mesasDisponibles: 0,
     mesasOcupadas: 0,
   });
+  
   useEffect(() => {
     const fetchOptions = {
       method: "GET",
