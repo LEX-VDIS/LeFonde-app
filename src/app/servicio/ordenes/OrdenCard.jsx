@@ -1,8 +1,28 @@
 import "./OrdenCard.css";
 import { useNavigate } from "react-router-dom";
 import { parseJwt } from "../../sesion";
+import { useEffect, useState } from "react";
 
 export default function Orden({ propiedades }) {
+
+  const [usuario, setUsuario] = useState(propiedades.idusuario);
+  useEffect(() => {
+    const fetchOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idusuario: propiedades.idusuario }),
+    };
+    const fetchUsuario = async () => {
+      const response = await fetch(
+        `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/usuarios`,
+        fetchOptions
+      );
+      const data = await response.json();
+      setUsuario(data.usuario[0].nombre);
+    };
+    fetchUsuario();
+  }, []);
+
   const navigate = useNavigate();
   return (
     <div
@@ -47,7 +67,7 @@ export default function Orden({ propiedades }) {
         1 && (
         <div className="rowOrden">
           <span className="icon material-symbols-rounded">person_apron</span>
-          <label>Mesero</label>
+          <label>{usuario}</label>
         </div>
       )}
     </div>

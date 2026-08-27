@@ -24,6 +24,7 @@ export default function Orden({ activarBoton }) {
   const [productosServidos, setProductosServidos] = useState([]);
   const [mesas_disp, setMesas_disp] = useState([]);
   const [refrescar, setRefrescar] = useState(false);
+  const [usuario, setUsuario] = useState("");
   const [updateOrden, setUpdateOrden] = useState(false);
 
   useEffect(() => {
@@ -32,6 +33,25 @@ export default function Orden({ activarBoton }) {
       setUpdateOrden((prev) => !prev);
     });
   }, []); //Efecto para escuchar los mensajes del servidor y actualizar la lista de ordenes cuando se recibe un mensaje
+
+  useEffect(() => {
+    if (orden[0]?.idusuario) {
+      const fetchOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idusuario: orden[0].idusuario }),
+      };
+      const fetchUsuario = async () => {
+        const response = await fetch(
+          `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/usuarios`,
+          fetchOptions
+        );
+        const data = await response.json();
+        setUsuario(data.usuario[0].nombre);
+      };
+      fetchUsuario();
+    }
+  }, [orden]);
 
   const {
     register,
@@ -95,7 +115,7 @@ export default function Orden({ activarBoton }) {
     const fetchOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idorden: ordenid, mesa: orden[0].idmesa}),
+      body: JSON.stringify({ idorden: ordenid, mesa: orden[0].idmesa }),
     };
     const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/orden`;
 
@@ -110,7 +130,7 @@ export default function Orden({ activarBoton }) {
         }
       })
       .catch((error) => console.error("Error finalizing orden:", error));
-  };
+  }; //Función para finalizar la orden y actualizar la base de datos, además de enviar un mensaje al servidor para actualizar la lista de ordenes en tiempo real
 
   return (
     <div className="app-body">
@@ -119,7 +139,7 @@ export default function Orden({ activarBoton }) {
           icono: ["room_service", "person_apron"],
           titulo: [
             `Orden #${orden[0] && orden[0].idorden} en ${orden[0] && orden[0].servicio === 0 ? "mesa " + orden[0].idmesa : "mostrador"}`,
-            `Atendido por ${parseJwt(localStorage.getItem("tokenme")).usuario[0].nombre}`,
+            `Atendido por ${usuario}`,
           ],
           mostrar: "flex",
           doble: true,
@@ -130,7 +150,10 @@ export default function Orden({ activarBoton }) {
           propiedades={{
             icono: "concierge",
             titulo: "Productos por servir",
-            cantidad: productosAgregados.reduce((acc, producto) => acc + producto.cantidad, 0),
+            cantidad: productosAgregados.reduce(
+              (acc, producto) => acc + producto.cantidad,
+              0,
+            ),
             mostrar: "flex",
             lado: "left",
           }}
@@ -153,7 +176,10 @@ export default function Orden({ activarBoton }) {
           propiedades={{
             icono: "hand_meal",
             titulo: "Productos servidos",
-            cantidad: productosServidos.reduce((acc, producto) => acc + producto.servido, 0),
+            cantidad: productosServidos.reduce(
+              (acc, producto) => acc + producto.servido,
+              0,
+            ),
             mostrar: "flex",
             lado: "right",
           }}
@@ -166,7 +192,11 @@ export default function Orden({ activarBoton }) {
               conteo={false}
               botones={[
                 { activo: false, accion: null, icono: null },
-                { activo: orden[0] && orden[0].finalizado === 0 ? true : false, accion: 0, icono: "cancel" },
+                {
+                  activo: orden[0] && orden[0].finalizado === 0 ? true : false,
+                  accion: 0,
+                  icono: "cancel",
+                },
               ]}
             />
           ))}
@@ -186,7 +216,14 @@ export default function Orden({ activarBoton }) {
           </button>
         </div>
         <div className="form-footer-right">
-          <button className="accion seccion blue" type="button" onClick={() => finalizarOrden()} disabled={productosAgregados.length !== 0 || orden[0]?.finalizado === 1}>
+          <button
+            className="accion seccion blue"
+            type="button"
+            onClick={() => finalizarOrden()}
+            disabled={
+              productosAgregados.length !== 0 || orden[0]?.finalizado === 1
+            }
+          >
             <span className="icon material-symbols-rounded">check_circle</span>
             Finalizar
           </button>
