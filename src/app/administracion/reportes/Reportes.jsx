@@ -97,7 +97,7 @@ export default function Reportes({ activarBoton }) {
                     <td>{orden.idorden}</td>
                     <td>{new Date(orden.fecha).toLocaleDateString()}</td>
                     <td>
-                      {new Date(`1970-01-01T${orden.hora}Z`).toLocaleTimeString(
+                      {new Date(new Date(`1970-01-01T${orden.hora}Z`).getTime() + 21600000).toLocaleTimeString(
                         [],
                         {
                           hour: "2-digit",

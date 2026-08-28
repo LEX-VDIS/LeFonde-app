@@ -57,7 +57,7 @@ export default function Orden({ propiedades }) {
       <div className="rowOrden">
         <span className="icon material-symbols-rounded">watch</span>
         <label>
-          {new Date(`1970-01-01T${propiedades.hora}Z`).toLocaleTimeString([], {
+          {new Date(new Date(`1970-01-01T${propiedades.hora}Z`).getTime() + 21600000).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })}
