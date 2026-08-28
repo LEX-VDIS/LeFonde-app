@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useNavigate, useState } from "react";
 import "./Login.css";
 import { parseJwt } from "./sesion.js";
 import { set } from "react-hook-form";
 
 export default function Login({ setLog }) {
-
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
 
   const evitarError = (aceptar) => {
     aceptar.preventDefault();
-
+    location.reload();
     if (name === "" || pass === "") {
       setError(true);
       setLog(false);
@@ -43,6 +42,7 @@ export default function Login({ setLog }) {
           console.log(error);
         });
     }
+
   };
 
   return (

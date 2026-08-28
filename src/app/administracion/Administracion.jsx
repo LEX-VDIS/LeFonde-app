@@ -61,8 +61,8 @@ export default function Administracion({ activarBoton }) {
           mostrar: "flex",
         }}
       >
-        <InfoCard icon="room_service" label="Total de ordenes" value={conteo.totalOrdenes} />
-        <InfoCard icon="money_bag" label="Total de ganancia" value={"$" + Intl.NumberFormat("es-MX", {
+        <InfoCard icon="room_service" label="Total de órdenes" value={conteo.totalOrdenes} />
+        <InfoCard icon="money_bag" label="Total de ingresos" value={"$" + Intl.NumberFormat("es-MX", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }).format(conteo.totalGanancia)} />

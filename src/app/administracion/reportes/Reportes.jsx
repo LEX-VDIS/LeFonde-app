@@ -51,19 +51,19 @@ export default function Reportes({ activarBoton }) {
           activo={true}
           propiedades={{
             icono: ["leaderboard"],
-            titulo: ["Resumen de ordenes"],
+            titulo: ["Resumen de órdenes"],
             mostrar: "flex",
             lado: "left",
           }}
         >
           <InfoCard
             icon="room_service"
-            label="Total de ordenes"
+            label="Total de órdenes"
             value={ordenes.length}
           />
           <InfoCard
             icon="money_bag"
-            label="Total de ganancia"
+            label="Total de ingresos"
             value={`$${Intl.NumberFormat("es-MX", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
@@ -76,7 +76,7 @@ export default function Reportes({ activarBoton }) {
           activo={true}
           propiedades={{
             icono: ["room_service"],
-            titulo: [`Ordenes del ${new Date().toLocaleDateString()}`],
+            titulo: [`Órdenes del ${new Date().toLocaleDateString()}`],
             mostrar: "flex",
             lado: "right",
           }}

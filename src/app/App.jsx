@@ -30,12 +30,21 @@ let usuario = {};
 let logueado = false;
 let administrador = 0;
 
-if (administrador === 0) {
+if (
+  localStorage.getItem("tokenme") &&
+  parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador === 1
+) {
+  administrador = 1;
+} else {
+  administrador = 0;
+}
+
+if (administrador === 1) {
   var navegacion = [
     [
       ["Servicio", "servicio", "flatware"],
       [
-        ["Ordenes", "ordenes", "room_service"],
+        ["Órdenes", "ordenes", "room_service"],
         ["Mesas", "mesas", "table_restaurant"],
       ],
     ],
@@ -52,7 +61,7 @@ if (administrador === 0) {
       ["Administración", "administracion", "briefcase_meal"],
       [
         ["Reportes", "reportes", "query_stats"],
-        ["Personal", "personal", "person"],
+        ["Personal", "personal", "patient_list"],
       ],
     ],
   ];
@@ -61,7 +70,7 @@ if (administrador === 0) {
     [
       ["Servicio", "servicio", "flatware"],
       [
-        ["Ordenes", "ordenes", "room_service"],
+        ["Órdenes", "ordenes", "room_service"],
         ["Mesas", "mesas", "table_restaurant"],
       ],
     ],
