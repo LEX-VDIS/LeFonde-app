@@ -8,7 +8,7 @@ const socket = io(
 );
 
 export default function Personal({ activarBoton, propsBoton }) {
-  activarBoton(true);
+  activarBoton(false);
   useEffect(() => {
     activarBoton(true);
     propsBoton({

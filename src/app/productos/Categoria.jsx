@@ -12,7 +12,7 @@ const categorias = [
 
 export default function Categoria({ activarBoton, propsBoton }) {
   useEffect(() => {
-    activarBoton(true);
+    activarBoton(false);
     propsBoton({
       texto: "Agregar",
       icono: "add_circle",
