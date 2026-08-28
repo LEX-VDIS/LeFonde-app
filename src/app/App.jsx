@@ -28,8 +28,9 @@ import { set } from "react-hook-form";
 
 let usuario = {};
 let logueado = false;
+let administrador = 0;
 
-if (parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador === 1) {
+if (administrador === 0) {
   var navegacion = [
     [
       ["Servicio", "servicio", "flatware"],

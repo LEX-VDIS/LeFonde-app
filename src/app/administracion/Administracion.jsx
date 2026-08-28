@@ -37,10 +37,10 @@ export default function Administracion({ activarBoton }) {
       .then((result) => {
         if (result) {
           setConteo({
-            totalOrdenes: result.conteo[0][0].total,
-            totalGanancia: result.conteo[1][0].total,
-            administradores: result.conteo[2][0].total,
-            usuarios: result.conteo[3][0].total,
+            totalOrdenes: result.conteos[0][0].total,
+            totalGanancia: result.conteos[1][0].total,
+            administradores: result.conteos[2][0].total,
+            usuarios: result.conteos[3][0].total,
           });
         } else {
           alert(result.mensaje);
@@ -51,7 +51,6 @@ export default function Administracion({ activarBoton }) {
       });
   }, [update]); //Efecto para obtener la lista de administración al cargar la página y cuando se recibe un mensaje del servidor
 
-  console.log("Conteo de administración:", conteo); // Agrega este console.log para depuración
   return (
     <div className="app-body">
       <SeccionLink
@@ -63,7 +62,10 @@ export default function Administracion({ activarBoton }) {
         }}
       >
         <InfoCard icon="room_service" label="Total de ordenes" value={conteo.totalOrdenes} />
-        <InfoCard icon="money_bag" label="Total de ganancia" value={conteo.totalGanancia} />
+        <InfoCard icon="money_bag" label="Total de ganancia" value={"$" + Intl.NumberFormat("es-MX", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(conteo.totalGanancia)} />
       </SeccionLink>
       <SeccionLink
         propiedades={{

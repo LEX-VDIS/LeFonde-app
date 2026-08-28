@@ -3,7 +3,8 @@ import "./Home.css";
 import SeccionLink from "../app-components/SeccionLink.jsx";
 import { parseJwt } from "./sesion.js";
 
-if (parseJwt(localStorage.getItem("tokenme")).usuario[0].administrador === 1) {
+let administrador = 1;
+if (administrador === 1) {
   var navegacion = [
     [
       ["Servicio", "servicio", "flatware"],

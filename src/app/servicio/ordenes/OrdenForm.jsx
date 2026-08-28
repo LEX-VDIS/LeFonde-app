@@ -36,7 +36,13 @@ function cartItem(quantity, producto, precio, addToCart, removeFromCart) {
         <span className="detalle-nombre-precio">
           <label>{producto}</label>
           <span className="detalle-precio">
-            ${precio} | Cantidad: {quantity} | ${(quantity * precio).toFixed(2)}
+            ${Intl.NumberFormat("es-MX", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(precio)} | Cantidad: {quantity} | ${Intl.NumberFormat("es-MX", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(quantity * precio)}
           </span>
         </span>
       </div>
@@ -389,12 +395,15 @@ export default function OrdenForm({
                 true,
                 {
                   left: `Cantidad: ${cart.reduce((total, item) => total + item.quantity, 0)}`,
-                  right: `Total: $${cart
-                    .reduce(
+                  right: `Total: $${Intl.NumberFormat("es-MX", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(
+                    cart.reduce(
                       (total, item) => total + item.quantity * item.precio,
                       0,
-                    )
-                    .toFixed(2)}`,
+                    ),
+                  )}`,
                 },
               ],
             }}
