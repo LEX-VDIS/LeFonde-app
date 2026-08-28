@@ -47,11 +47,7 @@ a {
     0px 2px 2px rgba(0, 0, 0, 0.2);
   background-color: whitesmoke;
 }
-.app-header > section {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
+
 
 .app-container {
   display: flex;
@@ -87,10 +83,25 @@ a {
   justify-content: space-between;
   align-items: center;
 }
+.seccion-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+.seccion-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
 .titulo {
+  padding: 8px;
   align-self: center;
   font-size: 1.5rem;
-  width: -webkit-fill-available;
   text-align: center;
 }
 

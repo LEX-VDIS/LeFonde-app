@@ -110,11 +110,18 @@ function App() {
     texto: null,
     click: null,
   }); // estado para el botón de acción en el header
+  const [titulo, setTitulo] = useState("LeFondé"); // estado para el título en el header
 
   useEffect(() => {
     setNombre(usuario.nombre + " " + usuario.apellido);
-  }, [open]); // actualiza el nombre del usuario al iniciar sesión
+  }, [log]); // actualiza el nombre del usuario al iniciar sesión
 
+  useEffect(() => {
+    setTitulo( navegacion.find((elemento) => {
+      return elemento[0][1] === window.location.pathname.split("/")[1];
+    })?.[0][0] || "LeFondé");
+  }, [window.location.pathname]); // actualiza el título del header al cambiar el título del documento
+  
   document.addEventListener("click", (e) => {
     if (
       !e.target.closest(".panelButton") &&
@@ -198,7 +205,7 @@ function App() {
         )}
         <div className="app-header">
           {log && (
-            <section>
+            <section className="seccion-left">
               <button
                 id="menu"
                 className={OpenLP ? "active panelButton" : "panelButton"}
@@ -208,11 +215,12 @@ function App() {
                   {OpenLP ? "menu_open" : "menu"}
                 </span>
               </button>
+              <label className="titulo">{titulo}</label>
             </section>
           )}
-          {!log && <span className="titulo">LeFondé</span>}
+          {!log && <span className="titulo" style={{ width: "stretch", width: "-webkit-fill-available" }}>LeFondé</span>}
           {log && (
-            <section>
+            <section className="seccion-right">
               {actionButton && <Boton {...actionButtonProps} />}
               <button
                 id="user"

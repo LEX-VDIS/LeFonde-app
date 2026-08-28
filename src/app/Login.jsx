@@ -10,7 +10,7 @@ export default function Login({ setLog }) {
 
   const evitarError = (aceptar) => {
     aceptar.preventDefault();
-    location.reload();
+
     if (name === "" || pass === "") {
       setError(true);
       setLog(false);
@@ -26,7 +26,7 @@ export default function Login({ setLog }) {
       };
       const fetchURL = `http://${import.meta.env.VITE_DB_IP}:${import.meta.env.VITE_DB_PORT}/login`;
       //const fetchURL = `http://10.10.10.99:55555/login`;
-
+      location.reload();
       fetch(fetchURL, fetchOptions)
         .then((response) => response.json())
         .then((result) => {
@@ -42,7 +42,6 @@ export default function Login({ setLog }) {
           console.log(error);
         });
     }
-
   };
 
   return (
